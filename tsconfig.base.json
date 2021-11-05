@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@jtjs/core/browser": ["libs/core/browser/src/index.ts"],
+      "@jtjs/core/data": ["libs/core/data/src/index.ts"],
+      "@jtjs/react": ["libs/react/src/index.ts"],
+      "@jtjs/react/theme": ["libs/react/src/styles.scss"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

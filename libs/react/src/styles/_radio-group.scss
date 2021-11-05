@@ -1,0 +1,12 @@
+.jtjs-radio-group {
+  display: block;
+  @include rounded-corners;
+
+  label {
+    display: block;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

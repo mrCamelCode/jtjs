@@ -1,0 +1,39 @@
+@use 'sass:math';
+
+.jtjs-toggle {
+  $height: 20px;
+  $width: 50px;
+
+  display: inline-block;
+  height: $height;
+  width: $width;
+  border-radius: math.div($height, 2);
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+
+  .jtjs-toggle-knob {
+    height: $height;
+    width: $height;
+    border: 1px solid;
+    box-sizing: border-box;
+    border-radius: 50%;
+    top: 0;
+
+    transition: left 0.2s ease, transform 0.2s ease;
+  }
+
+  &.jtjs-toggle-on {
+    .jtjs-toggle-knob {
+      left: $width;
+      transform: translateX(-100%);
+    }
+  }
+
+  &.jtjs-toggle-off {
+    .jtjs-toggle-knob {
+      left: 0;
+    }
+  }
+}

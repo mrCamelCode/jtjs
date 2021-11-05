@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+.jtjs-button {
+  border: none;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+
+  @include rounded-corners;
+}

@@ -1,0 +1,26 @@
+@import './styles/util';
+
+@import './styles/button';
+@import './styles/checkbox';
+@import './styles/dropdown';
+@import './styles/radio';
+@import './styles/radio-group';
+@import './styles/toggle';
+@import './styles/load-view';
+
+* {
+  position: relative;
+  box-sizing: border-box;
+
+  [disabled],
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:focus {
+    @include focus;
+  }
+}
+
+html {
+  background-color: var(--jtjs-theme-background);
+}

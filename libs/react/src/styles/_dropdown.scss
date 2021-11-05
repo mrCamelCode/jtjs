@@ -1,0 +1,11 @@
+.jtjs-dropdown-label {
+  display: block;
+  font-size: small;
+  margin-bottom: 0.2rem;
+}
+
+.jtjs-dropdown {
+  padding: 0.2rem;
+  @include rounded-corners;
+  font-size: medium;
+}
