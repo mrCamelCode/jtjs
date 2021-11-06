@@ -1,4 +1,4 @@
-import { Event } from '@jtjs/core/data';
+import { Event } from '@jtjs/core-data';
 import { Theme } from '../models/theme.model';
 
 export type OnThemeChangeListener = (theme: Theme) => void;

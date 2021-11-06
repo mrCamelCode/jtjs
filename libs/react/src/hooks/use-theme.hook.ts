@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Theme, ThemeService } from '@jtjs/core/browser';
+import { Theme, ThemeService } from '@jtjs/core-browser';
 
 /**
  * Hooks onto the current theme avialable via the {@link ThemeService}. If no
