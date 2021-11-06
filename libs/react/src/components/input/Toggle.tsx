@@ -1,7 +1,9 @@
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
+import { v4 as uuid } from 'uuid';
 import { useTheme } from '../../hooks/use-theme.hook';
 import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
+import Label from './Label';
 
 export interface ToggleProps
   extends Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
@@ -25,6 +27,10 @@ export interface ToggleProps
       | React.KeyboardEvent<HTMLSpanElement>
   ) => void;
   /**
+   * The children of the toggle, which will be used as the label.
+   */
+  children?: ReactNode | ReactNode[];
+  /**
    * Whether the toggle is disabled.
    */
   disabled?: boolean;
@@ -42,54 +48,82 @@ export const Toggle = ({
   onChange,
   theme: themeProp,
   disabled,
+  id,
+  children,
   ...otherProps
 }: ToggleProps) => {
   const theme = themeProp ?? useTheme()[0];
 
+  const onText = isOn ? 'on' : 'off';
+
+  let randomId = '';
+  if (!id) {
+    randomId = `jtjs-toggle-${uuid()}`;
+  }
+
   return (
-    <span
-      data-testid="toggle"
-      role="switch"
-      aria-label={`toggle-${isOn ? 'on' : 'off'}`}
-      className={formatClassName(
-        `jtjs-toggle jtjs-toggle-${isOn ? 'on' : 'off'}`,
-        className
-      )}
-      onClick={(event) => {
-        if (!disabled) {
-          onChange(!isOn, event);
-        }
-      }}
-      // Allows the user to navigate to the toggle with the keyboard and press
-      // space to interact with it.
-      tabIndex={0}
-      onKeyUp={(event) => {
-        if (event.key === ' ' && !disabled) {
-          onChange(!isOn, event);
-        }
-      }}
-      style={{
-        backgroundColor: isOn ? theme?.button : theme?.disabled,
-        borderColor: theme?.outline,
-        ...style,
-      }}
-      {...{
-        disabled,
-        'aria-disabled': disabled,
-      }}
-      {...otherProps}
-    >
-      {!disabled && (
-        <span
-          className="jtjs-toggle-knob"
-          style={{
-            backgroundColor: theme?.background,
-            borderColor: theme?.outline,
-            position: 'absolute',
+    <>
+      {children && (
+        <Label
+          disabled={disabled}
+          className="jtjs-toggle-label"
+          htmlFor={id ?? randomId}
+          onClick={(event) => {
+            if (!disabled) {
+              onChange(!isOn, event);
+            }
           }}
-        />
+        >
+          {children}
+        </Label>
       )}
-    </span>
+
+      <span
+        data-testid="toggle"
+        role="switch"
+        aria-label={`toggle-${onText}`}
+        className={formatClassName(
+          `jtjs-toggle jtjs-toggle-${onText}`,
+          className
+        )}
+        id={id ?? randomId}
+        onClick={(event) => {
+          if (!disabled) {
+            onChange(!isOn, event);
+          }
+        }}
+        // Allows the user to navigate to the toggle with the keyboard and press
+        // space to interact with it.
+        // Note: You can't focus normal inputs when they're disabled
+        tabIndex={disabled ? -1 : 0}
+        onKeyUp={(event) => {
+          if (event.key === ' ' && !disabled) {
+            onChange(!isOn, event);
+          }
+        }}
+        style={{
+          backgroundColor: isOn ? theme?.button : theme?.disabled,
+          borderColor: theme?.outline,
+          ...style,
+        }}
+        {...{
+          disabled,
+          'aria-disabled': disabled,
+        }}
+        {...otherProps}
+      >
+        {!disabled && (
+          <span
+            className="jtjs-toggle-knob"
+            style={{
+              backgroundColor: theme?.background,
+              borderColor: theme?.outline,
+              position: 'absolute',
+            }}
+          />
+        )}
+      </span>
+    </>
   );
 };
 

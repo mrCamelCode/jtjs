@@ -2,6 +2,12 @@
   display: block;
   @include rounded-corners;
 
+  background-color: var(--jtjs-theme-background);
+  border-color: var(--jtjs-theme-outline);
+
+  legend {
+    color: var(--jtjs-theme-text);
+  }
   label {
     display: block;
 

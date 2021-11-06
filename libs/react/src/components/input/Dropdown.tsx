@@ -89,7 +89,11 @@ export const Dropdown = ({
 
   return (
     <>
-      <Label className="jtjs-dropdown-label" htmlFor={id ?? randomId}>
+      <Label
+        className="jtjs-dropdown-label"
+        htmlFor={id ?? randomId}
+        theme={theme}
+      >
         {children}
       </Label>
       <select

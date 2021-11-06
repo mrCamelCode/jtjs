@@ -5,5 +5,13 @@
   padding: 0.7rem 1rem;
   cursor: pointer;
 
+  color: var(--jtjs-theme-buttonText);
+  background-color: var(--jtjs-theme-button);
+  border-color: var(--jtjs-theme-outline);
+
   @include rounded-corners;
+
+  &:disabled {
+    background-color: var(--jtjs-theme-disabled);
+  }
 }

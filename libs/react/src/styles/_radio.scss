@@ -10,6 +10,7 @@
     padding-left: 1.5rem;
 
     &::before {
+      // Custom radio
       content: '';
       display: block;
       position: absolute;
@@ -23,6 +24,7 @@
       border-radius: 50%;
     }
     &::after {
+      // Custom checked dot
       content: '';
       display: block;
       position: absolute;

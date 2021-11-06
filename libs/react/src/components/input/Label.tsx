@@ -13,7 +13,6 @@ export const Label = ({
   style,
   children,
   theme: themeProp,
-  disabled,
   ...otherProps
 }: LabelProps) => {
   const theme = themeProp ?? useTheme()[0];
@@ -22,8 +21,7 @@ export const Label = ({
     <label
       className={formatClassName('jtjs-label', className)}
       style={{
-        color: disabled ? theme?.disabled : theme?.text,
-        borderColor: theme?.outline,
+        color: theme?.text,
         ...style,
       }}
       {...otherProps}

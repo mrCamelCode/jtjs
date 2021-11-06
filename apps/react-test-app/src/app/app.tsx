@@ -24,6 +24,7 @@ export function App() {
   const [radio, setRadio] = useState(true);
   const [selectedRadio, setSelectedRadio] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     fakeNetworkCall().then((num) => setData(num));
@@ -38,21 +39,25 @@ export function App() {
         margin: '0',
       }}
     >
-      {/* <Radio checked={radio} onChange={setRadio}>
+      <Radio checked={radio} onChange={setRadio}>
         Radio 1
       </Radio>
       <Checkbox checked={checked} onChange={setChecked}>
         Check Me!
-      </Checkbox> */}
+      </Checkbox>
 
-      {/* <RadioGroup
+      <RadioGroup
         name="fav-monster"
         options={['Kraken', 'Sasquatch', 'Mothman']}
         onChange={setSelectedRadio}
         selectedOption={selectedRadio}
       >
         Choose your favorite monster
-      </RadioGroup> */}
+      </RadioGroup>
+
+      <Toggle isOn={toggle} onChange={setToggle} disabled>
+        Toggle Me!
+      </Toggle>
 
       <Dropdown
         selectedOption={selectedOption}
@@ -62,7 +67,7 @@ export function App() {
         Favorite Monster
       </Dropdown>
 
-      {/* <Button>Click Me!</Button> */}
+      <Button>Click Me!</Button>
     </div>
   );
 }

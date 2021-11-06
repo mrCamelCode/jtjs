@@ -1,14 +1,4 @@
-.jtjs-dropdown-label {
-  display: block;
-  font-size: small;
-  margin-bottom: 0.2rem;
-}
-
-.jtjs-dropdown {
-  padding: 0.2rem;
-  @include rounded-corners;
-  font-size: medium;
-
+.jtjs-text-input {
   background-color: var(--jtjs-theme-background);
   border-color: var(--jtjs-theme-outline);
   color: var(--jtjs-theme-text);

@@ -1,8 +1,22 @@
 @use 'sass:math';
 
+.jtjs-toggle-label {
+  display: inline-block;
+
+  cursor: pointer;
+
+  padding-right: 0.5rem;
+  top: 0.6rem;
+  transform: translateY(-75%);
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
 .jtjs-toggle {
-  $height: 20px;
-  $width: 50px;
+  $height: 1.2rem;
+  $width: 3rem;
 
   display: inline-block;
   height: $height;
@@ -11,9 +25,12 @@
   overflow: hidden;
   cursor: pointer;
 
+  border-color: var(--jtjs-theme-outline);
+
   transition: background-color 0.2s ease;
 
   .jtjs-toggle-knob {
+    position: absolute;
     height: $height;
     width: $height;
     border: 1px solid;
@@ -25,15 +42,30 @@
   }
 
   &.jtjs-toggle-on {
+    background-color: var(--jtjs-theme-button);
+
     .jtjs-toggle-knob {
       left: $width;
       transform: translateX(-100%);
+
+      background-color: var(--jtjs-theme-background);
+      border-color: var(--jtjs-theme-outline);
     }
   }
 
   &.jtjs-toggle-off {
+    background-color: var(--jtjs-theme-disabled);
+
     .jtjs-toggle-knob {
       left: 0;
+    }
+  }
+
+  &.jtjs-toggle[disabled] {
+    cursor: not-allowed;
+
+    &:focus {
+      outline: none;
     }
   }
 }

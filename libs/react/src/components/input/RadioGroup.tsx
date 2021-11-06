@@ -73,6 +73,7 @@ export const RadioGroup = ({
     <fieldset
       role="radiogroup"
       className={formatClassName('jtjs-radio-group', className)}
+      disabled={disabled}
       style={{
         backgroundColor: theme?.background,
         borderColor: theme?.outline,
