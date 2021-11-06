@@ -20,7 +20,7 @@ export const Button = ({
       aria-disabled={disabled}
       {...otherProps}
     >
-      {children}
+      <span className="jtjs-button-content">{children}</span>
     </button>
   );
 };

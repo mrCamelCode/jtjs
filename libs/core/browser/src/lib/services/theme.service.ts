@@ -80,12 +80,61 @@ export class ThemeService {
     }
   }
 
+  /**
+   * Lightens/darkens the provided hex color by the specified amount.
+   *
+   * Functions courtesy of css-tricks: https://css-tricks.com/snippets/javascript/lighten-darken-color/
+   *
+   * @param hexColor - The color to modify, defined by its hex value. Including the
+   * '#' is allowed, but not necessary.
+   * @param amount - The amount to modify the color by. Positive values yield lighter colors,
+   * negative values yield darker colors.
+   *
+   * @returns - The modified color. If the '#' was included in the hexColor, it will be
+   * included in the output.
+   */
+  static modifyColor(hexColor: string, amount: number): string {
+    let usePound = false;
+
+    if (hexColor[0] == '#') {
+      hexColor = hexColor.slice(1);
+      usePound = true;
+    }
+
+    const num = parseInt(hexColor, 16);
+
+    let r = (num >> 16) + amount;
+
+    if (r > 255) r = 255;
+    else if (r < 0) r = 0;
+
+    let b = ((num >> 8) & 0x00ff) + amount;
+
+    if (b > 255) b = 255;
+    else if (b < 0) b = 0;
+
+    let g = (num & 0x0000ff) + amount;
+
+    if (g > 255) g = 255;
+    else if (g < 0) g = 0;
+
+    return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+  }
+
   private static updateCssVariables() {
     const root = document.documentElement;
 
     Object.entries(this._currentTheme).forEach(([themeKey, color]) => {
       if (themeKey !== 'name') {
         root.style.setProperty(`--jtjs-theme-${themeKey}`, color);
+        root.style.setProperty(
+          `--jtjs-theme-${themeKey}-darkened`,
+          this.modifyColor(color, -30)
+        );
+        root.style.setProperty(
+          `--jtjs-theme-${themeKey}-lightened`,
+          this.modifyColor(color, 30)
+        );
       }
     });
   }

@@ -24,7 +24,7 @@
   &:disabled {
     cursor: not-allowed;
   }
-  &:focus {
+  &:focus-visible {
     @include focus;
   }
 }

@@ -1,17 +1,32 @@
 @use 'sass:math';
 
 .jtjs-button {
+  $raisedAmount: 3px;
+
   border: none;
   padding: 0.7rem 1rem;
   cursor: pointer;
 
   color: var(--jtjs-theme-buttonText);
   background-color: var(--jtjs-theme-button);
-  border-color: var(--jtjs-theme-outline);
+  // border-color: var(--jtjs-theme-button-darkened);
+
+  box-shadow: inset 0 (-$raisedAmount) var(--jtjs-theme-button-darkened);
+
+  // border-width: 0;
+  // border-bottom-width: 2px;
+  // border-style: solid;
 
   @include rounded-corners;
 
   &:disabled {
     background-color: var(--jtjs-theme-disabled);
+  }
+  &:active {
+    box-shadow: inset 0 $raisedAmount var(--jtjs-theme-button-darkened);
+
+    .jtjs-button-content {
+      top: $raisedAmount;
+    }
   }
 }

@@ -40,7 +40,7 @@ export function App() {
         margin: '0',
       }}
     >
-      {/* <Radio checked={radio} onChange={setRadio}>
+      <Radio checked={radio} onChange={setRadio}>
         Radio 1
       </Radio>
       <Checkbox checked={checked} onChange={setChecked}>
@@ -56,7 +56,7 @@ export function App() {
         Choose your favorite monster
       </RadioGroup>
 
-      <Toggle isOn={toggle} onChange={setToggle} disabled>
+      <Toggle isOn={toggle} onChange={setToggle}>
         Toggle Me!
       </Toggle>
 
@@ -68,9 +68,9 @@ export function App() {
         Favorite Monster
       </Dropdown>
 
-      <Button>Click Me!</Button> */}
+      <Button>Click Me!</Button>
 
-      <Icon icon="address-card" iconType="solid" />
+      {/* <Icon icon="address-card" iconType="solid" /> */}
     </div>
   );
 }
