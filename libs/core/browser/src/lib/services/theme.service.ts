@@ -7,7 +7,8 @@ export class ThemeService {
   static onThemeChange: Event<OnThemeChangeListener> = new Event();
   /**
    * A default theme you can use to get going. This theme is NOT in the set
-   * of registered themes.
+   * of registered themes, but will be used to set the theme CSS variables
+   * by default.
    *
    * Generated at coolors.co:
    * https://coolors.co/474747-963333-eb5e5e-5c7ec1-3bad61
