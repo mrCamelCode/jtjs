@@ -1,13 +1,10 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { v4 as uuid } from 'uuid';
-import { useTheme } from '../../hooks/use-theme.hook';
-import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
 export interface ToggleProps
-  extends Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
-    ThemedProps {
+  extends Omit<HTMLProps<HTMLSpanElement>, 'onChange'> {
   /**
    * Whether the toggle is currently on.
    */
@@ -37,23 +34,19 @@ export interface ToggleProps
 }
 
 /**
- * A toggle that can be clicked on to change whether it's on, with theme support.
+ * A toggle that can be clicked on to change whether it's on.
  *
  * This is a controlled component.
  */
 export const Toggle = ({
   className,
   isOn,
-  style,
   onChange,
-  theme: themeProp,
   disabled,
   id,
   children,
   ...otherProps
 }: ToggleProps) => {
-  const theme = themeProp ?? useTheme()[0];
-
   const onText = isOn ? 'on' : 'off';
 
   let randomId = '';
@@ -101,11 +94,6 @@ export const Toggle = ({
             onChange(!isOn, event);
           }
         }}
-        style={{
-          backgroundColor: isOn ? theme?.button : theme?.disabled,
-          borderColor: theme?.outline,
-          ...style,
-        }}
         {...{
           disabled,
           'aria-disabled': disabled,
@@ -116,8 +104,6 @@ export const Toggle = ({
           <span
             className="jtjs-toggle-knob"
             style={{
-              backgroundColor: theme?.background,
-              borderColor: theme?.outline,
               position: 'absolute',
             }}
           />

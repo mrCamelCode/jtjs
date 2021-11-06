@@ -1,13 +1,10 @@
 import React, { HTMLProps } from 'react';
 import { kebabCase } from 'lodash';
-import { useTheme } from '../../hooks/use-theme.hook';
-import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
 import Radio from './Radio';
 
 export interface RadioGroupProps
-  extends Omit<HTMLProps<HTMLFieldSetElement>, 'onChange'>,
-    ThemedProps {
+  extends Omit<HTMLProps<HTMLFieldSetElement>, 'onChange'> {
   /**
    * The name of the radio group. MUST be unique among radio groups on the page.
    */
@@ -33,8 +30,7 @@ export interface RadioGroupProps
 }
 
 /**
- * Allows you to specify a group of radio inputs. Supports a theme that will be passed
- * down to each radio button and label in the group.
+ * Allows you to specify a group of radio inputs.
  */
 export const RadioGroup = ({
   name,
@@ -42,14 +38,10 @@ export const RadioGroup = ({
   selectedOption,
   onChange,
   className,
-  theme: themeProp,
   disabled,
   children,
-  style,
   ...otherProps
 }: RadioGroupProps) => {
-  const theme = themeProp ?? useTheme()[0];
-
   const optionIdMap: Record<string, string> = {};
   options.forEach((option) => {
     optionIdMap[option] = kebabCase(option);
@@ -74,27 +66,15 @@ export const RadioGroup = ({
       role="radiogroup"
       className={formatClassName('jtjs-radio-group', className)}
       disabled={disabled}
-      style={{
-        backgroundColor: theme?.background,
-        borderColor: theme?.outline,
-        ...style,
-      }}
       {...otherProps}
     >
-      <legend
-        style={{
-          color: theme?.text,
-        }}
-      >
-        {children}
-      </legend>
+      <legend>{children}</legend>
 
       {options.map((option) => {
         const id = optionIdMap[option];
 
         return (
           <Radio
-            theme={theme}
             onChange={handleChange}
             id={id}
             name={name}

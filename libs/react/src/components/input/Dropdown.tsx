@@ -1,14 +1,11 @@
 import { kebabCase } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import React, { HTMLProps, ReactNode } from 'react';
-import { useTheme } from '../../hooks/use-theme.hook';
-import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
 export interface DropdownProps
-  extends Omit<HTMLProps<HTMLSelectElement>, 'onChange' | 'defaultValue'>,
-    ThemedProps {
+  extends Omit<HTMLProps<HTMLSelectElement>, 'onChange' | 'defaultValue'> {
   /**
    * The options to show in the dropdown.
    */
@@ -46,7 +43,7 @@ export interface DropdownProps
 }
 
 /**
- * A wrapper for the native select component. Provides theme support as well as the ability to define the options as a
+ * A wrapper for the native select component. Provides the ability to define the options as a
  * prop. When onChange is invoked, you'll be given the option that was selected instead of the event.
  *
  * This component is controlled.
@@ -58,15 +55,11 @@ export const Dropdown = ({
   allowEmpty,
   allowEmptyAfterSelection,
   className,
-  style,
-  theme: themeProp,
   disabled,
   children,
   id,
   ...otherProps
 }: DropdownProps) => {
-  const theme = themeProp ?? useTheme()[0];
-
   let randomId = '';
   if (!id) {
     randomId = `jtjs-dropdown-${uuid()}`;
@@ -89,23 +82,13 @@ export const Dropdown = ({
 
   return (
     <>
-      <Label
-        className="jtjs-dropdown-label"
-        htmlFor={id ?? randomId}
-        theme={theme}
-      >
+      <Label className="jtjs-dropdown-label" htmlFor={id ?? randomId}>
         {children}
       </Label>
       <select
         data-testid="dropdown"
         value={optionValueMap[selectedOption]}
         className={formatClassName('jtjs-dropdown', className)}
-        style={{
-          backgroundColor: disabled ? theme?.disabled : theme?.background,
-          borderColor: theme?.outline,
-          color: theme?.text,
-          ...style,
-        }}
         id={id ?? randomId}
         onChange={(event) => {
           const select = event.target;

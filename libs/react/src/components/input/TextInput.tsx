@@ -1,11 +1,8 @@
 import React, { HTMLProps } from 'react';
-import { useTheme } from '../../hooks/use-theme.hook';
-import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
 
 export interface TextInputProps
-  extends Omit<HTMLProps<HTMLTextAreaElement>, 'onChange'>,
-    ThemedProps {
+  extends Omit<HTMLProps<HTMLTextAreaElement>, 'onChange'> {
   /**
    * The current value of the input.
    */
@@ -46,7 +43,6 @@ export interface TextInputProps
 export const TextInput = ({
   className,
   style,
-  theme: themeProp,
   multiline,
   value,
   rows,
@@ -55,8 +51,6 @@ export const TextInput = ({
   onChange,
   ...otherProps
 }: TextInputProps) => {
-  const theme = themeProp ?? useTheme()[0];
-
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     let text = event.target.value;
 
@@ -85,9 +79,6 @@ export const TextInput = ({
       className={formatClassName('jtjs-text-input', className)}
       rows={multiline ? rows ?? 5 : 1}
       style={{
-        backgroundColor: disabled ? theme?.disabled : theme?.background,
-        borderColor: theme?.outline,
-        color: theme?.text,
         ...(multiline
           ? {}
           : {

@@ -1,31 +1,14 @@
 import { HTMLProps } from 'react';
-import { useTheme } from '../../hooks/use-theme.hook';
-import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
 
-export interface LabelProps extends HTMLProps<HTMLLabelElement>, ThemedProps {}
+export interface LabelProps extends HTMLProps<HTMLLabelElement> {}
 
 /**
- * A wrapper for the base label component that includes theme support.
+ * A wrapper for the base label component.
  */
-export const Label = ({
-  className,
-  style,
-  children,
-  theme: themeProp,
-  ...otherProps
-}: LabelProps) => {
-  const theme = themeProp ?? useTheme()[0];
-
+export const Label = ({ className, children, ...otherProps }: LabelProps) => {
   return (
-    <label
-      className={formatClassName('jtjs-label', className)}
-      style={{
-        color: theme?.text,
-        ...style,
-      }}
-      {...otherProps}
-    >
+    <label className={formatClassName('jtjs-label', className)} {...otherProps}>
       {children}
     </label>
   );

@@ -1,13 +1,10 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { v4 as uuid } from 'uuid';
-import { useTheme } from '../../hooks/use-theme.hook';
-import { ThemedProps } from '../../prop-types/themed.props';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
 export interface CheckboxProps
-  extends Omit<HTMLProps<HTMLInputElement>, 'onChange'>,
-    ThemedProps {
+  extends Omit<HTMLProps<HTMLInputElement>, 'onChange'> {
   /**
    * Handler for when the user attempts to change the value of the checkbox.
    *
@@ -25,14 +22,12 @@ export interface CheckboxProps
 }
 
 /**
- * Wraps the base checkbox input component, with support for theme.
+ * Wraps the base checkbox input component.
  *
  * This is a controlled component.
  */
 export const Checkbox = ({
-  theme: themeProp,
   checked,
-  style,
   className,
   onChange,
   disabled,
@@ -40,8 +35,6 @@ export const Checkbox = ({
   id,
   ...otherProps
 }: CheckboxProps) => {
-  const theme = themeProp ?? useTheme()[0];
-
   let randomId = '';
   if (!id) {
     randomId = `jtjs-checkbox-${uuid()}`;
@@ -58,24 +51,11 @@ export const Checkbox = ({
         onChange={(event) => {
           onChange(event.target.checked, event);
         }}
-        style={{
-          borderColor: theme?.outline,
-          backgroundColor: disabled
-            ? theme?.disabled
-            : checked
-            ? theme?.button
-            : theme?.background,
-          ...style,
-        }}
         disabled={disabled}
         aria-disabled={disabled}
         {...otherProps}
       />
-      <Label
-        theme={theme}
-        htmlFor={id ?? randomId}
-        className="jtjs-checkbox-label"
-      >
+      <Label htmlFor={id ?? randomId} className="jtjs-checkbox-label">
         {children}
       </Label>
     </>
