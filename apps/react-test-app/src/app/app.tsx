@@ -2,6 +2,7 @@ import {
   Button,
   Checkbox,
   Dropdown,
+  Icon,
   LoadView,
   Radio,
   RadioGroup,
@@ -39,7 +40,7 @@ export function App() {
         margin: '0',
       }}
     >
-      <Radio checked={radio} onChange={setRadio}>
+      {/* <Radio checked={radio} onChange={setRadio}>
         Radio 1
       </Radio>
       <Checkbox checked={checked} onChange={setChecked}>
@@ -67,7 +68,9 @@ export function App() {
         Favorite Monster
       </Dropdown>
 
-      <Button>Click Me!</Button>
+      <Button>Click Me!</Button> */}
+
+      <Icon icon="address-card" iconType="solid" />
     </div>
   );
 }

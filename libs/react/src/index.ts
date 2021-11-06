@@ -1,5 +1,6 @@
 // components
 export * from './components/Text';
+export * from './components/Icon';
 
 export * from './components/input/Button';
 export * from './components/input/Checkbox';
