@@ -5,9 +5,10 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "build:all": "nx run-many --all --target=build --parallel",
+    "build:all": "nx run-many --all --target=build --parallel --buildableProjectDepsInPackageJsonType=dependencies && nx workspace-generator fix-lib-output",
     "test": "nx test",
-    "test:all": "nx run-many --all --target=test --parallel"
+    "test:all": "nx run-many --all --target=test --parallel",
+    "clean": "npx rimraf node_modules"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@nrwl/cli": "13.1.2",
     "@nrwl/cypress": "13.1.2",
+    "@nrwl/devkit": "13.1.2",
     "@nrwl/eslint-plugin-nx": "13.1.2",
     "@nrwl/jest": "13.1.2",
     "@nrwl/linter": "13.1.2",

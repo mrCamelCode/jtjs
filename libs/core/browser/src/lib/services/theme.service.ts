@@ -16,7 +16,8 @@ export class ThemeService {
   static defaultTheme: Theme = {
     name: 'jtjs-default-dark',
     background: '#474747',
-    disabled: '#707070',
+    foreground: '#707070',
+    disabled: '#5C5C5C',
     text: '#EEE',
     accent: '#3BAD61',
     outline: '#8F8F8F',

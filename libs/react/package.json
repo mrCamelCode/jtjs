@@ -1,4 +1,11 @@
 {
   "name": "@jtjs/react",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "@jtjs/core-browser": "C:/Users/Josh/Documents/js-projects/jtjs/dist/libs/core/browser",
+    "@jtjs/core-data": "C:/Users/Josh/Documents/js-projects/jtjs/dist/libs/core/data"
+  },
+  "peerDependencies": {
+    "react": "17.0.2"
+  }
 }

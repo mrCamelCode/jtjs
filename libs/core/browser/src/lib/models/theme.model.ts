@@ -4,6 +4,7 @@ export interface Theme {
    */
   name: string;
   background: string;
+  foreground: string;
   disabled: string;
   text: string;
   accent: string;

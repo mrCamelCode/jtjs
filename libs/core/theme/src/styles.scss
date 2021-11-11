@@ -1,0 +1,34 @@
+@import url(https://use.fontawesome.com/releases/v5.15.4/css/all.css);
+
+@import './util';
+
+@import './button';
+@import './checkbox';
+@import './dropdown';
+@import './radio';
+@import './radio-group';
+@import './text-input';
+@import './toggle';
+@import './load-view';
+
+@import './text';
+@import './icon';
+
+@import './label';
+
+* {
+  position: relative;
+  box-sizing: border-box;
+
+  [disabled],
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:focus-visible {
+    @include focus;
+  }
+}
+
+html {
+  background-color: var(--jtjs-theme-background);
+}
