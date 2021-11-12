@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   Checkbox,
   Dropdown,
   Icon,
@@ -40,37 +41,39 @@ export function App() {
         margin: '0',
       }}
     >
-      <Radio checked={radio} onChange={setRadio}>
-        Radio 1
-      </Radio>
-      <Checkbox checked={checked} onChange={setChecked}>
-        Check Me!
-      </Checkbox>
+      <Card>
+        <Radio checked={radio} onChange={setRadio}>
+          Radio 1
+        </Radio>
+        <Checkbox checked={checked} onChange={setChecked}>
+          Check Me!
+        </Checkbox>
 
-      <RadioGroup
-        name="fav-monster"
-        options={['Kraken', 'Sasquatch', 'Mothman']}
-        onChange={setSelectedRadio}
-        selectedOption={selectedRadio}
-      >
-        Choose your favorite monster
-      </RadioGroup>
+        <RadioGroup
+          name="fav-monster"
+          options={['Kraken', 'Sasquatch', 'Mothman']}
+          onChange={setSelectedRadio}
+          selectedOption={selectedRadio}
+        >
+          Choose your favorite monster
+        </RadioGroup>
 
-      <Toggle isOn={toggle} onChange={setToggle}>
-        Toggle Me!
-      </Toggle>
+        <Toggle isOn={toggle} onChange={setToggle}>
+          Toggle Me!
+        </Toggle>
 
-      <Dropdown
-        selectedOption={selectedOption}
-        options={['Kraken', 'Sasquatch', 'Mothman']}
-        onChange={setSelectedOption}
-      >
-        Favorite Monster
-      </Dropdown>
+        <Dropdown
+          selectedOption={selectedOption}
+          options={['Kraken', 'Sasquatch', 'Mothman']}
+          onChange={setSelectedOption}
+        >
+          Favorite Monster
+        </Dropdown>
 
-      <Button>Click Me!</Button>
+        <Button>Click Me!</Button>
 
-      {/* <Icon icon="address-card" iconType="solid" /> */}
+        {/* <Icon icon="address-card" iconType="solid" /> */}
+      </Card>
     </div>
   );
 }

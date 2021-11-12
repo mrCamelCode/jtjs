@@ -11,7 +11,9 @@ export * from './components/input/RadioGroup';
 export * from './components/input/TextInput';
 export * from './components/input/Toggle';
 
+export * from './components/wrappers/Card';
 export * from './components/wrappers/LoadView';
+export * from './components/wrappers/Flexbox';
 
 // hooks
 export * from './hooks/use-theme.hook';
