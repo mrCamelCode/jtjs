@@ -1,6 +1,6 @@
 .jtjs-radio-group {
   display: block;
-  @include rounded-corners;
+  @include slightly-rounded-corners;
 
   background-color: var(--jtjs-theme-background);
   border-color: var(--jtjs-theme-outline);

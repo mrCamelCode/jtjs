@@ -1,12 +1,17 @@
+import { ThemeService } from '@jtjs/core-browser';
 import {
   Button,
   Card,
   Checkbox,
   Dropdown,
+  Flexbox,
+  Heading,
   Icon,
+  ImageCard,
   LoadView,
   Radio,
   RadioGroup,
+  Text,
   TextInput,
   Toggle,
   useTheme,
@@ -71,6 +76,41 @@ export function App() {
         </Dropdown>
 
         <Button>Click Me!</Button>
+
+        <Flexbox>
+          <ImageCard
+            flex
+            direction="column"
+            verticalAlignment="bottom"
+            innerShadow
+            style={{
+              flexBasis: '50%',
+              minHeight: '50vh',
+            }}
+            src="../assets/ga-screenshot0.jpg"
+          >
+            <Heading
+              style={{
+                margin: 0,
+              }}
+            >
+              Game
+            </Heading>
+            <Text>This game is Galactic Assault</Text>
+          </ImageCard>
+        </Flexbox>
+
+        <div
+          style={{
+            height: '100px',
+            width: '100px',
+            backgroundColor: ThemeService.toColor(
+              ThemeService.currentTheme.foreground
+            )
+              .darken(0.3)
+              .hex(),
+          }}
+        ></div>
 
         {/* <Icon icon="address-card" iconType="solid" /> */}
       </Card>

@@ -1,5 +1,6 @@
 // components
 export * from './components/Text';
+export * from './components/Heading';
 export * from './components/Icon';
 
 export * from './components/input/Button';
@@ -12,6 +13,7 @@ export * from './components/input/TextInput';
 export * from './components/input/Toggle';
 
 export * from './components/wrappers/Card';
+export * from './components/wrappers/ImageCard';
 export * from './components/wrappers/LoadView';
 export * from './components/wrappers/Flexbox';
 

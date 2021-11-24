@@ -6,7 +6,7 @@
 
 .jtjs-dropdown {
   padding: 0.2rem;
-  @include rounded-corners;
+  @include slightly-rounded-corners;
   font-size: medium;
 
   background-color: var(--jtjs-theme-background);
