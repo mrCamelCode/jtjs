@@ -19,6 +19,8 @@ export * from './components/wrappers/Flexbox';
 
 // hooks
 export * from './hooks/use-theme.hook';
+export * from './hooks/use-window-dimensions.hook';
+export * from './hooks/use-breakpoint.hook';
 
 // prop types
 export * from './prop-types/base.props';
