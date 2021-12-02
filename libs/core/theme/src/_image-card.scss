@@ -1,12 +1,12 @@
 .jtjs-image-card {
-  background-attachment: scroll;
-  background-clip: border-box;
-  background-origin: border-box;
-  background-position: top left;
-  background-repeat: no-repeat;
-  background-size: cover;
+  z-index: 0;
+  padding: 0;
+  overflow: hidden;
 
-  .jtjs-inner-shadow {
-    @include rounded-corners;
+  .jtjs-image-card-image {
+    z-index: -1;
+  }
+  .jtjs-image-card-content {
+    padding: 1.5rem;
   }
 }

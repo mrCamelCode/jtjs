@@ -1,5 +1,29 @@
-import { formatClassName } from '../../util/util-functions';
-import Card, { CardProps } from './Card';
+import { HTMLProps, ReactNode } from 'react';
+import { formatClassName } from '../../../util/util-functions';
+import Flexbox, { FlexboxProps } from '../Flexbox';
+
+export interface CardProps
+  extends Omit<HTMLProps<HTMLDivElement>, 'wrap'>,
+    FlexboxProps {
+  children: ReactNode | ReactNode[];
+  /**
+   * (Optional, defaults to false) Whether the card should be a flex container. This will make the card a Flexbox
+   * and offer all the benefits and props available to a Flexbox. Keep in mind that any FlexboxProps you pass in will
+   * ONLY WORK if this prop is `true`.
+   */
+  flex?: boolean;
+  /**
+   * Whether the card has an inner shadow. This can be useful for making text in the
+   * ImageCard easier to read against the image. If you'd like to customize the shadow,
+   * use the `innerShadowOptions` prop.
+   */
+  innerShadow?: boolean;
+  /**
+   * Options to customize the inner shadow if the defaults don't work well for your use
+   * case.
+   */
+  innerShadowOptions?: ShadowProps;
+}
 
 interface ShadowProps {
   /**
@@ -58,50 +82,31 @@ const Shadow = ({
   );
 };
 
-export interface ImageCardProps extends CardProps {
-  /**
-   * The source of the image to use for the background.
-   */
-  src: string;
-  /**
-   * Whether the card has an inner shadow. This can be useful for making text in the
-   * ImageCard easier to read against the image. If you'd like to customize the shadow,
-   * use the `innerShadowOptions` prop.
-   */
-  innerShadow?: boolean;
-  /**
-   * Options to customize the inner shadow if the defaults don't work well for your use
-   * case.
-   */
-  innerShadowOptions?: ShadowProps;
-}
-
 /**
- * A card that has the specified image as its background. The children of the card will
- * appear over the image.
+ * Wrapper that logically groups related content.
  */
-export const ImageCard = ({
-  style,
+export const Card = ({
   className,
   children,
-  src,
+  flex = false,
   innerShadow = false,
-  innerShadowOptions,
+  innerShadowOptions = {},
   ...otherProps
-}: ImageCardProps) => {
-  return (
-    <Card
-      className={formatClassName('jtjs-image-card', className)}
-      style={{
-        backgroundImage: `url(${src})`,
-        ...style,
-      }}
+}: CardProps) => {
+  return flex ? (
+    <Flexbox
+      className={formatClassName('jtjs-card', className)}
       {...otherProps}
     >
       {innerShadow ? <Shadow {...innerShadowOptions} /> : null}
       {children}
-    </Card>
+    </Flexbox>
+  ) : (
+    <div className={formatClassName('jtjs-card', className)} {...otherProps}>
+      {innerShadow ? <Shadow {...innerShadowOptions} /> : null}
+      {children}
+    </div>
   );
 };
 
-export default ImageCard;
+export default Card;

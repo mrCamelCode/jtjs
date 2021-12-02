@@ -84,16 +84,31 @@ export class ThemeService {
   }
 
   /**
-   * Turns the passed hex color into a Color object from the color package. This can be useful to take a color from
-   * a theme and manipulate it in some way.
+   * Lightens a hex color.
    *
-   * @param hexColor - The color in HEX format that you want to convert to a Color object.
-   * @returns - A Color object from the color package. This object has a rich API for color manipulation.
+   * @param color - The color to lighten
+   * @param amount - (Optional) The amount by which to lighten the color. This is a value
+   * between 0-1. The default for this value is the same value used by the service to generate
+   * lightened color variants for theme colors.
    *
-   * @example ThemeService.toColor(ThemeService.currentTheme.background).lighten(0.6);
+   * @returns - The lightened color.
    */
-  static toColor(hexColor: string): Color {
-    return Color(hexColor);
+  static lighten(color: string, amount = 0.3) {
+    return Color(color).lighten(amount).hex().toString();
+  }
+
+  /**
+   * Darkens a hex color.
+   *
+   * @param color - The color to darken
+   * @param amount - (Optional) The amount by which to darken the color. This is a value
+   * between 0-1. The default for this value is the same value used by the service to generate
+   * darkened color variants for theme colors.
+   *
+   * @returns - The darkened color.
+   */
+  static darken(color: string, amount = 0.3) {
+    return Color(color).darken(amount).hex().toString();
   }
 
   private static updateCssVariables() {
@@ -104,11 +119,11 @@ export class ThemeService {
         root.style.setProperty(`--jtjs-theme-${themeKey}`, color);
         root.style.setProperty(
           `--jtjs-theme-${themeKey}-darkened`,
-          Color(color).darken(0.3).hex()
+          this.darken(color)
         );
         root.style.setProperty(
           `--jtjs-theme-${themeKey}-lightened`,
-          Color(color).lighten(0.3).hex()
+          this.lighten(color)
         );
       }
     });

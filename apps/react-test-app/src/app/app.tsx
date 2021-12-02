@@ -1,5 +1,6 @@
 import { ThemeService } from '@jtjs/core-browser';
 import {
+  BackgroundImageCard,
   Button,
   Card,
   Checkbox,
@@ -7,7 +8,8 @@ import {
   Flexbox,
   Heading,
   Icon,
-  ImageCard,
+  // ImageCard,
+  Link,
   LoadView,
   Radio,
   RadioGroup,
@@ -78,7 +80,30 @@ export function App() {
         <Button>Click Me!</Button>
 
         <Flexbox>
-          <ImageCard
+          {/* <ImageCard
+            flex
+            direction="column"
+            verticalAlignment="bottom"
+            innerShadow
+            style={{
+              flexBasis: '50%',
+              minHeight: '50vh',
+            }}
+            src="../assets/ga-screenshot0.jpg"
+            imgOptions={{
+              horizontalAlignment: 'center',
+            }}
+          >
+            <Heading
+              style={{
+                margin: 0,
+              }}
+            >
+              Game
+            </Heading>
+            <Text>This game is Galactic Assault</Text>
+          </ImageCard> */}
+          <BackgroundImageCard
             flex
             direction="column"
             verticalAlignment="bottom"
@@ -97,20 +122,21 @@ export function App() {
               Game
             </Heading>
             <Text>This game is Galactic Assault</Text>
-          </ImageCard>
+          </BackgroundImageCard>
         </Flexbox>
 
         <div
           style={{
             height: '100px',
             width: '100px',
-            backgroundColor: ThemeService.toColor(
-              ThemeService.currentTheme.foreground
-            )
-              .darken(0.3)
-              .hex(),
+            backgroundColor: ThemeService.darken(
+              ThemeService.currentTheme.foreground,
+              0.5
+            ),
           }}
         ></div>
+
+        <Link href="https://google.com">Google</Link>
 
         {/* <Icon icon="address-card" iconType="solid" /> */}
       </Card>

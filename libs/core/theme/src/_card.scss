@@ -5,4 +5,8 @@
   width: 100%;
 
   background-color: var(--jtjs-theme-foreground);
+
+  .jtjs-inner-shadow {
+    @include rounded-corners;
+  }
 }
