@@ -17,7 +17,17 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   get tail(): ILinkedList<T> {
-    return new LinkedList();
+    // TODO: This should be done better to avoid O(n-1).
+    const tail = new LinkedList<T>();
+    this.forEach((element) => {
+      if (element === this.head?.value) {
+        return;
+      } else {
+        tail.add(element);
+      }
+    });
+
+    return tail;
   }
 
   get first(): T | undefined {
@@ -86,6 +96,19 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     for (let node = this._head; node !== null; node = node.next) {
       if (node.value === value) {
+        foundNode = node;
+        break;
+      }
+    }
+
+    this.removeNode(foundNode);
+  }
+
+  removeBy(predicate: (value: T) => boolean): void {
+    let foundNode: ILinkedListNode<T> | null = null;
+
+    for (let node = this._head; node !== null; node = node.next) {
+      if (predicate(node.value)) {
         foundNode = node;
         break;
       }

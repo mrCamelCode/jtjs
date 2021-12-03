@@ -144,6 +144,74 @@ describe('LinkedList', () => {
       expect(linkedList.head.value).toBe(1);
     });
   });
+  describe('removeBy', () => {
+    test('Will do nothing and not throw when the list is empty', () => {
+      expect(() => linkedList.removeBy((val) => val === 1)).not.toThrow();
+      expect(linkedList.length).toBe(0);
+    });
+    test('Will remove the element from a list with one element.', () => {
+      linkedList = new LinkedList(1);
+
+      expect(linkedList.length).toBe(1);
+
+      linkedList.removeBy((val) => val === 1);
+
+      expect(linkedList.length).toBe(0);
+      expect(linkedList.head).toBe(null);
+      expect(linkedList.tip).toBe(null);
+    });
+    test('Will NOT remove the only element in a list if it does not match.', () => {
+      linkedList = new LinkedList(1);
+
+      expect(linkedList.length).toBe(1);
+
+      expect(() => linkedList.removeBy((val) => val === 5)).not.toThrow();
+
+      expect(linkedList.length).toBe(1);
+      expect(linkedList.first).toBe(1);
+    });
+    test('Will correctly remove the specified element from a non-empty list.', () => {
+      linkedList = new LinkedList(1, 2, 3, 4, 5);
+
+      linkedList.removeBy((val) => val === 3);
+
+      const one = linkedList.head;
+      const two = one.next;
+      const four = two.next;
+      const five = four.next;
+
+      expect(linkedList.length).toBe(4);
+      expect(two.value).toBe(2);
+      expect(four.value).toBe(4);
+      expect(four.previous.value).toBe(2);
+
+      expect(one.value).toBe(1);
+      expect(five.value).toBe(5);
+    });
+    test('Will correctly remove the first element from a non-empty list.', () => {
+      linkedList = new LinkedList(1, 2, 3);
+
+      linkedList.removeBy((val) => val === 1);
+
+      expect(linkedList.length).toBe(2);
+      expect(linkedList.head.value).toBe(2);
+      expect(linkedList.head.previous).toBe(null);
+      expect(linkedList.head.next === linkedList.tip).toBe(true);
+      expect(linkedList.tip.value).toBe(3);
+    });
+    test('Will correctly remove the last element from a non-empty list.', () => {
+      linkedList = new LinkedList(1, 2, 3);
+
+      linkedList.removeBy((val) => val === 3);
+
+      expect(linkedList.length).toBe(2);
+      expect(linkedList.tip.value).toBe(2);
+      expect(linkedList.tip.next).toBe(null);
+      expect(linkedList.tip.previous === linkedList.head).toBe(true);
+      expect(linkedList.head.value).toBe(1);
+    });
+  });
+
   describe('removeFirst', () => {
     test('Does nothing and does not throw on an empty list.', () => {
       expect(() => linkedList.removeFirst()).not.toThrow();

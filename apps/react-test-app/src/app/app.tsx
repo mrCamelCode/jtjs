@@ -78,6 +78,7 @@ export function App() {
         </Dropdown>
 
         <Button>Click Me!</Button>
+        <Button disabled>Can't Click Me!</Button>
 
         <Flexbox>
           {/* <ImageCard

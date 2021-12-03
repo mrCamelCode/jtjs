@@ -49,6 +49,13 @@ export interface ILinkedList<T1> {
    */
   remove(value: T1): void;
   /**
+   * Removes the first element that passes the test of the passed `predicate`.
+   *
+   * @param predicate - The predicate to invoke on each element of the list. If the predicate returns `true`, the element
+   * is removed and the iteration ceases.
+   */
+  removeBy(predicate: (value: T1) => boolean): void;
+  /**
    * Removes the first value from the linked list.
    */
   removeFirst(): void;
