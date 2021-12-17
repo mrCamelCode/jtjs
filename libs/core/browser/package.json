@@ -2,6 +2,6 @@
   "name": "@jtjs/core-browser",
   "version": "0.0.1",
   "dependencies": {
-    "@jtjs/core-data": "C:/Users/Josh/Documents/js-projects/jtjs/dist/libs/core/data"
+    "@jtjs/core-data": "git+ssh://git@github.com/mrCamelCode/jtjs-core-data.git"
   }
 }
