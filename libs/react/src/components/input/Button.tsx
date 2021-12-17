@@ -15,7 +15,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={formatClassName('jtjs-button')}
+      className={formatClassName('jtjs-button', className)}
       disabled={disabled}
       aria-disabled={disabled}
       {...otherProps}

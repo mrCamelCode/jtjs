@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { Theme, ThemeService } from '@jtjs/core-browser';
+import { useEffect, useState } from 'react';
 
 /**
  * Hooks onto the current theme avialable via the {@link ThemeService}. If no
@@ -9,7 +9,7 @@ import { Theme, ThemeService } from '@jtjs/core-browser';
  *
  * @returns - An array, where the first element is the current {@link Theme},
  * and the second element is a setter for the the current {@link Theme}. Using
- * the setter triggers the {@link ThemeService.onThemeChange} event, so all
+ * the setter triggers the {@link ThemeService.onChangeTheme} event, so all
  * instances of this hook will be updated, as well as any listeners you may
  * have registered to that event.
  */
@@ -19,14 +19,14 @@ export function useTheme(): [Theme, (themeName: string) => void] {
   );
 
   useEffect(() => {
-    const onThemeChangeListener = (theme: Theme) => {
+    const onChangeThemeListener = (theme: Theme) => {
       setCurrentTheme(theme);
     };
 
-    ThemeService.onThemeChange.subscribe(onThemeChangeListener);
+    ThemeService.onChangeTheme.subscribe(onChangeThemeListener);
 
     return () => {
-      ThemeService.onThemeChange.unsubscribe(onThemeChangeListener);
+      ThemeService.onChangeTheme.unsubscribe(onChangeThemeListener);
     };
   });
 

@@ -7,7 +7,7 @@
   transition: box-shadow 0.2s ease, color 0.2s ease;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--jtjs-theme-buttonText);
     box-shadow: 0 -1.1em 0 0 inset var(--jtjs-theme-button);
   }

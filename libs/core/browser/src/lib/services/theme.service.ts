@@ -1,11 +1,16 @@
 import { Event } from '@jtjs/core-data';
-import { Theme } from '../models/theme.model';
 import Color from 'color';
+import { Theme } from '../models/theme.model';
 
-export type OnThemeChangeListener = (theme: Theme) => void;
+export type OnChangeThemeListener = (theme: Theme) => void;
 
+/**
+ * Provides means by which to register themes, change the active theme, and listen to
+ * when the theme changes. Also includes helper methods for dealing with themes and colors.
+ */
 export class ThemeService {
-  static onThemeChange: Event<OnThemeChangeListener> = new Event();
+  static onChangeTheme: Event<OnChangeThemeListener> = new Event();
+
   /**
    * A default theme you can use to get going. This theme is NOT in the set
    * of registered themes, but will be used to set the theme CSS variables
@@ -40,13 +45,13 @@ export class ThemeService {
     return this._currentTheme;
   }
   /**
-   * Sets the current theme and invokes the `onThemeChange` event.
+   * Sets the current theme and invokes the `onChangeTheme` event.
    */
   private static set currentTheme(theme: Theme) {
     this._currentTheme = theme;
     this.updateCssVariables();
 
-    this.onThemeChange.trigger(theme);
+    this.onChangeTheme.trigger(theme);
   }
 
   /**
@@ -94,7 +99,13 @@ export class ThemeService {
    * @returns - The lightened color.
    */
   static lighten(color: string, amount = 0.3) {
-    return Color(color).lighten(amount).hex().toString();
+    const colorObj = Color(color);
+    const lightness = colorObj.hsl().lightness();
+
+    return colorObj
+      .lightness(lightness + (100 - lightness) * amount)
+      .hex()
+      .toString();
   }
 
   /**
@@ -108,7 +119,13 @@ export class ThemeService {
    * @returns - The darkened color.
    */
   static darken(color: string, amount = 0.3) {
-    return Color(color).darken(amount).hex().toString();
+    const colorObj = Color(color);
+    const lightness = colorObj.hsl().lightness();
+
+    return colorObj
+      .lightness(lightness - lightness * amount)
+      .hex()
+      .toString();
   }
 
   private static updateCssVariables() {

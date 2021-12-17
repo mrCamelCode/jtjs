@@ -1,4 +1,8 @@
-import { ThemeService } from '@jtjs/core-browser';
+import {
+  ActivityState,
+  ThemeService,
+  UserActivityService,
+} from '@jtjs/core-browser';
 import {
   BackgroundImageCard,
   Button,
@@ -25,6 +29,11 @@ function fakeNetworkCall(): Promise<number> {
     setTimeout(() => resolve(3), 5000);
   });
 }
+
+UserActivityService.onActivity.subscribe(() => console.log('activity'));
+UserActivityService.onChangeActivityState.subscribe((state) => {
+  console.log('activity state changin to:', ActivityState[state].toString());
+});
 
 export function App() {
   const [theme, setTheme] = useTheme();

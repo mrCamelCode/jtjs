@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
+import { CSSProperties, useCallback, useState } from 'react';
 import { formatClassName } from '../../../util/util-functions';
 import Card, { CardProps } from './Card';
 
@@ -58,7 +58,6 @@ export const ImageCard = ({
     (image: HTMLImageElement) => {
       if (image) {
         const workingImageStyle: CSSProperties = {};
-        console.log('imageOptions:', JSON.stringify(imgOptions, null, 2));
         switch (imgOptions.horizontalAlignment) {
           case 'left':
             workingImageStyle.left = '0';
