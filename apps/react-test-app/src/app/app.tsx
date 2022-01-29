@@ -79,8 +79,21 @@ export function App() {
         </Toggle>
 
         <Dropdown
-          selectedOption={selectedOption}
-          options={['Kraken', 'Sasquatch', 'Mothman']}
+          value={selectedOption}
+          options={[
+            {
+              label: 'Kraken',
+              value: 'K',
+            },
+            {
+              label: 'Sasquatch',
+              value: 'S',
+            },
+            {
+              label: 'Mothman',
+              value: 'M',
+            },
+          ]}
           onChange={setSelectedOption}
         >
           Favorite Monster

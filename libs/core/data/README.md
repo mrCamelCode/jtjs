@@ -1,7 +1,1 @@
-# core-data
-
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test core-data` to execute the unit tests via [Jest](https://jestjs.io).
+This package is a WIP and is not advised for use.

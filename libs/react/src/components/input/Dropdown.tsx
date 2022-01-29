@@ -9,21 +9,18 @@ export interface DropdownProps
   /**
    * The options to show in the dropdown.
    */
-  options: string[];
+  options: { label: string; value: string }[];
   /**
    * Handler for when the user attempts to change their selection in the dropdown.
    *
-   * @param option - The {@link DropdownOption} that was selected from the dropdown.
+   * @param optionValue - The value of the option that was selected from the dropdown.
    * @param event - The original simulated event.
    */
   onChange: (
-    option: string,
+    optionValue: string,
     event: React.ChangeEvent<HTMLSelectElement>
   ) => void;
-  /**
-   * The currently selected option.
-   */
-  selectedOption: string;
+  value: string;
   /**
    * The children of the dropdown, which will be used as its label.
    */
@@ -51,7 +48,7 @@ export interface DropdownProps
 export const Dropdown = ({
   options,
   onChange,
-  selectedOption,
+  value,
   allowEmpty,
   allowEmptyAfterSelection,
   className,
@@ -73,12 +70,7 @@ export const Dropdown = ({
    *  - If we're NOT allowing empty after selection and we DON'T have a value, then empty can still appear.
    */
   const emptyCanAppear =
-    allowEmpty && (allowEmptyAfterSelection !== false || !selectedOption);
-
-  const optionValueMap: Record<string, string> = {};
-  options.forEach((option) => {
-    optionValueMap[option] = kebabCase(option);
-  });
+    allowEmpty && (allowEmptyAfterSelection !== false || !value);
 
   return (
     <>
@@ -87,13 +79,13 @@ export const Dropdown = ({
       </Label>
       <select
         data-testid="dropdown"
-        value={optionValueMap[selectedOption]}
+        value={value}
         className={formatClassName('jtjs-dropdown', className)}
         id={id ?? randomId}
         onChange={(event) => {
           const select = event.target;
 
-          onChange(select.options[select.selectedIndex].text, event);
+          onChange(select.value, event);
         }}
         disabled={disabled}
         aria-disabled={disabled}
@@ -102,12 +94,14 @@ export const Dropdown = ({
         {emptyCanAppear && (
           <option data-testid="dropdown-option" value=""></option>
         )}
-        {options.map((option) => {
-          const value = optionValueMap[option];
-
+        {options.map((optionData) => {
           return (
-            <option data-testid="dropdown-option" key={value} value={value}>
-              {option}
+            <option
+              data-testid="dropdown-option"
+              key={optionData.value}
+              value={optionData.value}
+            >
+              {optionData.label}
             </option>
           );
         })}

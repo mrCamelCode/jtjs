@@ -2,15 +2,24 @@ import Dropdown, { DropdownProps } from '../Dropdown';
 import { render, cleanup, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-let selectedOption = 'Option 1';
-const onChange = jest.fn((option: string) => (selectedOption = option));
+let value = '1';
+const onChange = jest.fn((option: string) => (value = option));
 
-const defaultOptions = ['Option 1', 'Option 2'];
+const defaultOptions = [
+  {
+    label: 'Option 1',
+    value: '1',
+  },
+  {
+    label: 'Option 2',
+    value: '2',
+  },
+];
 
 const renderDropdown = (props: Partial<DropdownProps> = {}) => {
   const defaultProps: DropdownProps = {
     options: defaultOptions,
-    selectedOption,
+    value,
     onChange,
     children: 'Dropdown',
   };
@@ -33,7 +42,7 @@ describe('Dropdown', () => {
 
   it('should allow you to change which option is selected', () => {
     renderDropdown({
-      selectedOption,
+      value,
       onChange,
     });
 
@@ -41,13 +50,13 @@ describe('Dropdown', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
 
-    expect(selectedOption).toBe('Option 2');
+    expect(value).toBe('2');
   });
 
   it('should accurately default to the option that is set as the initial value', () => {
     renderDropdown({
       allowEmpty: true,
-      selectedOption: 'Option 2',
+      value: '2',
     });
 
     expect((screen.getByText('Option 1') as HTMLOptionElement).selected).toBe(
@@ -84,10 +93,10 @@ describe('Dropdown', () => {
   });
 
   it('should remove the empty option after selection when allowEmptyAfterSelection is false', async () => {
-    selectedOption = '';
+    value = '';
 
     const { rerender } = renderDropdown({
-      selectedOption,
+      value,
       allowEmpty: true,
       allowEmptyAfterSelection: false,
     });
@@ -102,7 +111,7 @@ describe('Dropdown', () => {
       <Dropdown
         options={defaultOptions}
         onChange={onChange}
-        selectedOption={selectedOption}
+        value={value}
         allowEmpty
         allowEmptyAfterSelection={false}
       >

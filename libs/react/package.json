@@ -2,8 +2,8 @@
   "name": "@jtjs/react",
   "version": "0.0.1",
   "dependencies": {
-    "@jtjs/core-browser": "git+ssh://git@github.com:mrCamelCode/jtjs-core-browser.git",
-    "@jtjs/core-data": "git+ssh://git@github.com/mrCamelCode/jtjs-core-data.git"
+    "@jtjs/core-browser": ">=0.0.1",
+    "@jtjs/core-data": ">=0.0.1"
   },
   "peerDependencies": {
     "react": ">=17.0",
