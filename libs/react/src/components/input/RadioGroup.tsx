@@ -1,5 +1,4 @@
 import React, { HTMLProps } from 'react';
-import { kebabCase } from 'lodash';
 import { formatClassName } from '../../util/util-functions';
 import Radio from './Radio';
 
@@ -12,19 +11,19 @@ export interface RadioGroupProps
   /**
    * The options for the radio group.
    */
-  options: string[];
+  options: { label: string; value: string }[];
   /**
-   * The currently selected option.
+   * The currently selected option's value.
    */
-  selectedOption: string;
+  value: string;
   /**
    * Handler for when the user attempts to change their selection in the radio group.
    *
-   * @param option - The option that was selected.
+   * @param optionValue - The value of the option that was selected.
    * @param event - The original simulated event.
    */
   onChange: (
-    option: string,
+    optionValue: string,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
 }
@@ -35,29 +34,21 @@ export interface RadioGroupProps
 export const RadioGroup = ({
   name,
   options,
-  selectedOption,
+  value,
   onChange,
   className,
   disabled,
   children,
   ...otherProps
 }: RadioGroupProps) => {
-  const optionIdMap: Record<string, string> = {};
-  options.forEach((option) => {
-    optionIdMap[option] = kebabCase(option);
-  });
-
   const handleChange = (
     checked: boolean,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (checked) {
       const radio = event.target;
-      const chosenOption = Object.keys(optionIdMap).find(
-        (option) => optionIdMap[option] === radio.id
-      );
 
-      onChange(chosenOption ?? 'chosen option not in option list', event);
+      onChange(radio.value ?? 'chosen option not in option list', event);
     }
   };
 
@@ -71,18 +62,19 @@ export const RadioGroup = ({
       <legend>{children}</legend>
 
       {options.map((option) => {
-        const id = optionIdMap[option];
+        const id = option.value;
 
         return (
           <Radio
             onChange={handleChange}
             id={id}
             name={name}
-            checked={option === selectedOption}
+            checked={option.value === value}
+            value={option.value}
             disabled={disabled}
             key={id}
           >
-            {option}
+            {option.label}
           </Radio>
         );
       })}

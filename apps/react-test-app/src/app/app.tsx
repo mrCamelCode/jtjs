@@ -67,9 +67,22 @@ export function App() {
 
         <RadioGroup
           name="fav-monster"
-          options={['Kraken', 'Sasquatch', 'Mothman']}
+          options={[
+            {
+              label: 'Kraken',
+              value: 'K',
+            },
+            {
+              label: 'Sasquatch',
+              value: 'S',
+            },
+            {
+              label: 'Mothman',
+              value: 'M',
+            },
+          ]}
           onChange={setSelectedRadio}
-          selectedOption={selectedRadio}
+          value={selectedRadio}
         >
           Choose your favorite monster
         </RadioGroup>

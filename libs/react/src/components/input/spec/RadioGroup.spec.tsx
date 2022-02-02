@@ -3,12 +3,25 @@ import { render, cleanup, screen } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-let defaultOptions: string[] = ['Radio 1', 'Radio 2', 'Radio 3'];
+let defaultOptions: { label: string; value: string }[] = [
+  {
+    label: 'Radio 1',
+    value: '1',
+  },
+  {
+    label: 'Radio 2',
+    value: '2',
+  },
+  {
+    label: 'Radio 3',
+    value: '3',
+  },
+];
 
-let selectedOption = '';
+let value = '';
 let onChange = jest.fn(
-  (option: string, event: React.ChangeEvent<HTMLInputElement>) => {
-    selectedOption = option;
+  (optionValue: string, event: React.ChangeEvent<HTMLInputElement>) => {
+    value = optionValue;
   }
 );
 
@@ -17,7 +30,7 @@ const renderRadioGroup = (props: Partial<RadioGroupProps> = {}) => {
     options: defaultOptions,
     onChange,
     name: 'test-group',
-    selectedOption,
+    value,
   };
 
   return render(<RadioGroup {...defaultProps} {...props} />);
@@ -33,7 +46,7 @@ describe('RadioGroup', () => {
     renderRadioGroup();
 
     defaultOptions.forEach((option) => {
-      expect(screen.getByText(option)).toBeDefined();
+      expect(screen.getByText(option.label)).toBeDefined();
     });
   });
 
@@ -43,32 +56,32 @@ describe('RadioGroup', () => {
     userEvent.click(screen.getByLabelText('Radio 2'));
 
     expect(onChange).toHaveBeenCalledWith(
-      'Radio 2',
+      '2',
       // Don't care about the value of the event.
       onChange.mock.calls[0][1]
     );
-    expect(selectedOption).toBe('Radio 2');
+    expect(value).toBe('2');
   });
 
   it('should check the appropriate radio when given a default value', () => {
     renderRadioGroup({
-      selectedOption: 'Radio 3',
+      value: '3',
     });
 
     defaultOptions.forEach((option) => {
-      const radio = screen.getByLabelText(option) as HTMLInputElement;
+      const radio = screen.getByLabelText(option.label) as HTMLInputElement;
 
-      expect(radio.checked).toBe(option === 'Radio 3' ? true : false);
+      expect(radio.checked).toBe(option.value === '3' ? true : false);
     });
   });
 
   it('no radio should be selected when the default value does not correspond to an option', () => {
     renderRadioGroup({
-      selectedOption: 'jfkdjakf',
+      value: 'jfkdjakf',
     });
 
     defaultOptions.forEach((option) => {
-      const radio = screen.getByLabelText(option) as HTMLInputElement;
+      const radio = screen.getByLabelText(option.label) as HTMLInputElement;
 
       expect(radio.checked).toBe(false);
     });
