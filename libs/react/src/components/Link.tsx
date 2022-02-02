@@ -1,5 +1,5 @@
 import { HTMLProps } from 'react';
-import { formatClassName } from '..';
+import { formatClassName } from '../util/util-functions';
 
 export interface LinkProps extends HTMLProps<HTMLAnchorElement> {}
 
