@@ -17,8 +17,8 @@ export interface IconProps extends HTMLProps<HTMLSpanElement> {
 
 /**
  * Renders an icon from FontAwesome. Note that for this component to work, you MUST either:
- * 1. Use JTJS' provided styles or
- * 1. Include FontAwesome in your project yourself.
+ * 1. Import FontAwesome via a URL like this: https://use.fontawesome.com/releases/v5.15.4/css/all.css
+ * 1. Include FontAwesome in your project yourself another way
  *
  * If your icon doesn't seem to be appearing and you've verified that you're including FontAwesome
  * in your project, try verifying and changing the `iconType`.
