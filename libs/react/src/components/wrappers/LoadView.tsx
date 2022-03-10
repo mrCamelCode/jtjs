@@ -1,5 +1,6 @@
 import { HTMLProps, ReactNode } from 'react';
 import { formatClassName } from '../../util/util-functions';
+import LoadIndicator from './LoadIndicator';
 
 export interface LoadViewProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -14,24 +15,6 @@ export interface LoadViewProps extends HTMLProps<HTMLDivElement> {
    */
   loadingComponent?: ReactNode;
 }
-
-const LoadViewDots = ({ ...otherProps }: HTMLProps<HTMLDivElement>) => {
-  return (
-    <div className="jtjs-load-view-dots-container" {...otherProps}>
-      {Array(6)
-        .fill(0)
-        .map((el, index) => {
-          return (
-            <span
-              key={index}
-              className="jtjs-load-view-dot"
-              id={`jtjs-load-view-dot-${index}`}
-            />
-          );
-        })}
-    </div>
-  );
-};
 
 /**
  * A wrapper that will show its content based on its `isLoading` prop.
@@ -48,7 +31,7 @@ export const LoadView = ({
       className={formatClassName('jtjs-load-view', className)}
       {...otherProps}
     >
-      {isLoading ? loadingComponent ?? <LoadViewDots /> : children}
+      {isLoading ? loadingComponent ?? <LoadIndicator /> : children}
     </div>
   );
 };

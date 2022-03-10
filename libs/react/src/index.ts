@@ -17,6 +17,7 @@ export * from './components/wrappers/cards/Card';
 // export * from './components/wrappers/cards/ImageCard';
 export * from './components/wrappers/cards/BackgroundImageCard';
 export * from './components/wrappers/LoadView';
+export * from './components/wrappers/LoadIndicator';
 export * from './components/wrappers/Flexbox';
 
 // hooks

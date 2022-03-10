@@ -1,5 +1,5 @@
+import { uniqueId } from 'lodash';
 import React, { HTMLProps, ReactNode } from 'react';
-import { v4 as uuid } from 'uuid';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
@@ -37,7 +37,7 @@ export const Checkbox = ({
 }: CheckboxProps) => {
   let randomId = '';
   if (!id) {
-    randomId = `jtjs-checkbox-${uuid()}`;
+    randomId = uniqueId('jtjs-checkbox-');
   }
 
   return (

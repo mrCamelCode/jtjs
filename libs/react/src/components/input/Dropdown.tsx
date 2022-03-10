@@ -1,5 +1,4 @@
-import { kebabCase } from 'lodash';
-import { v4 as uuid } from 'uuid';
+import { uniqueId } from 'lodash';
 import React, { HTMLProps, ReactNode } from 'react';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
@@ -59,7 +58,7 @@ export const Dropdown = ({
 }: DropdownProps) => {
   let randomId = '';
   if (!id) {
-    randomId = `jtjs-dropdown-${uuid()}`;
+    randomId = uniqueId('jtjs-dropdown-');
   }
 
   /**
