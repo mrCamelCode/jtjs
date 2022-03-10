@@ -11,14 +11,12 @@ import {
   Dropdown,
   Flexbox,
   Heading,
-  Icon,
   // ImageCard,
   Link,
   LoadView,
   Radio,
   RadioGroup,
   Text,
-  TextInput,
   Toggle,
   useTheme,
 } from '@jtjs/react';
@@ -47,6 +45,15 @@ export function App() {
   useEffect(() => {
     fakeNetworkCall().then((num) => setData(num));
   }, []);
+
+  const themeColors: { name: string; color: string }[] = Object.entries(theme)
+    .map(([colorName, hex]) => {
+      return {
+        name: colorName,
+        color: hex,
+      };
+    })
+    .filter((c) => c.name !== 'name');
 
   return (
     <div
@@ -177,6 +184,62 @@ export function App() {
         {/* <Icon icon="address-card" iconType="solid" /> */}
 
         <LoadView isLoading />
+
+        <Heading importance={3}>Colors</Heading>
+        <Flexbox direction="column">
+          {themeColors.map((themeColor) => {
+            const ThemeColorSample = ({
+              themeColor,
+            }: {
+              themeColor: { color: string; name: string };
+            }) => {
+              return (
+                <Flexbox
+                  horizontalAlignment="center"
+                  verticalAlignment="center"
+                  style={{
+                    height: '2rem',
+                    width: '6rem',
+                    backgroundColor: themeColor.color,
+                  }}
+                  key={themeColor.name}
+                >
+                  <span
+                    style={{
+                      textShadow: '1px 1px black',
+                      color: 'white',
+                    }}
+                  >
+                    {themeColor.name}
+                  </span>
+                </Flexbox>
+              );
+            };
+
+            return (
+              <Flexbox spacing="0">
+                <ThemeColorSample
+                  key={`${themeColor.name}-2`}
+                  themeColor={{
+                    name: `${themeColor.name}-lightened`,
+                    color: ThemeService.lighten(themeColor.color),
+                  }}
+                />
+                <ThemeColorSample
+                  key={`${themeColor.name}-1`}
+                  themeColor={themeColor}
+                />
+                <ThemeColorSample
+                  key={`${themeColor.name}-3`}
+                  themeColor={{
+                    name: `${themeColor.name}-darkened`,
+                    color: ThemeService.darken(themeColor.color),
+                  }}
+                />
+              </Flexbox>
+            );
+          })}
+        </Flexbox>
       </Card>
     </div>
   );

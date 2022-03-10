@@ -100,9 +100,8 @@ export class ThemeService {
    */
   static lighten(color: string, amount = 0.3): string {
     const c = chroma(color);
-    c.set('hsl.l', c.get('hsl.l') + amount);
 
-    return c.hex();
+    return c.set('hsl.l', c.get('hsl.l') + amount).hex();
   }
 
   /**
