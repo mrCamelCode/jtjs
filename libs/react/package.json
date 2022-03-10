@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/react",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "@jtjs/core-browser": ">=0.0.1",
     "@jtjs/core-data": ">=0.0.1"

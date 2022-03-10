@@ -175,6 +175,8 @@ export function App() {
         <Link href="https://google.com">Google</Link>
 
         {/* <Icon icon="address-card" iconType="solid" /> */}
+
+        <LoadView isLoading />
       </Card>
     </div>
   );
