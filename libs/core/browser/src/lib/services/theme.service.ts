@@ -1,5 +1,5 @@
 import { Event } from '@jtjs/core-data';
-import Color from 'color';
+import chroma from 'chroma-js';
 import { Theme } from '../models/theme.model';
 
 export type OnChangeThemeListener = (theme: Theme) => void;
@@ -98,14 +98,11 @@ export class ThemeService {
    *
    * @returns - The lightened color.
    */
-  static lighten(color: string, amount = 0.3) {
-    const colorObj = Color(color);
-    const lightness = colorObj.hsl().lightness();
+  static lighten(color: string, amount = 0.3): string {
+    const c = chroma(color);
+    c.set('hsl.l', c.get('hsl.l') + amount);
 
-    return colorObj
-      .lightness(lightness + (100 - lightness) * amount)
-      .hex()
-      .toString();
+    return c.hex();
   }
 
   /**
@@ -119,13 +116,7 @@ export class ThemeService {
    * @returns - The darkened color.
    */
   static darken(color: string, amount = 0.3) {
-    const colorObj = Color(color);
-    const lightness = colorObj.hsl().lightness();
-
-    return colorObj
-      .lightness(lightness - lightness * amount)
-      .hex()
-      .toString();
+    return this.lighten(color, -amount);
   }
 
   private static updateCssVariables() {

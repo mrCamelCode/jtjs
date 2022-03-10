@@ -1,5 +1,5 @@
+import { uniqueId } from 'lodash';
 import React, { HTMLProps, ReactNode } from 'react';
-import { v4 as uuid } from 'uuid';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
@@ -51,7 +51,7 @@ export const Toggle = ({
 
   let randomId = '';
   if (!id) {
-    randomId = `jtjs-toggle-${uuid()}`;
+    randomId = uniqueId('jtjs-toggle-');
   }
 
   return (

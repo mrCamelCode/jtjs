@@ -1,5 +1,5 @@
+import { uniqueId } from 'lodash';
 import React, { HTMLProps, ReactNode } from 'react';
-import { v4 as uuid } from 'uuid';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
@@ -36,7 +36,7 @@ export const Radio = ({
 }: RadioProps) => {
   let randomId = '';
   if (!id) {
-    randomId = `jtjs-radio-${uuid()}`;
+    randomId = uniqueId('jtjs-radio-');
   }
 
   return (
