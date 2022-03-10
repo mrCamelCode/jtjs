@@ -8,7 +8,7 @@
       "tags": [],
       "targets": {
         "build": {
-          "executor": "@nrwl/web:package",
+          "executor": "@nrwl/web:rollup",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/core/browser",
@@ -64,7 +64,7 @@
           }
         },
         "build": {
-          "executor": "@nrwl/node:package",
+          "executor": "@nrwl/js:tsc",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/core/data",
@@ -84,7 +84,7 @@
       "tags": [],
       "targets": {
         "build": {
-          "executor": "@nrwl/web:package",
+          "executor": "@nrwl/web:rollup",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/core/theme",
@@ -117,7 +117,7 @@
       "projectType": "library",
       "targets": {
         "build": {
-          "executor": "@nrwl/web:package",
+          "executor": "@nrwl/web:rollup",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/react",
@@ -159,7 +159,7 @@
       "projectType": "application",
       "targets": {
         "build": {
-          "executor": "@nrwl/web:build",
+          "executor": "@nrwl/web:webpack",
           "outputs": ["{options.outputPath}"],
           "defaultConfiguration": "production",
           "options": {
