@@ -11,7 +11,7 @@ export default async function (tree: Tree, schema: any) {
     if (tree.exists(filePath)) {
       const fileContents = tree.read(filePath, 'utf-8');
 
-      tree.write(filePath, fileContents.replace(/\.js/gim, '.css'));
+      tree.write(filePath, fileContents.replace(/index/gim, 'styles').replace(/\.js/gim, '.css'));
 
       console.log('Successfully updated core-theme package.json');
     } else {
