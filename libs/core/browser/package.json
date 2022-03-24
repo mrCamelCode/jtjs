@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/core-browser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "@jtjs/core-data": ">=0.0.1"
   }

@@ -62,7 +62,7 @@ export const RadioGroup = ({
       <legend>{children}</legend>
 
       {options.map((option) => {
-        const id = option.value;
+        const id = `${name}-jtjs-radio-button-${option.value}`;
 
         return (
           <Radio

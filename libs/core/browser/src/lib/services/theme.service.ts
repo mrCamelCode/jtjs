@@ -98,7 +98,7 @@ export class ThemeService {
    *
    * @returns - The lightened color.
    */
-  static lighten(color: string, amount = 0.3): string {
+  static lighten(color: string, amount = 0.1): string {
     const c = chroma(color);
 
     return c.set('hsl.l', c.get('hsl.l') + amount).hex();
@@ -114,7 +114,7 @@ export class ThemeService {
    *
    * @returns - The darkened color.
    */
-  static darken(color: string, amount = 0.3) {
+  static darken(color: string, amount = 0.1) {
     return this.lighten(color, -amount);
   }
 
