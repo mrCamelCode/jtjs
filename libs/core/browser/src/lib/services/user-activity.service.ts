@@ -1,4 +1,4 @@
-import { Event } from '@jtjs/core-data';
+import { Event } from '@jtjs/event';
 
 export enum ActivityState {
   ACTIVE,

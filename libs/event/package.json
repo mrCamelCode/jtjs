@@ -1,5 +1,5 @@
 {
   "name": "@jtjs/event",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A simple, 0 dependency object-oriented event implementation for Node and browser."
 }
