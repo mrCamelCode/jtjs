@@ -8,7 +8,9 @@ Create your event:
 ```ts
 import { Event } from '@jtjs/event';
 
-const onThemeChange = new Event<(themeName: string) => void>();
+type ThemeChangeHandler = (themeName: string) => void;
+
+const onThemeChange = new Event<ThemeChangeHandler>();
 ```
 
 Subscribe to your event:
