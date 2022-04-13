@@ -8,5 +8,3 @@ export * from './lib/collections/Stack';
 
 export * from './lib/collections/IQueue';
 export * from './lib/collections/Queue';
-
-export * from './lib/structures/Event';

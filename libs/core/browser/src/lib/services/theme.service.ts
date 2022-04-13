@@ -1,4 +1,4 @@
-import { Event } from '@jtjs/core-data';
+import { Event } from '@jtjs/event';
 import chroma from 'chroma-js';
 import { Theme } from '../models/theme.model';
 
