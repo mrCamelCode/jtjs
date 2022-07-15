@@ -19,7 +19,8 @@
       "@jtjs/core-data": ["libs/core/data/src/index.ts"],
       "@jtjs/core-theme": ["libs/core/theme/src/styles.scss"],
       "@jtjs/event": ["libs/event/src/index.ts"],
-      "@jtjs/react": ["libs/react/src/index.ts"]
+      "@jtjs/react": ["libs/react/src/index.ts"],
+      "@jtjs/view": ["libs/view/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

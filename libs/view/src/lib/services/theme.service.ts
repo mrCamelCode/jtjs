@@ -1,6 +1,6 @@
 import { Event } from '@jtjs/event';
 import chroma from 'chroma-js';
-import { Theme } from '../models/theme.model';
+import { Theme } from '../../../../core/browser/src/lib/models/theme.model';
 
 export type OnChangeThemeListener = (theme: Theme) => void;
 
@@ -32,9 +32,13 @@ export class ThemeService {
     focus: '#97ADD8',
   };
 
+  private static get isBrowser(): boolean {
+    return !!document;
+  }
+
   private static _themes: Theme[] = [];
   public static get themes() {
-    return [...this._themes];
+    return [...ThemeService._themes];
   }
 
   private static _currentTheme: Theme = ThemeService.defaultTheme;
@@ -42,16 +46,16 @@ export class ThemeService {
    * The currently active theme.
    */
   public static get currentTheme() {
-    return this._currentTheme;
+    return ThemeService._currentTheme;
   }
   /**
    * Sets the current theme and invokes the `onChangeTheme` event.
    */
   private static set currentTheme(theme: Theme) {
-    this._currentTheme = theme;
-    this.updateCssVariables();
+    ThemeService._currentTheme = theme;
+    ThemeService.updateCssVariables();
 
-    this.onChangeTheme.trigger(theme);
+    ThemeService.onChangeTheme.trigger(theme);
   }
 
   /**
@@ -63,13 +67,13 @@ export class ThemeService {
    * is the first theme added to the service.
    */
   static registerTheme(theme: Theme, autoSetCurrent = true) {
-    if (!this._themes.some((t) => t.name === theme.name)) {
+    if (!ThemeService._themes.some((t) => t.name === theme.name)) {
       // Only add themes whose names aren't already registered.
-      this._themes.push(theme);
+      ThemeService._themes.push(theme);
 
-      if (this._themes.length === 1 && autoSetCurrent) {
+      if (ThemeService._themes.length === 1 && autoSetCurrent) {
         // If the theme we just registered is the first registered theme, set that theme to the current theme.
-        this.currentTheme = theme;
+        ThemeService.currentTheme = theme;
       }
     }
   }
@@ -81,10 +85,10 @@ export class ThemeService {
    * @param themeName - The name of the theme to set as the current theme.
    */
   static changeTheme(themeName: string) {
-    const theme = this._themes.find((t) => t.name === themeName);
+    const theme = ThemeService._themes.find((t) => t.name === themeName);
 
     if (theme) {
-      this.currentTheme = theme;
+      ThemeService.currentTheme = theme;
     }
   }
 
@@ -115,22 +119,26 @@ export class ThemeService {
    * @returns - The darkened color.
    */
   static darken(color: string, amount = 0.1) {
-    return this.lighten(color, -amount);
+    return ThemeService.lighten(color, -amount);
   }
 
   private static updateCssVariables() {
+    if (!ThemeService.isBrowser) {
+      return;
+    }
+
     const root = document.documentElement;
 
-    Object.entries(this._currentTheme).forEach(([themeKey, color]) => {
+    Object.entries(ThemeService._currentTheme).forEach(([themeKey, color]) => {
       if (themeKey !== 'name' && color) {
         root.style.setProperty(`--jtjs-theme-${themeKey}`, color);
         root.style.setProperty(
           `--jtjs-theme-${themeKey}-darkened`,
-          this.darken(color)
+          ThemeService.darken(color)
         );
         root.style.setProperty(
           `--jtjs-theme-${themeKey}-lightened`,
-          this.lighten(color)
+          ThemeService.lighten(color)
         );
       }
     });
