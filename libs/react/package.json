@@ -1,10 +1,11 @@
 {
   "name": "@jtjs/react",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "license": "MIT",
   "dependencies": {
     "@jtjs/core-browser": ">=0.0.1",
-    "@jtjs/core-data": ">=0.0.1"
+    "@jtjs/core-data": ">=0.0.1",
+    "@jtjs/view": ">=0.0.1"
   },
   "peerDependencies": {
     "react": ">=17.0",

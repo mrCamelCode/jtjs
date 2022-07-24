@@ -1,4 +1,4 @@
-import { Theme } from '@jtjs/core-browser';
+import { Theme } from '@jtjs/view';
 
 export interface ThemedProps {
   /**

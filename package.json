@@ -8,7 +8,8 @@
     "build:all": "nx run-many --all --target=build --parallel --buildableProjectDepsInPackageJsonType=dependencies --skip-nx-cache && nx workspace-generator fix-lib-output",
     "test": "nx test",
     "test:all": "nx run-many --all --target=test --parallel --skip-nx-cache",
-    "clean:modules": "npx rimraf node_modules"
+    "clean:modules": "npx rimraf node_modules",
+    "clean:dist": "npx rimraf dist"
   },
   "private": true,
   "dependencies": {

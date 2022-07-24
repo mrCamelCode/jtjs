@@ -11,7 +11,22 @@ export default async function (tree: Tree, schema: any) {
     if (tree.exists(filePath)) {
       const fileContents = tree.read(filePath, 'utf-8');
 
-      tree.write(filePath, fileContents.replace(/index/gim, 'styles').replace(/\.js/gim, '.css'));
+      if (fileContents) {
+        const fileLines = fileContents.split('\n');
+
+        const closingBracketLineIndex = fileLines.lastIndexOf('}');
+
+        if (closingBracketLineIndex > -1) {
+          fileLines[closingBracketLineIndex - 1] += ',';
+          // Insert the style property before the last line. The style property lets a stylesheet include the package and know where
+          // to pull it from.
+          fileLines.splice(closingBracketLineIndex, 0, `\t"style": "./styles.esm.css"`);
+
+          tree.write(filePath, fileLines.join('\n'));
+        } else {
+          throw new Error("Could not find closing bracked in core-theme's package.json. Please make sure the file is formatted correctly.");
+        }
+      }
 
       console.log('Successfully updated core-theme package.json');
     } else {

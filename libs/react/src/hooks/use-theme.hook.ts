@@ -1,4 +1,4 @@
-import { Theme, ThemeService } from '@jtjs/core-browser';
+import { Theme, ThemeService } from '@jtjs/view';
 import { useEffect, useState } from 'react';
 
 /**

@@ -1,6 +1,5 @@
 {
   "name": "@jtjs/core-theme",
-  "version": "0.0.6",
-  "license": "MIT",
-  "main": "src/styles.scss"
+  "version": "0.0.7",
+  "license": "MIT"
 }

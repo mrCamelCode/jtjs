@@ -1,8 +1,8 @@
 import {
   ActivityState,
-  ThemeService,
   UserActivityService,
 } from '@jtjs/core-browser';
+import { ThemeService } from '@jtjs/view';
 import {
   BackgroundImageCard,
   Button,
