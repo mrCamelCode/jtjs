@@ -2,6 +2,8 @@
   background-color: var(--jtjs-theme-background);
   border-color: var(--jtjs-theme-outline);
   color: var(--jtjs-theme-text);
+  @include slightly-rounded-corners;
+  padding: 0.5rem;
 
   &:disabled {
     background-color: var(--jtjs-theme-disabled);

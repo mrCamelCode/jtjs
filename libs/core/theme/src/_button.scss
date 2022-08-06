@@ -2,12 +2,12 @@
 
 .jtjs-button {
   padding: 0.7rem 1rem;
-  border-radius: 2rem;
+  @include slightly-rounded-corners;
 
   cursor: pointer;
 
   background-color: var(--jtjs-theme-button);
-  border: 2px solid var(--jtjs-theme-button-darkened);
+  border: none;
   color: var(--jtjs-theme-buttonText);
 
   overflow: hidden;

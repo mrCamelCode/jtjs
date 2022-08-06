@@ -1,9 +1,9 @@
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import TextInput, { TextInputProps } from '../TextInput';
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 
 let value = '';
 let rawValue = '';
-const onChange = jest.fn((maskedText: string, rawText: string) => {
+const onChangeText = jest.fn((maskedText: string, rawText: string) => {
   value = maskedText;
   rawValue = rawText;
 });
@@ -11,7 +11,7 @@ const onChange = jest.fn((maskedText: string, rawText: string) => {
 const renderTextInput = (props: Partial<TextInputProps> = {}) => {
   const defaultProps: TextInputProps = {
     value,
-    onChange,
+    onChangeText,
   };
 
   return render(<TextInput {...defaultProps} {...props} />);

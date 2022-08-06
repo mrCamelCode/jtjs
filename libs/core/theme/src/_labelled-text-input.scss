@@ -1,0 +1,27 @@
+.jtjs-labelled-text-input {
+  margin-top: 1rem;
+
+  .jtjs-label {
+    position: absolute;
+    z-index: 1;
+    top: 0.5em;
+    left: 0.5em;
+    font-style: italic;
+
+    transition: all 0.2s ease;
+  }
+  .jtjs-text-input {
+  }
+
+  &:focus-within,
+  &.has-value {
+    .jtjs-label {
+      top: -0.8em;
+      background-color: var(--jtjs-theme-background);
+      padding: 0.2em;
+      @include slightly-rounded-corners;
+      font-size: smaller;
+      font-style: normal;
+    }
+  }
+}

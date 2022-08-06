@@ -20,7 +20,7 @@
       left: 0;
       box-sizing: border-box;
       border: 1px solid var(--jtjs-theme-outline);
-      border-radius: 50%;
+      @include slightly-rounded-corners;
       background-color: var(--jtjs-theme-background);
     }
     &::after {
@@ -37,7 +37,7 @@
       top: 0;
       background-color: var(--jtjs-theme-button);
       color: var(--jtjs-theme-buttonText);
-      border-radius: 50%;
+      @include slightly-rounded-corners;
       opacity: 0;
 
       transition: opacity 0.2s ease;

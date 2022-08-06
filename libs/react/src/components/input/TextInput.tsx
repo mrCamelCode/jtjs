@@ -1,12 +1,8 @@
-import React, { HTMLProps } from 'react';
+import React, { forwardRef, PropsWithoutRef } from 'react';
 import { formatClassName } from '../../util/util-functions';
 
 export interface TextInputProps
-  extends Omit<HTMLProps<HTMLTextAreaElement>, 'onChange'> {
-  /**
-   * The current value of the input.
-   */
-  value: string;
+  extends PropsWithoutRef<JSX.IntrinsicElements['textarea']> {
   /**
    * Handler for when the user attempts to change the input.
    *
@@ -17,7 +13,7 @@ export interface TextInputProps
    * ignoring the removal of newlines that's performed when the `multiline` prop is `false`.
    * @param event - The original simulated event.
    */
-  onChange: (
+  onChangeText?: (
     maskedText: string,
     rawText: string,
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -40,61 +36,73 @@ export interface TextInputProps
  *
  * This is a controlled component.
  */
-export const TextInput = ({
-  className,
-  style,
-  multiline,
-  value,
-  rows,
-  mask,
-  disabled,
-  onChange,
-  ...otherProps
-}: TextInputProps) => {
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    let text = event.target.value;
+export const TextInput = forwardRef<HTMLTextAreaElement, TextInputProps>(
+  (
+    {
+      className,
+      style,
+      multiline,
+      value,
+      rows,
+      mask,
+      disabled,
+      onChange,
+      onChangeText,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (onChangeText) {
+        let text = event.target.value;
 
-    if (!multiline) {
-      text = text.replace(/[\r\n]/gm, '');
-    }
-
-    let maskedText = text;
-    if (mask) {
-      maskedText = '';
-      for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-
-        if (mask.test(char)) {
-          maskedText += char;
+        if (!multiline) {
+          text = text.replace(/[\r\n]/gm, '');
         }
+
+        let maskedText = text;
+        if (mask) {
+          maskedText = '';
+          for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+
+            if (mask.test(char)) {
+              maskedText += char;
+            }
+          }
+        }
+
+        onChangeText(maskedText, event.target.value, event);
       }
-    }
+    };
 
-    onChange(maskedText, event.target.value, event);
-  };
-
-  return (
-    <textarea
-      data-testid="text-input"
-      className={formatClassName('jtjs-text-input', className)}
-      rows={multiline ? rows ?? 5 : 1}
-      style={{
-        ...(multiline
-          ? {}
-          : {
-              resize: 'none',
-              whiteSpace: 'nowrap',
-              overflowX: 'auto',
-            }),
-        ...style,
-      }}
-      value={value}
-      onChange={handleChange}
-      disabled={disabled}
-      aria-disabled={disabled}
-      {...otherProps}
-    ></textarea>
-  );
-};
+    return (
+      <textarea
+        ref={ref}
+        data-testid="text-input"
+        className={formatClassName('jtjs-text-input', className)}
+        rows={multiline ? rows ?? 5 : 1}
+        style={{
+          ...(multiline
+            ? {}
+            : {
+                resize: 'none',
+                whiteSpace: 'nowrap',
+                overflowX: 'auto',
+              }),
+          ...style,
+        }}
+        value={value}
+        onChange={(event) => {
+          handleChange(event);
+          onChange?.(event);
+        }}
+        disabled={disabled}
+        aria-disabled={disabled}
+        {...otherProps}
+      />
+    );
+  }
+);
 
 export default TextInput;

@@ -1,5 +1,4 @@
-import { uniqueId } from 'lodash';
-import React, { HTMLProps, ReactNode } from 'react';
+import React, { HTMLProps, ReactNode, useId } from 'react';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
@@ -49,10 +48,7 @@ export const Toggle = ({
 }: ToggleProps) => {
   const onText = isOn ? 'on' : 'off';
 
-  let randomId = '';
-  if (!id) {
-    randomId = uniqueId('jtjs-toggle-');
-  }
+  const randomId = `${useId()}-jtjs-toggle`;
 
   return (
     <>

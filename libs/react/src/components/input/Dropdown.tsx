@@ -1,5 +1,4 @@
-import { uniqueId } from 'lodash';
-import React, { HTMLProps, ReactNode } from 'react';
+import React, { HTMLProps, ReactNode, useId } from 'react';
 import { formatClassName } from '../../util/util-functions';
 import Label from './Label';
 
@@ -56,10 +55,7 @@ export const Dropdown = ({
   id,
   ...otherProps
 }: DropdownProps) => {
-  let randomId = '';
-  if (!id) {
-    randomId = uniqueId('jtjs-dropdown-');
-  }
+  const randomId = `${useId()}-jtjs-dropdown`;
 
   /**
    * How empty appearing works:

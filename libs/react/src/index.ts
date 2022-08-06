@@ -11,6 +11,7 @@ export * from './components/input/Label';
 export * from './components/input/Radio';
 export * from './components/input/RadioGroup';
 export * from './components/input/TextInput';
+export * from './components/input/LabelledTextInput';
 export * from './components/input/Toggle';
 
 export * from './components/wrappers/cards/Card';

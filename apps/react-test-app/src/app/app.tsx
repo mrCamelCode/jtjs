@@ -1,8 +1,4 @@
-import {
-  ActivityState,
-  UserActivityService,
-} from '@jtjs/core-browser';
-import { ThemeService } from '@jtjs/view';
+import { ActivityState, UserActivityService } from '@jtjs/core-browser';
 import {
   BackgroundImageCard,
   Button,
@@ -11,16 +7,20 @@ import {
   Dropdown,
   Flexbox,
   Heading,
+  LabelledTextInput,
   // ImageCard,
   Link,
   LoadView,
   Radio,
   RadioGroup,
   Text,
+  TextInput,
   Toggle,
   useTheme,
 } from '@jtjs/react';
+import { ThemeService } from '@jtjs/view';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 function fakeNetworkCall(): Promise<number> {
   return new Promise((resolve) => {
@@ -41,6 +41,8 @@ export function App() {
   const [selectedRadio, setSelectedRadio] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [toggle, setToggle] = useState(false);
+
+  const { register } = useForm<{ name: string }>();
 
   useEffect(() => {
     fakeNetworkCall().then((num) => setData(num));
@@ -71,7 +73,6 @@ export function App() {
         <Checkbox checked={checked} onChange={setChecked}>
           Check Me!
         </Checkbox>
-
         <RadioGroup
           name="fav-monster"
           options={[
@@ -93,11 +94,9 @@ export function App() {
         >
           Choose your favorite monster
         </RadioGroup>
-
         <Toggle isOn={toggle} onChange={setToggle}>
           Toggle Me!
         </Toggle>
-
         <Dropdown
           value={selectedOption}
           options={[
@@ -118,9 +117,19 @@ export function App() {
         >
           Favorite Monster
         </Dropdown>
-
         <Button>Click Me!</Button>
         <Button disabled>Can't Click Me!</Button>
+        <div style={{ marginTop: '1rem' }}>
+          <TextInput {...register('name')} />
+        </div>
+
+        <LabelledTextInput label="Name" {...register('name')} />
+
+        <LabelledTextInput
+          label="Multline Name"
+          multiline
+          {...register('name')}
+        />
 
         <Flexbox>
           {/* <ImageCard
@@ -167,7 +176,6 @@ export function App() {
             <Text>This game is Galactic Assault</Text>
           </BackgroundImageCard>
         </Flexbox>
-
         <div
           style={{
             height: '100px',
@@ -178,13 +186,9 @@ export function App() {
             ),
           }}
         ></div>
-
         <Link href="https://google.com">Google</Link>
-
         {/* <Icon icon="address-card" iconType="solid" /> */}
-
         <LoadView isLoading />
-
         <Heading importance={3}>Colors</Heading>
         <Flexbox direction="column">
           {themeColors.map((themeColor) => {
