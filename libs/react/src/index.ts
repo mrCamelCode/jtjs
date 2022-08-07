@@ -10,6 +10,8 @@ export * from './components/input/Dropdown';
 export * from './components/input/Label';
 export * from './components/input/Radio';
 export * from './components/input/RadioGroup';
+export * from './components/input/Input';
+export * from './components/input/LabelledInput';
 export * from './components/input/TextInput';
 export * from './components/input/LabelledTextInput';
 export * from './components/input/Toggle';

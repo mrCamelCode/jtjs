@@ -1,11 +1,5 @@
-.jtjs-text-input {
-  background-color: var(--jtjs-theme-background);
-  border-color: var(--jtjs-theme-outline);
-  color: var(--jtjs-theme-text);
-  @include slightly-rounded-corners;
-  padding: 0.5rem;
+@use './input';
 
-  &:disabled {
-    background-color: var(--jtjs-theme-disabled);
-  }
+.jtjs-text-input {
+  @include input;
 }

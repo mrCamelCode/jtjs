@@ -18,9 +18,9 @@ export function buildClassName(
   ...classes: string[]
 ): string {
   const trimmedClassName = classNameProp?.trim() ?? '';
-  const trimmedClasses = classes?.map((c) => c.trim()).filter((c) => !!c) ?? [];
+  const trimmedClasses =
+    [trimmedClassName, ...classes?.map((c) => c.trim())].filter((c) => !!c) ??
+    [];
 
-  return `${trimmedClassName}${
-    trimmedClasses.length > 0 ? ` ${trimmedClasses.join(' ')}` : ''
-  }`;
+  return trimmedClasses.join(' ');
 }

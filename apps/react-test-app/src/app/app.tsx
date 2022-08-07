@@ -7,6 +7,7 @@ import {
   Dropdown,
   Flexbox,
   Heading,
+  LabelledInput,
   LabelledTextInput,
   // ImageCard,
   Link,
@@ -130,6 +131,9 @@ export function App() {
           multiline
           {...register('name')}
         />
+
+        <LabelledInput label="Password" type="password" />
+        <LabelledInput label="Numbers" type="number" />
 
         <Flexbox>
           {/* <ImageCard
