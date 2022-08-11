@@ -21,7 +21,7 @@
       box-sizing: border-box;
       border: 1px solid var(--jtjs-theme-outline);
       @include slightly-rounded-corners;
-      background-color: var(--jtjs-theme-background);
+      background-color: transparent;
     }
     &::after {
       // Custom checkmark

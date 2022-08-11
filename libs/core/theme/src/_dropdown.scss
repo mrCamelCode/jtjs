@@ -9,9 +9,13 @@
   @include slightly-rounded-corners;
   font-size: medium;
 
-  background-color: var(--jtjs-theme-background);
+  background-color: transparent;
   border-color: var(--jtjs-theme-outline);
   color: var(--jtjs-theme-text);
+
+  option {
+    background-color: var(--jtjs-theme-background);
+  }
 
   &:disabled {
     background-color: var(--jtjs-theme-disabled);

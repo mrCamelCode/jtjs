@@ -1,6 +1,6 @@
 @import './util';
 
-@mixin labelled-input {
+@mixin jtjs-labelled-input {
   margin-top: 1rem;
 
   .jtjs-label {
@@ -27,5 +27,5 @@
 }
 
 .jtjs-labelled-input {
-  @include labelled-input;
+  @include jtjs-labelled-input;
 }

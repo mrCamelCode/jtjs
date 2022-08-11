@@ -2,7 +2,7 @@
   display: block;
   @include slightly-rounded-corners;
 
-  background-color: var(--jtjs-theme-background);
+  background-color: transparent;
   border-color: var(--jtjs-theme-outline);
 
   legend {

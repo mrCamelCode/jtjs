@@ -1,5 +1,5 @@
 @use './input';
 
 .jtjs-text-input {
-  @include input;
+  @include jtjs-input;
 }

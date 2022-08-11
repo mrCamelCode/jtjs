@@ -1,7 +1,7 @@
 @import './util';
 
-@mixin input {
-  background-color: var(--jtjs-theme-background);
+@mixin jtjs-input {
+  background-color: transparent;
   border: 1px solid var(--jtjs-theme-outline);
   color: var(--jtjs-theme-text);
   @include slightly-rounded-corners;
@@ -13,5 +13,5 @@
 }
 
 .jtjs-input {
-  @include input;
+  @include jtjs-input;
 }
