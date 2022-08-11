@@ -1,10 +1,19 @@
-import { ChangeEvent, forwardRef, useEffect, useId, useState } from 'react';
+import {
+  ChangeEvent,
+  forwardRef,
+  HTMLProps,
+  useEffect,
+  useId,
+  useState,
+} from 'react';
 import { buildClassName } from '../../util/util-functions';
 import Input, { InputProps } from './Input';
 import Label from './Label';
 
 export interface LabelledInputProps extends InputProps {
   label?: string;
+  containerProps?: HTMLProps<HTMLDivElement>;
+  labelProps?: HTMLProps<HTMLLabelElement>;
 }
 
 export const LabelledInput = forwardRef<HTMLInputElement, LabelledInputProps>(
@@ -15,6 +24,8 @@ export const LabelledInput = forwardRef<HTMLInputElement, LabelledInputProps>(
       value,
       onChange,
       id,
+      containerProps,
+      labelProps,
       ...otherProps
     }: LabelledInputProps,
     ref
@@ -38,8 +49,11 @@ export const LabelledInput = forwardRef<HTMLInputElement, LabelledInputProps>(
           'jtjs-labelled-input',
           hasValue ? 'has-value' : ''
         )}
+        {...containerProps}
       >
-        <Label htmlFor={id ?? randomId}>{label}</Label>
+        <Label {...labelProps} htmlFor={id ?? randomId}>
+          {label}
+        </Label>
         <Input
           ref={ref}
           id={id ?? randomId}
