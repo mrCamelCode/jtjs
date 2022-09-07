@@ -143,8 +143,6 @@ export function useBreakpoint(
     getBreakpoint(window?.innerWidth ?? 0)
   );
 
-  console.log('width:', window.innerWidth);
-
   useEffect(() => {
     const handleResize = () => {
       setCurrentBreakpoint(getBreakpoint(window.innerWidth, breakpoints));
