@@ -17,6 +17,7 @@ import {
   Text,
   TextInput,
   Toggle,
+  useBreakpoint,
   useTheme,
 } from '@jtjs/react';
 import { ThemeService } from '@jtjs/view';
@@ -29,10 +30,10 @@ function fakeNetworkCall(): Promise<number> {
   });
 }
 
-UserActivityService.onActivity.subscribe(() => console.log('activity'));
-UserActivityService.onChangeActivityState.subscribe((state) => {
-  console.log('activity state changin to:', ActivityState[state].toString());
-});
+// UserActivityService.onActivity.subscribe(() => console.log('activity'));
+// UserActivityService.onChangeActivityState.subscribe((state) => {
+//   console.log('activity state changin to:', ActivityState[state].toString());
+// });
 
 export function App() {
   const [theme, setTheme] = useTheme();
@@ -42,6 +43,9 @@ export function App() {
   const [selectedRadio, setSelectedRadio] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [toggle, setToggle] = useState(false);
+  const currentBreakpoint = useBreakpoint();
+
+  console.log('render');
 
   const { register } = useForm<{ name: string }>();
 
@@ -68,6 +72,8 @@ export function App() {
       }}
     >
       <Card>
+        <Text>Current breakpoint is: {currentBreakpoint}</Text>
+
         <Radio checked={radio} onChange={setRadio}>
           Radio 1
         </Radio>

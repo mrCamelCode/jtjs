@@ -1,3 +1,4 @@
+import { render, screen } from '@testing-library/react';
 import {
   isBreakpointBiggerThan,
   isBreakpointSmallerThan,
@@ -5,55 +6,89 @@ import {
   useBreakpoint,
 } from '../use-breakpoint.hook';
 
-let mockGetWindowWidth = jest.fn();
-jest.mock('../use-window-dimensions.hook', () => {
-  const originalModule = jest.requireActual('../use-window-dimensions.hook');
+// let mockGetWindowWidth = jest.fn();
+// jest.mock('../use-window-dimensions.hook', () => {
+//   const originalModule = jest.requireActual('../use-window-dimensions.hook');
 
-  return {
-    __esModule: true,
-    ...originalModule,
-    useWindowDimensions: jest.fn(() => ({
-      height: 0,
-      width: mockGetWindowWidth(),
-    })),
-  };
-});
+//   return {
+//     __esModule: true,
+//     ...originalModule,
+//     useWindowDimensions: jest.fn(() => ({
+//       height: 0,
+//       width: mockGetWindowWidth(),
+//     })),
+//   };
+// });
+
+// Since `useBreakpoint` uses state, we need a component that uses the hook to be able to test it (otherwise useState
+// breaks).
+const TestComponent = () => {
+  const currentBreakpoint = useBreakpoint();
+
+  return <p>breakpoint: {currentBreakpoint}</p>;
+};
+
+const renderTestComponent = () => {
+  return render(<TestComponent />);
+};
 
 describe('use-breakpoint.hook', () => {
   describe('useBreakpoint', () => {
+    const originalWindow = window;
+    let mockWindow = {
+      innerWidth: 1920,
+    };
+    // @ts-ignore
+    window = mockWindow;
+
     afterEach(() => {
       jest.clearAllMocks();
     });
+    afterAll(() => {
+      window = originalWindow;
+    });
 
     it('will return the correct breakpoint for the xl breakpoint', () => {
-      mockGetWindowWidth.mockReturnValueOnce(1920);
+      window.innerWidth = 1920;
 
-      expect(useBreakpoint()).toBe('xl');
+      renderTestComponent();
+
+      expect(screen.getByText('breakpoint: xl')).toBeDefined();
     });
     it('will return the correct breakpoint for the xs breakpoint', () => {
-      mockGetWindowWidth.mockReturnValueOnce(480);
+      window.innerWidth = 480;
 
-      expect(useBreakpoint()).toBe('xs');
+      renderTestComponent();
+
+      expect(screen.getByText('breakpoint: xs')).toBeDefined();
     });
     it('will return the correct breakpoint for the md breakpoint', () => {
-      mockGetWindowWidth.mockReturnValueOnce(800);
+      window.innerWidth = 800;
 
-      expect(useBreakpoint()).toBe('md');
+      renderTestComponent();
+
+      expect(screen.getByText('breakpoint: md')).toBeDefined();
     });
     it('will return the correct breakpoint when the width is on a breakpoint', () => {
-      mockGetWindowWidth.mockReturnValueOnce(992);
+      window.innerWidth = 992;
 
-      expect(useBreakpoint()).toBe('lg');
+      renderTestComponent();
+
+      expect(screen.getByText('breakpoint: lg')).toBeDefined();
     });
     it('will return the correct breakpoint when the width is one less than a breakpoint', () => {
-      mockGetWindowWidth.mockReturnValueOnce(767);
+      window.innerWidth = 767;
 
-      expect(useBreakpoint()).toBe('sm');
+      renderTestComponent();
+
+      expect(screen.getByText('breakpoint: sm')).toBeDefined();
     });
     it('will return the correct breakpoint when the width is one greater than a breakpoint', () => {
-      mockGetWindowWidth.mockReturnValueOnce(769);
+      window.innerWidth = 769;
 
-      expect(useBreakpoint()).toBe('md');
+      renderTestComponent();
+
+      expect(screen.getByText('breakpoint: md')).toBeDefined();
     });
   });
   describe('isBreakpointSmallerThan', () => {

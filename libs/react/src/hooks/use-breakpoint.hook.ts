@@ -1,4 +1,4 @@
-import { useWindowDimensions } from './use-window-dimensions.hook';
+import { useEffect, useState } from 'react';
 
 export interface Breakpoints {
   sm: number;
@@ -8,6 +8,13 @@ export interface Breakpoints {
 }
 
 type BreakpointName = keyof Breakpoints | 'xs';
+
+export const defaultBreakpoints: Breakpoints = {
+  sm: 600,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+};
 
 /**
  * Compares the two breakpoints. The result is based on the first breakpoint supplied. For example,
@@ -38,6 +45,29 @@ function compareBreakpoints(
     breakpointComparisonReference[breakpoint1] -
     breakpointComparisonReference[breakpoint2]
   );
+}
+
+function getBreakpoint(
+  width: number,
+  breakpoints = defaultBreakpoints
+): BreakpointName {
+  // Ensure an order for the breakpoints before we iterate through them.
+  // Ordered in descending order by the number for the breakpoint.
+  const sortedBreakpointsEntries = Object.entries(breakpoints).sort(
+    ([key1, val1], [key2, val2]) => {
+      return val2 - val1;
+    }
+  );
+
+  for (const [breakpointName, breakpointWidth] of sortedBreakpointsEntries) {
+    if (width >= breakpointWidth) {
+      return breakpointName as BreakpointName;
+    }
+  }
+
+  // If the width wasn't <= any of the breakpoints, it must be greater than the largest
+  // breakpoint, so default to xl.
+  return 'xs';
 }
 
 /**
@@ -82,7 +112,8 @@ export function isBreakpointWithin(
 
 /**
  * Determines and returns the breakpoint for the current window width. The breakpoint is updated
- * automatically with window resizes.
+ * automatically with window resizes. This hook will trigger a re-render only when the breakpoint
+ * changes.
  *
  * @param breakpoints - (Optional, defaults to the breakpoints outlined here: https://www.w3schools.com/howto/howto_css_media_query_breakpoints.asp)
  * The breakpoints to use to determine what breakpoint the current window width falls into.
@@ -106,30 +137,25 @@ export function isBreakpointWithin(
  * ```
  */
 export function useBreakpoint(
-  breakpoints: Breakpoints = {
-    sm: 600,
-    md: 768,
-    lg: 992,
-    xl: 1200,
-  }
+  breakpoints: Breakpoints = defaultBreakpoints
 ): BreakpointName {
-  const { width } = useWindowDimensions();
-
-  // Ensure an order for the breakpoints before we iterate through them.
-  // Ordered in descending order by the number for the breakpoint.
-  const sortedBreakpointsEntries = Object.entries(breakpoints).sort(
-    ([key1, val1], [key2, val2]) => {
-      return val2 - val1;
-    }
+  const [currentBreakpoint, setCurrentBreakpoint] = useState<BreakpointName>(
+    getBreakpoint(window?.innerWidth ?? 0)
   );
 
-  for (const [breakpointName, breakpointWidth] of sortedBreakpointsEntries) {
-    if (width >= breakpointWidth) {
-      return breakpointName as BreakpointName;
-    }
-  }
+  console.log('width:', window.innerWidth);
 
-  // If the width wasn't <= any of the breakpoints, it must be greater than the largest
-  // breakpoint, so default to xl.
-  return 'xs';
+  useEffect(() => {
+    const handleResize = () => {
+      setCurrentBreakpoint(getBreakpoint(window.innerWidth, breakpoints));
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return currentBreakpoint;
 }
