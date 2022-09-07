@@ -7,7 +7,7 @@ export interface Breakpoints {
   xl: number;
 }
 
-type BreakpointName = keyof Breakpoints | 'xs';
+export type BreakpointName = keyof Breakpoints | 'xs';
 
 export const defaultBreakpoints: Breakpoints = {
   sm: 600,
