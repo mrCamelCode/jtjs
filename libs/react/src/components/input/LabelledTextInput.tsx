@@ -14,6 +14,7 @@ export interface LabelledTextInputProps extends TextInputProps {
   label?: string;
   containerProps?: HTMLProps<HTMLDivElement>;
   labelProps?: HTMLProps<HTMLLabelElement>;
+  inputProps?: TextInputProps;
 }
 
 export const LabelledTextInput = forwardRef<
@@ -29,6 +30,7 @@ export const LabelledTextInput = forwardRef<
       onChange,
       containerProps,
       labelProps,
+      inputProps,
       ...otherProps
     },
     ref
@@ -67,6 +69,7 @@ export const LabelledTextInput = forwardRef<
             onChange?.(event);
           }}
           {...otherProps}
+          {...inputProps}
         />
       </div>
     );
