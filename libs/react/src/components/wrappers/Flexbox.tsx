@@ -1,7 +1,8 @@
-import { forwardRef, HTMLProps } from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes } from 'react';
 import { formatClassName } from '../../util/util-functions';
 
-interface BaseFlexboxProps {
+export interface FlexboxProps
+  extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
   direction?: 'row' | 'column';
   reverseDirection?: boolean;
   horizontalAlignment?: 'left' | 'center' | 'right';
@@ -10,10 +11,6 @@ interface BaseFlexboxProps {
   reverseWrap?: boolean;
   spacing?: string;
 }
-
-export interface FlexboxProps
-  extends BaseFlexboxProps,
-    Omit<HTMLProps<HTMLDivElement>, 'wrap'> {}
 
 /**
  * A wrapper that allows for rapid and simple assembly of flexboxes for common use cases.

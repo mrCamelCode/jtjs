@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/react",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "license": "MIT",
   "dependencies": {
     "@jtjs/core-browser": ">=0.0.1",

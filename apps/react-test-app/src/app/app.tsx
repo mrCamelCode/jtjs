@@ -6,6 +6,7 @@ import {
   Checkbox,
   Dropdown,
   Flexbox,
+  FlexboxProps,
   Heading,
   LabelledInput,
   LabelledTextInput,
@@ -21,7 +22,7 @@ import {
   useTheme,
 } from '@jtjs/react';
 import { ThemeService } from '@jtjs/view';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function fakeNetworkCall(): Promise<number> {
@@ -34,6 +35,8 @@ function fakeNetworkCall(): Promise<number> {
 // UserActivityService.onChangeActivityState.subscribe((state) => {
 //   console.log('activity state changin to:', ActivityState[state].toString());
 // });
+
+const testProps: FlexboxProps = {};
 
 export function App() {
   const [theme, setTheme] = useTheme();
@@ -61,6 +64,8 @@ export function App() {
       };
     })
     .filter((c) => c.name !== 'name');
+
+  const flexboxRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -141,7 +146,7 @@ export function App() {
         <LabelledInput label="Password" type="password" />
         <LabelledInput label="Numbers" type="number" />
 
-        <Flexbox>
+        <Flexbox ref={flexboxRef} {...testProps}>
           {/* <ImageCard
             flex
             direction="column"
