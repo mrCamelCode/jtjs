@@ -96,7 +96,7 @@ export const Card = ({
   return flex ? (
     <Flexbox
       className={formatClassName('jtjs-card', className)}
-      {...otherProps}
+      {...(otherProps as FlexboxProps)}
     >
       {innerShadow ? <Shadow {...innerShadowOptions} /> : null}
       {children}

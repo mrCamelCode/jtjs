@@ -1,6 +1,12 @@
-import React, { HTMLProps, ReactNode, useId } from 'react';
-import { formatClassName } from '../../util/util-functions';
-import Label from './Label';
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  HTMLProps,
+  ReactNode,
+  useId,
+} from 'react';
+import { buildClassName, formatClassName } from '../../util/util-functions';
+import Label, { LabelProps } from './Label';
 
 export interface CheckboxProps
   extends Omit<HTMLProps<HTMLInputElement>, 'onChange'> {
@@ -18,6 +24,11 @@ export interface CheckboxProps
    * The children of the checkbox, which will be used as its label.
    */
   children: ReactNode | ReactNode[];
+  labelProps?: LabelProps;
+  containerProps?: DetailedHTMLProps<
+    HTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
+  >;
 }
 
 /**
@@ -32,12 +43,14 @@ export const Checkbox = ({
   disabled,
   children,
   id,
+  containerProps,
+  labelProps,
   ...otherProps
 }: CheckboxProps) => {
   let randomId = `${useId()}-jtjs-checkbox`;
 
   return (
-    <>
+    <span {...containerProps}>
       <input
         data-testid="checkbox"
         className={formatClassName('jtjs-checkbox', className)}
@@ -51,10 +64,14 @@ export const Checkbox = ({
         aria-disabled={disabled}
         {...otherProps}
       />
-      <Label htmlFor={id ?? randomId} className="jtjs-checkbox-label">
+      <Label
+        className={buildClassName(labelProps?.className, 'jtjs-checkbox-label')}
+        {...labelProps}
+        htmlFor={id ?? randomId}
+      >
         {children}
       </Label>
-    </>
+    </span>
   );
 };
 
