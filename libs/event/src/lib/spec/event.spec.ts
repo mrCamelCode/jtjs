@@ -70,7 +70,7 @@ describe('Event', () => {
       expect(handler).toHaveBeenCalledTimes(1);
     });
   });
-  
+
   describe('once', () => {
     it('invokes the handler when triggered', () => {
       const event = new Event<EventListener>();
@@ -110,6 +110,45 @@ describe('Event', () => {
       event.trigger();
 
       expect(handler).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('trigger', () => {
+    describe('listener results', () => {
+      it(`returns the results correctly when listeners return void`, () => {
+        const event = new Event();
+
+        const handlers = [
+          jest.fn(),
+          jest.fn(),
+        ];
+
+        handlers.forEach((h) => event.subscribe(h));
+
+        const results = event.trigger();
+
+        expect(results.length).toBe(2);
+        // All results should be void (undefined).
+        expect(results.some((result) => result !== undefined)).toBe(false);
+      });
+      it(`returns the results correctly when listeners return a value`, () => {
+        const event = new Event<() => number>();
+
+        const handlers = [
+          jest.fn(() => 10),
+          jest.fn(() => 15),
+          jest.fn(() => 20),
+        ];
+
+        handlers.forEach((h) => event.subscribe(h));
+
+        const results = event.trigger();
+
+        expect(results.length).toBe(3);
+        expect(results.includes(10)).toBe(true);
+        expect(results.includes(15)).toBe(true);
+        expect(results.includes(20)).toBe(true);
+      });
     });
   });
 });
