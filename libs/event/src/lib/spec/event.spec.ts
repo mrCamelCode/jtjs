@@ -118,10 +118,7 @@ describe('Event', () => {
       it(`returns the results correctly when listeners return void`, () => {
         const event = new Event();
 
-        const handlers = [
-          jest.fn(),
-          jest.fn(),
-        ];
+        const handlers = [jest.fn(), jest.fn()];
 
         handlers.forEach((h) => event.subscribe(h));
 
@@ -148,6 +145,44 @@ describe('Event', () => {
         expect(results.includes(10)).toBe(true);
         expect(results.includes(15)).toBe(true);
         expect(results.includes(20)).toBe(true);
+      });
+    });
+  });
+
+  describe('invoke', () => {
+    describe('can use invoke just like trigger', () => {
+      describe('listener results', () => {
+        it(`returns the results correctly when listeners return void`, () => {
+          const event = new Event();
+
+          const handlers = [jest.fn(), jest.fn()];
+
+          handlers.forEach((h) => event.subscribe(h));
+
+          const results = event.invoke();
+
+          expect(results.length).toBe(2);
+          // All results should be void (undefined).
+          expect(results.some((result) => result !== undefined)).toBe(false);
+        });
+        it(`returns the results correctly when listeners return a value`, () => {
+          const event = new Event<() => number>();
+
+          const handlers = [
+            jest.fn(() => 10),
+            jest.fn(() => 15),
+            jest.fn(() => 20),
+          ];
+
+          handlers.forEach((h) => event.subscribe(h));
+
+          const results = event.invoke();
+
+          expect(results.length).toBe(3);
+          expect(results.includes(10)).toBe(true);
+          expect(results.includes(15)).toBe(true);
+          expect(results.includes(20)).toBe(true);
+        });
       });
     });
   });

@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/event",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A simple, object-oriented event implementation for Node and browser.",
   "license": "MIT",
   "keywords": [
