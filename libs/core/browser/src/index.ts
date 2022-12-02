@@ -1,1 +1,1 @@
-export * from './lib/services/user-activity.service';
+export * from './lib/services';
