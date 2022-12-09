@@ -145,6 +145,49 @@
       },
       "tags": []
     },
+    "networking": {
+      "root": "libs/networking",
+      "sourceRoot": "libs/networking/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:rollup",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/networking",
+            "tsConfig": "libs/networking/tsconfig.lib.json",
+            "project": "libs/networking/package.json",
+            "entryFile": "libs/networking/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "compiler": "babel",
+            "assets": [
+              {
+                "glob": "libs/networking/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/networking/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/networking"],
+          "options": {
+            "jestConfig": "libs/networking/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "react": {
       "root": "libs/react",
       "sourceRoot": "libs/react/src",
