@@ -278,4 +278,4 @@ export class FetchHttpClient
  * A default instance of {@link FetchHttpClient} for ease of use if you don't want to make an instance whenever you need
  * to make a request. This instance has no defaults specified.
  */
-export const FetchHttpService = new FetchHttpClient();
+export const FetchService = new FetchHttpClient();
