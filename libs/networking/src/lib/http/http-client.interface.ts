@@ -26,12 +26,16 @@ export interface BasicHttpRequestData<
 export interface BasicHttpResponseData<ParsedResponseBodyType> {
   /**
    * The raw received response.
+   * 
+   * Can be undefined if a network error prevented the request from being fulfilled.
    */
-  response: Response;
+  response?: Response;
   /**
-   * The parsed body. How the body is parsed depends on the HTTP client implementation.
+   * The parsed body. How the body is parsed depends on the HTTP client implementation. 
+   * 
+   * Can be undefined if a network error prevented the request from being fulfilled.
    */
-  body: ParsedResponseBodyType;
+  body?: ParsedResponseBodyType;
 }
 
 export type SendRequestHandler<T> = (request: T) => void;
