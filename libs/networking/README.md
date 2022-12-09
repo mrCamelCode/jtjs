@@ -1,7 +1,6 @@
-# networking
+# @jtjs/networking
 
-This library was generated with [Nx](https://nx.dev).
+An addition to the JTJS library suite that provides easy-to-use network clients.
 
-## Running unit tests
-
-Run `nx test networking` to execute the unit tests via [Jest](https://jestjs.io).
+## Currently Included
+`FetchHttpClient`
