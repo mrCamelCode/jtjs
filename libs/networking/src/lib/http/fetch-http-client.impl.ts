@@ -168,11 +168,15 @@ export class FetchHttpClient
       this.onReceiveResponse.trigger(response);
 
       let defaultBodyParser;
-      if (response?.headers?.get('content-type')?.includes('application/json')) {
+      if (
+        response?.headers?.get('content-type')?.includes('application/json')
+      ) {
         defaultBodyParser = response?.json;
       } else {
         defaultBodyParser = response?.text;
       }
+
+      defaultBodyParser = defaultBodyParser?.bind(response);
 
       return {
         response,

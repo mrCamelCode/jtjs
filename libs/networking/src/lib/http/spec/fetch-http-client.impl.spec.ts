@@ -16,6 +16,18 @@ jest.mock('cross-fetch', () => {
   };
 });
 
+class MockResponseObject {
+  constructor(public body: any, public headers: any) {}
+
+  text() {
+    return Promise.resolve(JSON.stringify(this.body));
+  }
+
+  json() {
+    return this.text().then(JSON.parse);
+  }
+}
+
 describe('FetchHttpClient', () => {
   test('throws error when trying to create a client with a path that does not start with a /', () => {
     expect(() => {
@@ -356,6 +368,28 @@ describe('FetchHttpClient', () => {
           });
 
           expect(result.body).toEqual('value');
+        });
+        test(`parses the body correctly when the json method on the response object tries to use 'this'`, async () => {
+          const body = {
+            prop: 1,
+          };
+
+          mockFetch.mockResolvedValueOnce(
+            Promise.resolve(
+              new MockResponseObject(
+                body,
+                new Headers({
+                  'content-type': 'application/json',
+                })
+              )
+            )
+          );
+
+          const result = await FetchService.makeRequest('POST', uri, {
+            body,
+          });
+
+          expect(result.body).toEqual(body);
         });
       });
     });
