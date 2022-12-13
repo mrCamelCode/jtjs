@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch';
-import { FetchHttpClient, FetchHttpService } from '../fetch-http-client.impl';
+import { FetchHttpClient, FetchService } from '../fetch-http-client.impl';
 import { HttpProtocol } from '../http-client.interface';
 
 const mockFetch = fetch as jest.Mock;
@@ -158,7 +158,7 @@ describe('FetchHttpClient', () => {
 
     describe('Content-Type absent', () => {
       test(`works when no body is provided. No Content-Type is included.`, () => {
-        FetchHttpService.makeRequest('GET', uri);
+        FetchService.makeRequest('GET', uri);
 
         expect(mockFetch).toHaveBeenCalledTimes(1);
         expect(mockFetch).toHaveBeenCalledWith(uri, {
@@ -173,7 +173,7 @@ describe('FetchHttpClient', () => {
           prop: 1,
         };
 
-        FetchHttpService.makeRequest('POST', uri, {
+        FetchService.makeRequest('POST', uri, {
           body,
         });
 
@@ -192,7 +192,7 @@ describe('FetchHttpClient', () => {
       test(`uses the provided Content-Type`, () => {
         const body = 'something';
 
-        FetchHttpService.makeRequest('POST', uri, {
+        FetchService.makeRequest('POST', uri, {
           body,
           options: {
             headers: {
@@ -214,7 +214,7 @@ describe('FetchHttpClient', () => {
       test(`uses the provided Content-Type even when the actual content differs`, () => {
         const body = 'something';
 
-        FetchHttpService.makeRequest('POST', uri, {
+        FetchService.makeRequest('POST', uri, {
           body,
           options: {
             headers: {
@@ -249,7 +249,28 @@ describe('FetchHttpClient', () => {
             })
           );
 
-          const result = await FetchHttpService.makeRequest('POST', uri, {
+          const result = await FetchService.makeRequest('POST', uri, {
+            body,
+          });
+
+          expect(result.body).toEqual(body);
+        });
+        test(`parses the body correctly when the response Content-Type is JSON and there's extra information in the header`, async () => {
+          const body = {
+            prop: 1,
+          };
+
+          mockFetch.mockResolvedValueOnce(
+            Promise.resolve({
+              body: JSON.stringify(body),
+              json: () => Promise.resolve(body),
+              headers: new Headers({
+                'content-type': 'application/json; charset=utf-8',
+              }),
+            })
+          );
+
+          const result = await FetchService.makeRequest('POST', uri, {
             body,
           });
 
@@ -272,7 +293,7 @@ describe('FetchHttpClient', () => {
             })
           );
 
-          const result = await FetchHttpService.makeRequest('POST', uri, {
+          const result = await FetchService.makeRequest('POST', uri, {
             body: requestBody,
           });
 
@@ -298,7 +319,7 @@ describe('FetchHttpClient', () => {
             })
           );
 
-          const result = await FetchHttpService.makeRequest<string>('POST', uri, {
+          const result = await FetchService.makeRequest<string>('POST', uri, {
             body: requestBody,
             responseBodyParser: (test) => htmlParsed,
           });
@@ -326,7 +347,7 @@ describe('FetchHttpClient', () => {
             })
           );
 
-          const result = await FetchHttpService.makeRequest('POST', uri, {
+          const result = await FetchService.makeRequest('POST', uri, {
             body: requestBody,
             // Pretend parser grabs just the first property's value
             responseBodyParser: () => {
@@ -425,19 +446,19 @@ describe('FetchHttpClient', () => {
 
       test(`does not throw when allowThrow was not included in the request data`, () => {
         expect(async () => {
-          await FetchHttpService.get(uri);
+          await FetchService.get(uri);
         }).not.toThrow();
       });
       test(`does not throw when allowThrow was false in the request data`, () => {
         expect(async () => {
-          await FetchHttpService.get(uri, {
+          await FetchService.get(uri, {
             allowThrow: false,
           });
         }).not.toThrow();
       });
       test(`throws when allowThrow was true in the request data`, async () => {
         await expect(async () => {
-          await FetchHttpService.get(uri, {
+          await FetchService.get(uri, {
             allowThrow: true,
           });
         }).rejects.toThrow('Big bad network error!');
@@ -503,11 +524,11 @@ describe('FetchHttpClient', () => {
     });
 
     test('convenience methods invoke fetch with the expected method', () => {
-      FetchHttpService.get(uri);
-      FetchHttpService.put(uri);
-      FetchHttpService.post(uri);
-      FetchHttpService.patch(uri);
-      FetchHttpService.delete(uri);
+      FetchService.get(uri);
+      FetchService.put(uri);
+      FetchService.post(uri);
+      FetchService.patch(uri);
+      FetchService.delete(uri);
 
       expect(mockFetch).toHaveBeenNthCalledWith(1, uri, {
         method: 'GET',
