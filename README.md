@@ -32,7 +32,7 @@ In my own use of @jtjs/react, I've found it _significantly_  reduces the amount 
 
 > "A component should be helpful but focused, without any more markup than what's absolutely necessary. A wrapper component should be _at least_ as useful as the component it's wrapping."
 
-That's the design philosophy of all components in this library. If it wraps a base component (like an input), it shouldn't be at the cost of that component's functionality. If you ever need to do something that a JTJS wrapper component doesn't have a nifty prop available for, no problem! You can always pass any props the base component takes.
+That's the design philosophy of all components in this library. If it wraps a base component (like an input), it shouldn't be at the cost of that component's functionality or customizability. If you ever need to do something that a JTJS wrapper component doesn't have a nifty prop available for, no problem! You can always pass any props the base component takes.
 
 ## @jtjs/view
 
