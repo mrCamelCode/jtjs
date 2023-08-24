@@ -6,6 +6,7 @@
   color: var(--jtjs-theme-text);
   @include slightly-rounded-corners;
   padding: 0.5rem;
+  max-width: 100%;
 
   &:disabled {
     background-color: var(--jtjs-theme-disabled);

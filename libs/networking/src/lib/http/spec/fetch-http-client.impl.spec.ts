@@ -309,8 +309,6 @@ describe('FetchHttpClient', () => {
             body: requestBody,
           });
 
-          console.log('result:', result);
-
           expect(result.body).toEqual(xmlString);
         });
         test(`parses the body using the provided body parser when it's provided and the response Content-Type isn't JSON`, async () => {

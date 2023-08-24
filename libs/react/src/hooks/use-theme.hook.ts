@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
  * hasn't been started), the {@link ThemeService.defaultTheme} is used. Whenever
  * the current theme is changed, this hook will automatically update.
  *
- * @returns - An array, where the first element is the current {@link Theme},
+ * @returns An array, where the first element is the current {@link Theme},
  * and the second element is a setter for the the current {@link Theme}. Using
  * the setter triggers the {@link ThemeService.onChangeTheme} event, so all
  * instances of this hook will be updated, as well as any listeners you may
@@ -19,15 +19,7 @@ export function useTheme(): [Theme, (themeName: string) => void] {
   );
 
   useEffect(() => {
-    const onChangeThemeListener = (theme: Theme) => {
-      setCurrentTheme(theme);
-    };
-
-    ThemeService.onChangeTheme.subscribe(onChangeThemeListener);
-
-    return () => {
-      ThemeService.onChangeTheme.unsubscribe(onChangeThemeListener);
-    };
+    return ThemeService.onChangeTheme.subscribe(setCurrentTheme);
   });
 
   return [

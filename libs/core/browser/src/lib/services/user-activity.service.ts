@@ -68,7 +68,7 @@ export class UserActivityService {
   private static replaceActivityTimeout() {
     clearTimeout(this._activityTimeout);
 
-    this._activityTimeout = setTimeout(() => {
+    this._activityTimeout = window.setTimeout(() => {
       this.activityState = ActivityState.INACTIVE;
     }, this._activityTimeoutDuration);
   }

@@ -62,7 +62,7 @@ export interface IHttpClient<
   onError: Event<NetworkErrorHandler>;
 
   /**
-   * (Optional) A default protocol and domain to use for the instance. It will be prepended to all request URIs if
+   * A default protocol and domain to use for the instance. It will be prepended to all request URIs if
    * given during construction.
    *
    * @example
@@ -83,7 +83,7 @@ export interface IHttpClient<
    *
    * @param method - The HTTP method to use.
    * @param uri - The URI to send the request to.
-   * @param requestData - (Optional) Additional information to put on the request.
+   * @param requestData - Additional information to put on the request.
    *
    * @returns A promise that resolves to response data. The properties of the returned object may be undefined if a fetch
    * error occurred during processing. To globally address fetch errors made by this client, use the `onFetchError` event.
@@ -103,7 +103,7 @@ export interface IHttpClient<
    * Convenience function for sending a GET request.
    *
    * @param uri - The URI to send the request to.
-   * @param requestData - (Optional) Additional information to put on the request.
+   * @param requestData - Additional information to put on the request.
    *
    * @returns A promise that resolves to response data. The properties of the returned object may be undefined if a fetch
    * error occurred during processing. To globally address fetch errors made by this client, use the `onFetchError` event.
@@ -125,7 +125,7 @@ export interface IHttpClient<
    * Convenience function for sending a POST request.
    *
    * @param uri - The URI to send the request to.
-   * @param requestData - (Optional) Additional information to put on the request.
+   * @param requestData - Additional information to put on the request.
    *
    * @returns A promise that resolves to response data. The properties of the returned object may be undefined if a fetch
    * error occurred during processing. To globally address fetch errors made by this client, use the `onFetchError` event.
@@ -144,7 +144,7 @@ export interface IHttpClient<
    * Convenience function for sending a PUT request.
    *
    * @param uri - The URI to send the request to.
-   * @param requestData - (Optional) Additional information to put on the request.
+   * @param requestData - Additional information to put on the request.
    *
    * @returns A promise that resolves to response data. The properties of the returned object may be undefined if a fetch
    * error occurred during processing. To globally address fetch errors made by this client, use the `onFetchError` event.
@@ -163,7 +163,7 @@ export interface IHttpClient<
    * Convenience function for sending a PATCH request.
    *
    * @param uri - The URI to send the request to.
-   * @param requestData - (Optional) Additional information to put on the request.
+   * @param requestData - Additional information to put on the request.
    *
    * @returns A promise that resolves to response data. The properties of the returned object may be undefined if a fetch
    * error occurred during processing. To globally address fetch errors made by this client, use the `onFetchError` event.
@@ -182,7 +182,7 @@ export interface IHttpClient<
    * Convenience function for sending a DELETE request.
    *
    * @param uri - The URI to send the request to.
-   * @param requestData - (Optional) Additional information to put on the request.
+   * @param requestData - Additional information to put on the request.
    *
    * @returns A promise that resolves to response data. The properties of the returned object may be undefined if a fetch
    * error occurred during processing. To globally address fetch errors made by this client, use the `onFetchError` event.

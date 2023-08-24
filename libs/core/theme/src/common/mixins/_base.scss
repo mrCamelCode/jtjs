@@ -1,0 +1,43 @@
+@mixin focus() {
+  outline-style: solid;
+  outline-width: 3px;
+  outline-color: var(--jtjs-theme-focus);
+}
+
+@mixin base-styles {
+  * {
+    position: relative;
+    box-sizing: border-box;
+
+    [disabled],
+    [aria-disabled='true'],
+    &:disabled {
+      cursor: not-allowed;
+    }
+    &:focus-visible {
+      @include focus;
+    }
+
+    // Firefox only
+    scrollbar-color: var(--jtjs-theme-accent) transparent;
+
+    ::-webkit-scrollbar {
+      background-color: transparent;
+      width: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      @include rounded-corners;
+
+      // background-color: var(--jtjs-theme-accent);
+      background: linear-gradient(
+        to right,
+        var(--jtjs-theme-accent-lightened) 20%,
+        var(--jtjs-theme-accent-darkened) 50%
+      );
+    }
+  }
+
+  html {
+    background-color: var(--jtjs-theme-background);
+  }
+}

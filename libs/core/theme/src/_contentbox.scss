@@ -1,0 +1,10 @@
+.jtjs-contentbox {
+  @include rounded-corners;
+
+  border: 1px solid var(--jtjs-theme-foreground);
+  padding: 1rem;
+
+  &.jtjs-filled {
+    background-color: var(--jtjs-theme-foreground);
+  }
+}

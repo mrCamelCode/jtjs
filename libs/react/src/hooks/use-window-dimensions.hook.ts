@@ -6,7 +6,7 @@ export interface WindowDimensions {
 }
 
 /**
- * @returns - The dimensions of the window, based on the inner dimensions.
+ * @returns The dimensions of the window, based on the inner dimensions.
  */
 export function useWindowDimensions(): WindowDimensions {
   const [height, setHeight] = useState(window?.innerHeight ?? 0);

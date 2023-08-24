@@ -16,13 +16,13 @@ export interface IStack<T> {
   /**
    * Pops the first item on the stack off. This mutates the stack.
    *
-   * @returns - The popped item, or null if the stack is empty.
+   * @returns The popped item, or null if the stack is empty.
    */
   pop(): T | null;
   /**
    * Shows you the first item in the stack without removing it.
    *
-   * @returns - The first item in the stack, or null if the stack is empty.
+   * @returns The first item in the stack, or null if the stack is empty.
    */
   peek(): T | null;
   /**
@@ -30,11 +30,11 @@ export interface IStack<T> {
    */
   clear(): void;
   /**
-   * @returns - The stack as an array.
+   * @returns The stack as an array.
    */
   toArray(): T[];
   /**
-   * @returns - The stack as a human-readable string.
+   * @returns The stack as a human-readable string.
    */
   toString(): string;
 }

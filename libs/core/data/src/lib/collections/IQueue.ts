@@ -16,11 +16,11 @@ export interface IQueue<T> {
   /**
    * Removes the first item in the queue.
    *
-   * @returns - The removed item, or null if the queue was empty.
+   * @returns The removed item, or null if the queue was empty.
    */
   dequeue(): T | null;
   /**
-   * @returns - The first item in the queue, or null if the queue is empty.
+   * @returns The first item in the queue, or null if the queue is empty.
    */
   peek(): T | null;
   /**
@@ -28,11 +28,11 @@ export interface IQueue<T> {
    */
   clear(): void;
   /**
-   * @returns - The queue as an array.
+   * @returns The queue as an array.
    */
   toArray(): T[];
   /**
-   * @returns - The queue as a human-readable string.
+   * @returns The queue as a human-readable string.
    */
   toString(): string;
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  * Hook that gets updated whenever the user's activity state changes from being inactive
  * to active or vice versa. To configure options for user inactivity, see {@link UserActivityService}
  *
- * @returns - Whether the user is currently active.
+ * @returns Whether the user is currently active.
  */
 export function useUserActive() {
   const [isUserActive, setIsUserActive] = useState(

@@ -5,15 +5,15 @@
       "description": "Set --parallel=1 for existing repos to preserve the existing behavior",
       "cli": "nx",
       "implementation": "./src/migrations/update-13-2-0/set-parallel-default",
-      "package": "@nrwl/workspace",
+      "package": "@nx/workspace",
       "name": "set-parallel-default"
     },
     {
       "version": "13.3.0-beta.0",
-      "description": "@nrwl/workspace:tsc is now @nrwl/js:tsc",
+      "description": "@nx/workspace:tsc is now @nx/js:tsc",
       "cli": "nx",
       "implementation": "./src/migrations/update-13-3-0/update-tsc-executor-location",
-      "package": "@nrwl/workspace",
+      "package": "@nx/workspace",
       "name": "13-3-0-tsc-location"
     },
     {
@@ -21,15 +21,15 @@
       "description": "Remove old options that are no longer used",
       "cli": "nx",
       "implementation": "./src/migrations/update-13-6-0/remove-old-task-runner-options",
-      "package": "@nrwl/workspace",
+      "package": "@nx/workspace",
       "name": "13-6-0-remove-old-task-runner-options"
     },
     {
       "version": "13.4.4-beta.0",
       "cli": "nx",
-      "description": "Create a root babel config file if it doesn't exist and using babel-jest in jest.config.js and add @nrwl/web as needed",
+      "description": "Create a root babel config file if it doesn't exist and using babel-jest in jest.config.js and add @nx/web as needed",
       "factory": "./src/migrations/update-13-4-4/add-missing-root-babel-config",
-      "package": "@nrwl/jest",
+      "package": "@nx/jest",
       "name": "add-missing-root-babel-config"
     },
     {
@@ -37,31 +37,31 @@
       "version": "13.3.0-beta.0",
       "description": "Update eslint-rules jest.config.js in order to support ESLint v8 exports mapping, remove category field",
       "factory": "./src/migrations/update-13-3-0/eslint-8-updates",
-      "package": "@nrwl/linter",
+      "package": "@nx/linter",
       "name": "eslint-8-updates"
     },
     {
       "cli": "nx",
       "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/node:build to @nrwl/node:webpack",
+      "description": "Renames @nx/node:build to @nx/node:webpack",
       "factory": "./src/migrations/update-13-8-5/rename-build-to-webpack",
-      "package": "@nrwl/node",
+      "package": "@nx/node",
       "name": "rename-build-to-webpack"
     },
     {
       "cli": "nx",
       "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/node:execute to @nrwl/node:node",
+      "description": "Renames @nx/node:execute to @nx/node:node",
       "factory": "./src/migrations/update-13-8-5/rename-execute-to-node",
-      "package": "@nrwl/node",
+      "package": "@nx/node",
       "name": "rename-execute-to-node"
     },
     {
       "cli": "nx",
       "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/node:package to @nrwl/js:tsc",
+      "description": "Renames @nx/node:package to @nx/js:tsc",
       "factory": "./src/migrations/update-13-8-5/update-package-to-tsc",
-      "package": "@nrwl/node",
+      "package": "@nx/node",
       "name": "update-package-to-tsc"
     },
     {
@@ -69,7 +69,7 @@
       "version": "13.3.0-beta.1",
       "description": "Rename the 'build' executor to 'webpack'",
       "factory": "./src/migrations/update-13-3-0/rename-build-to-webpack",
-      "package": "@nrwl/web",
+      "package": "@nx/web",
       "name": "rename-build-to-webpack"
     },
     {
@@ -77,7 +77,7 @@
       "version": "13.3.0-beta.1",
       "description": "Rename the 'package' executor to 'rollup'",
       "factory": "./src/migrations/update-13-3-0/rename-package-to-rollup",
-      "package": "@nrwl/web",
+      "package": "@nx/web",
       "name": "rename-package-to-rollup"
     },
     {
@@ -85,7 +85,7 @@
       "version": "13.8.0-beta.1",
       "description": "Add a postcss config option to apps to load a single config file for all libs",
       "factory": "./src/migrations/update-13-8-0/add-postcss-config-option",
-      "package": "@nrwl/web",
+      "package": "@nx/web",
       "name": "add-postcss-config-option"
     }
   ]

@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "fix-lib-output": {
+      "implementation": "./src/generators/fix-lib-output",
+      "schema": "./src/generators/fix-lib-output/schema.json",
+      "description": "Generator fix-lib-output"
+    }
+  }
+}

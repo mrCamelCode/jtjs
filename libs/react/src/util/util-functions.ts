@@ -1,26 +1,29 @@
-export function formatClassName(className?: string, classNameProp?: string) {
-  const trimmedClassName = className?.trim() ?? '';
-  const trimmedClassNameProp = classNameProp?.trim() ?? '';
-
-  return `${trimmedClassName}${
-    trimmedClassNameProp ? ` ${trimmedClassNameProp}` : ''
-  }`;
+/**
+ * @returns Properly formatted and built class name without trailing spaces.
+ */
+export function buildClassName(...classes: (string | undefined)[]): string {
+  return classes
+    .map((c) => c?.trim())
+    .filter((c) => !!c)
+    .join(' ');
 }
 
 /**
- * @param classNameProp - The className prop received by the component.
- * @param classes - The classes you want to apply to the component.
+ * Masks text on a per-character basis.
  *
- * @returns Properly formatted and built class name without trailing spaces.
+ * @param text - The text to mask.
+ * @param mask - The mask to apply to the text. The mask will be applied on a per-character basis.
+ *
+ * @returns The masked text.
+ *
+ * @example
+ * ```ts
+ * maskText('abc123', /\d/); // => '123'
+ * ```
  */
-export function buildClassName(
-  classNameProp?: string,
-  ...classes: string[]
-): string {
-  const trimmedClassName = classNameProp?.trim() ?? '';
-  const trimmedClasses =
-    [trimmedClassName, ...classes?.map((c) => c.trim())].filter((c) => !!c) ??
-    [];
-
-  return trimmedClasses.join(' ');
+export function maskText(text: string, mask: RegExp): string {
+  return text
+    .split('')
+    .filter((char) => mask.test(char))
+    .join('');
 }

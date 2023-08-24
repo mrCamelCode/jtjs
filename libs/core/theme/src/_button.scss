@@ -12,14 +12,47 @@
 
   overflow: hidden;
 
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  &:not(.disable-mouse-effects) {
+    &::after {
+      $shineSize: 100px;
 
-  &:hover {
-    background-color: var(--jtjs-theme-button-lightened);
-    border-color: var(--jtjs-theme-button-darkened);
+      content: '';
+      position: absolute;
+      top: calc(var(--jtjs-mouse-pos-y, 0) * 1px - math.div($shineSize, 2));
+      left: calc(var(--jtjs-mouse-pos-x, 0) * 1px - math.div($shineSize, 2));
+      height: $shineSize;
+      width: $shineSize;
+      opacity: 0;
+      background: radial-gradient(
+        var(--jtjs-theme-button-lightened),
+        transparent 50%
+      );
+
+      transition: opacity 0.2s ease;
+    }
+    &:hover:not(:disabled) {
+      &::after {
+        opacity: 0.4;
+
+        &:active {
+          background: radial-gradient(
+            var(--jtjs-theme-button),
+            transparent 50%
+          );
+        }
+      }
+    }
   }
-  &:active {
+
+  &:hover:not(:disabled) {
+    &.disable-mouse-effects {
+      background-color: var(--jtjs-theme-button-lightened);
+      border-color: var(--jtjs-theme-button-darkened);
+    }
+  }
+  &:active:not(:disabled) {
     background-color: var(--jtjs-theme-button-darkened);
+    transform: scale(0.95);
   }
   &:disabled {
     background-color: var(--jtjs-theme-disabled);

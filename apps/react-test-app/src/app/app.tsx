@@ -1,27 +1,38 @@
 import {
-  BackgroundImageCard,
+  BinaryThemeToggle,
   Button,
-  Card,
   Checkbox,
-  Dropdown,
+  Collapsible,
+  Contentbox,
   Flexbox,
-  FlexboxProps,
   Heading,
+  HideBehaviour,
+  Icon,
+  LabelPosition,
+  LabelledCheckboxGroup,
+  LabelledColorInput,
   LabelledInput,
+  LabelledMaskedMultilineTextInput,
+  LabelledMaskedTextInput,
+  LabelledRadio,
+  LabelledRadioGroup,
+  LabelledSelect,
   LabelledTextInput,
-  // ImageCard,
+  LabelledToggle,
   Link,
   LoadView,
   Radio,
-  RadioGroup,
+  Select,
+  Table,
   Text,
-  TextInput,
+  ThemeMode,
   Toggle,
+  Tooltipped,
   useBreakpoint,
   useTheme,
 } from '@jtjs/react';
 import { ThemeService } from '@jtjs/view';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function fakeNetworkCall(): Promise<number> {
@@ -30,30 +41,48 @@ function fakeNetworkCall(): Promise<number> {
   });
 }
 
+ThemeService.registerTheme({
+  ...ThemeService.dark,
+  name: 'dark',
+});
+ThemeService.registerTheme({
+  ...ThemeService.parchment,
+  name: 'light',
+});
+
 // UserActivityService.onActivity.subscribe(() => console.log('activity'));
 // UserActivityService.onChangeActivityState.subscribe((state) => {
 //   console.log('activity state changin to:', ActivityState[state].toString());
 // });
-
-const testProps: FlexboxProps = {};
 
 export function App() {
   const [theme, setTheme] = useTheme();
   const [data, setData] = useState(0);
   const [checked, setChecked] = useState(false);
   const [radio, setRadio] = useState(true);
-  const [selectedRadio, setSelectedRadio] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [toggle, setToggle] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState(theme.background);
+
   const currentBreakpoint = useBreakpoint();
 
   console.log('render');
 
-  const { register } = useForm<{ name: string }>();
+  const { register, handleSubmit } = useForm<{
+    name: string;
+    otherName: string;
+    anotherName: string;
+  }>();
 
   useEffect(() => {
     fakeNetworkCall().then((num) => setData(num));
   }, []);
+
+  useEffect(() => {
+    ThemeService.updateTheme(theme.name, {
+      background: backgroundColor,
+    });
+  }, [backgroundColor]);
 
   const themeColors: { name: string; color: string }[] = Object.entries(theme)
     .map(([colorName, hex]) => {
@@ -64,7 +93,7 @@ export function App() {
     })
     .filter((c) => c.name !== 'name');
 
-  const flexboxRef = useRef<HTMLDivElement>(null);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <div
@@ -75,21 +104,22 @@ export function App() {
         margin: '0',
       }}
     >
-      <Card>
+      <Contentbox direction="column">
         <Text>Current breakpoint is: {currentBreakpoint}</Text>
 
-        <Radio checked={radio} onChange={setRadio}>
-          Radio 1
-        </Radio>
-        <Checkbox checked={checked} onChange={setChecked}>
-          Check Me!
-        </Checkbox>
-        <RadioGroup
-          name="fav-monster"
+        <Radio checked={radio} onChangeChecked={setRadio} />
+
+        <Checkbox checked={checked} onChangeChecked={setChecked} />
+
+        <LabelledRadioGroup
+          label="Favorite Monster"
           options={[
             {
               label: 'Kraken',
               value: 'K',
+              props: {
+                labelPosition: LabelPosition.Before,
+              },
             },
             {
               label: 'Sasquatch',
@@ -100,15 +130,119 @@ export function App() {
               value: 'M',
             },
           ]}
-          onChange={setSelectedRadio}
-          value={selectedRadio}
-        >
-          Choose your favorite monster
-        </RadioGroup>
-        <Toggle isOn={toggle} onChange={setToggle}>
-          Toggle Me!
-        </Toggle>
-        <Dropdown
+        />
+
+        <LabelledRadioGroup
+          inlineItems
+          label="Favorite Monster Inline"
+          options={[
+            {
+              label: 'Kraken',
+              value: 'K',
+              props: {
+                labelPosition: LabelPosition.Before,
+              },
+            },
+            {
+              label: 'Sasquatch',
+              value: 'S',
+            },
+            {
+              label: 'Mothman',
+              value: 'M',
+            },
+            {
+              label: 'Cthulhu',
+              value: 'C',
+            },
+            {
+              label: 'Werewolf',
+              value: 'W',
+            },
+            {
+              label: 'Vampire',
+              value: 'V',
+            },
+          ]}
+        />
+
+        <LabelledCheckboxGroup
+          label="Cool Games"
+          options={[
+            {
+              label: 'Fallout',
+              name: 'fo',
+            },
+            {
+              label: 'The Elder Scrolls',
+              name: 'tes',
+            },
+            {
+              label: 'FFXIV',
+              name: 'ffxiv',
+              props: {
+                labelPosition: LabelPosition.Before,
+              },
+            },
+            {
+              label: "Baldur's Gate 3",
+              name: 'bg3',
+            },
+          ]}
+        />
+
+        <LabelledCheckboxGroup
+          inlineItems
+          label="Cool Games Inline"
+          options={[
+            {
+              label: 'Fallout',
+              name: 'fo',
+            },
+            {
+              label: 'The Elder Scrolls',
+              name: 'tes',
+            },
+            {
+              label: 'FFXIV',
+              name: 'ffxiv',
+              props: {
+                labelPosition: LabelPosition.Before,
+              },
+            },
+            {
+              label: "Baldur's Gate 3",
+              name: 'bg3',
+            },
+          ]}
+        />
+
+        <LabelledRadio disabled label="Labelled Radio" />
+
+        <Toggle isOn={toggle} onToggle={setToggle} />
+
+        <Toggle />
+
+        <LabelledToggle label="Labelled Toggle" />
+
+        <LabelledToggle
+          label="Labelled Toggle"
+          labelPosition={LabelPosition.After}
+        />
+
+        <LabelledToggle label="Disabled Labelled Toggle" disabled />
+        <Toggle disabled />
+
+        <Tooltipped tooltip="Toggle App Theme" disableWrapperFocus>
+          <BinaryThemeToggle
+            mode={theme.name === 'light' ? ThemeMode.Light : ThemeMode.Dark}
+            onToggle={(mode) =>
+              mode === ThemeMode.Light ? setTheme('light') : setTheme('dark')
+            }
+          />
+        </Tooltipped>
+
+        <Select
           value={selectedOption}
           options={[
             {
@@ -124,72 +258,161 @@ export function App() {
               value: 'M',
             },
           ]}
-          onChange={setSelectedOption}
-        >
-          Favorite Monster
-        </Dropdown>
-        <Button>Click Me!</Button>
-        <Button disabled>Can't Click Me!</Button>
-        <div style={{ marginTop: '1rem' }}>
-          <TextInput {...register('name')} />
-        </div>
-
-        <LabelledTextInput label="Name" {...register('name')} />
-
-        <LabelledTextInput
-          label="Multline Name"
-          multiline
-          {...register('name')}
+          onChangeSelection={setSelectedOption}
         />
+
+        <LabelledSelect
+          label="Subscription Tier"
+          options={[
+            {
+              groupLabel: 'Totally Awesomesauce',
+              options: [
+                {
+                  label: 'Richest Elitest',
+                  value: 0,
+                },
+                {
+                  label: 'Richer Eliter',
+                  value: 1,
+                },
+                {
+                  label: 'Rich Elite',
+                  value: 2,
+                },
+              ],
+            },
+            {
+              groupLabel: 'Okay',
+              options: [
+                {
+                  label: 'A Fair Amount of Dough',
+                  value: 3,
+                },
+                {
+                  label: 'An Okay Amount of Dough',
+                  value: 4,
+                },
+              ],
+            },
+            {
+              label: "You're Such a Schlub, You Don't Get an Option Group",
+              value: 5,
+            },
+          ]}
+        />
+        <LabelledSelect
+          label="Subscription Tier"
+          labelPosition={LabelPosition.After}
+          options={[
+            {
+              groupLabel: 'Totally Awesomesauce',
+              options: [
+                {
+                  label: 'Richest Elitest',
+                  value: 0,
+                },
+                {
+                  label: 'Richer Eliter',
+                  value: 1,
+                },
+                {
+                  label: 'Rich Elite',
+                  value: 2,
+                },
+              ],
+            },
+            {
+              groupLabel: 'Okay',
+              options: [
+                {
+                  label: 'A Fair Amount of Dough',
+                  value: 3,
+                },
+                {
+                  label: 'An Okay Amount of Dough',
+                  value: 4,
+                },
+              ],
+            },
+            {
+              label: "You're Such a Schlub, You Don't Get an Option Group",
+              value: 5,
+            },
+          ]}
+        />
+
+        <Button>Click Me!</Button>
+        <Button>Another Button</Button>
+        <Button disabled>Can't Click Me!</Button>
+
+        <Collapsible heading="Collapsible Heading" collapseBehaviour={HideBehaviour.Hide}>
+          <Text>I can be collapsed!</Text>
+
+          <Button>Focusable Button</Button>
+        </Collapsible>
+
+        <Collapsible defaultIsCollapsed heading="Tables">
+          <Table
+            title="Empty Table"
+            columnHeaders={['Data Col 1', 'Data Col 2']}
+          />
+
+          <Table
+            title="Example Table"
+            columnHeaders={['Name', 'Age', 'Profession', 'Input']}
+            rows={new Array(20).fill(0).map(() => ({
+              cells: [
+                'JT',
+                26,
+                'Software Dev',
+                <LabelledTextInput label="Something" />,
+              ],
+            }))}
+          />
+
+          <Table
+            title="Example Table With Capped Height"
+            columnHeaders={['Name', 'Age', 'Profession', 'Input']}
+            rows={new Array(20).fill(0).map(() => ({
+              cells: [
+                'JT',
+                26,
+                'Software Dev',
+                <LabelledTextInput label="Something" />,
+              ],
+            }))}
+            maxHeight="15rem"
+          />
+        </Collapsible>
+
+        <Contentbox filled>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Flexbox direction="column">
+              <LabelledMaskedTextInput
+                label="RHF: Name (A-Z only)"
+                mask={/[a-z]/i}
+                {...register('name')}
+              />
+
+              <LabelledMaskedMultilineTextInput
+                label="RHF: Multline Name (no numbers)"
+                labelPosition={LabelPosition.After}
+                mask={/[^\d]/}
+                {...register('otherName')}
+              />
+
+              <input type="text" {...register('anotherName')} />
+
+              <Button type="submit">Submit</Button>
+            </Flexbox>
+          </form>
+        </Contentbox>
 
         <LabelledInput label="Password" type="password" />
         <LabelledInput label="Numbers" type="number" />
 
-        <Flexbox ref={flexboxRef} {...testProps}>
-          {/* <ImageCard
-            flex
-            direction="column"
-            verticalAlignment="bottom"
-            innerShadow
-            style={{
-              flexBasis: '50%',
-              minHeight: '50vh',
-            }}
-            src="../assets/ga-screenshot0.jpg"
-            imgOptions={{
-              horizontalAlignment: 'center',
-            }}
-          >
-            <Heading
-              style={{
-                margin: 0,
-              }}
-            >
-              Game
-            </Heading>
-            <Text>This game is Galactic Assault</Text>
-          </ImageCard> */}
-          <BackgroundImageCard
-            flex
-            direction="column"
-            verticalAlignment="bottom"
-            innerShadow
-            style={{
-              flexBasis: '50%',
-              minHeight: '50vh',
-            }}
-            src="../assets/ga-screenshot0.jpg"
-          >
-            <Heading
-              style={{
-                margin: 0,
-              }}
-            >
-              Game
-            </Heading>
-            <Text>This game is Galactic Assault</Text>
-          </BackgroundImageCard>
-        </Flexbox>
+        <LabelledTextInput label="Labelled Text Input" />
+
         <div
           style={{
             height: '100px',
@@ -201,8 +424,38 @@ export function App() {
           }}
         ></div>
         <Link href="https://google.com">Google</Link>
-        {/* <Icon icon="address-card" iconType="solid" /> */}
+        <Link external href="https://google.com">
+          Google as External
+        </Link>
+        <Icon icon="address-card" iconType="solid" />
+        <Tooltipped tooltip="Totally neat extra information that's really long and just keeps going like wow who would write a tooltip this long I have no idea!">
+          <Text>I have a tooltip!</Text>
+        </Tooltipped>
+
+        <Text>
+          Here's some text that has a{' '}
+          <Tooltipped tooltip="Hey look, an inline tooltip" inline>
+            TOOLTIP!
+          </Tooltipped>{' '}
+          inside it inline.
+        </Text>
+
         <LoadView isLoading />
+
+        <Flexbox>
+          <LabelledColorInput
+            label="Background Color"
+            value={theme.background}
+            onChangeColor={setBackgroundColor}
+          />
+
+          <LabelledColorInput
+            label="Some Color"
+            defaultValue="#00ffff"
+            labelPosition={LabelPosition.After}
+          />
+        </Flexbox>
+
         <Heading importance={3}>Colors</Heading>
         <Flexbox direction="column">
           {themeColors.map((themeColor) => {
@@ -235,7 +488,7 @@ export function App() {
             };
 
             return (
-              <Flexbox spacing="0">
+              <Flexbox spacing="0" key={themeColor.name}>
                 <ThemeColorSample
                   key={`${themeColor.name}-2`}
                   themeColor={{
@@ -258,7 +511,7 @@ export function App() {
             );
           })}
         </Flexbox>
-      </Card>
+      </Contentbox>
     </div>
   );
 }

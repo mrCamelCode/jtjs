@@ -46,4 +46,22 @@ export interface Theme {
    * what will indicate to a user navigating the page with the keyboard what element is currently selected.
    */
   focus: string;
+  /**
+   * The color used to indicate an affirmative action, like a confirmation button for
+   * whether the user wants to save their data.
+   */
+  affirmative: string;
+  /**
+   * The color for text that appears on an element with a background of the `affirmative` color.
+   */
+  affirmativeText: string;
+  /**
+   * The color used to indicate a negative or possibly destructive action, like a confirmation button for deleting
+   * some data.
+   */
+  negative: string;
+  /**
+   * The color for text that appears on an element with a background of the `negative` color.
+   */
+  negativeText: string;
 }

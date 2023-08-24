@@ -9,28 +9,79 @@ export type OnChangeThemeListener = (theme: Theme) => void;
  * when the theme changes. Also includes helper methods for dealing with themes and colors.
  */
 export class ThemeService {
+  /**
+   * Event for when the current theme changes or is modified.
+   */
   static onChangeTheme: Event<OnChangeThemeListener> = new Event();
 
   /**
-   * A default theme you can use to get going. This theme is NOT in the set
-   * of registered themes, but will be used to set the theme CSS variables
-   * by default.
-   *
-   * Generated at coolors.co:
-   * https://coolors.co/474747-963333-eb5e5e-5c7ec1-3bad61
+   * A classic light theme, featuring blue buttons and aqua accents.
    */
-  static defaultTheme: Theme = {
-    name: 'jtjs-default-dark',
-    background: '#292929',
-    foreground: '#474747',
-    disabled: '#3D3D3D',
-    text: '#EEE',
-    accent: '#3BAD61',
+  static light: Theme = {
+    name: 'jtjs-light',
+    background: '#FEFEFE',
+    foreground: '#EBEBEB',
+    disabled: '#B8B8B8',
+    text: '#333',
+    accent: '#469BBF',
     outline: '#8F8F8F',
     button: '#5C7EC1',
     buttonText: '#EEE',
     focus: '#97ADD8',
+    affirmative: '#3BAD61',
+    affirmativeText: '#EEE',
+    negative: '#CB3D3D',
+    negativeText: '#EEE',
   };
+
+  /**
+   * A dark theme that primarily uses shades of gray with pops of soft blue for buttons
+   * and an aqua for accent.
+   */
+  static dark: Theme = {
+    name: 'jtjs-dark',
+    background: '#292929',
+    foreground: '#474747',
+    disabled: '#3D3D3D',
+    text: '#EEE',
+    accent: '#469BBF',
+    outline: '#8F8F8F',
+    button: '#5C7EC1',
+    buttonText: '#EEE',
+    focus: '#97ADD8',
+    affirmative: '#3BAD61',
+    affirmativeText: '#EEE',
+    negative: '#CB3D3D',
+    negativeText: '#EEE',
+  };
+
+  /**
+   * A lighter theme with an off-white background, deep chocolates for text, beautiful
+   * blue buttons, and lovely lavender accents.
+   */
+  static parchment: Theme = {
+    name: 'jtjs-parchment',
+    background: '#EEECE7',
+    foreground: '#D5D0C3',
+    disabled: '#9B916F',
+    text: '#36261A',
+    accent: '#957186',
+    outline: '#B4AC93',
+    button: '#5299D3',
+    buttonText: '#EEE',
+    focus: '#957186',
+    affirmative: '#3BAD61',
+    affirmativeText: '#EEE',
+    negative: '#CB3D3D',
+    negativeText: '#EEE',
+  };
+
+  /**
+   * A default theme you can use to get going. This theme is NOT in the set
+   * of registered themes, but will be used to set the theme CSS variables
+   * by default. Same as {@link ThemeService.dark}.
+   */
+  static defaultTheme: Theme = ThemeService.dark;
 
   private static get isBrowser(): boolean {
     return !!document;
@@ -67,12 +118,10 @@ export class ThemeService {
    * is the first theme added to the service.
    */
   static registerTheme(theme: Theme, autoSetCurrent = true) {
-    if (!ThemeService._themes.some((t) => t.name === theme.name)) {
-      // Only add themes whose names aren't already registered.
+    if (!ThemeService.hasTheme(theme.name)) {
       ThemeService._themes.push(theme);
 
       if (ThemeService._themes.length === 1 && autoSetCurrent) {
-        // If the theme we just registered is the first registered theme, set that theme to the current theme.
         ThemeService.currentTheme = theme;
       }
     }
@@ -85,9 +134,30 @@ export class ThemeService {
    * @param themeName - The name of the theme to set as the current theme.
    */
   static changeTheme(themeName: string) {
-    const theme = ThemeService._themes.find((t) => t.name === themeName);
+    const theme = ThemeService.getTheme(themeName);
 
     if (theme) {
+      ThemeService.currentTheme = theme;
+    }
+  }
+
+  /**
+   * Updates the specified theme, modifying its registered data.
+   *
+   * @param themeName - The theme to update.
+   * @param newThemeData - The new theme data to use.
+   */
+  // Note: Maybe instead of requiring that they call this, just use a proxy that watches
+  // for sets to the object fields and triggers the event when one changes?
+  static updateTheme(
+    themeName: string,
+    newThemeData: Partial<Omit<Theme, 'name'>>
+  ) {
+    const theme = ThemeService.getTheme(themeName);
+
+    if (theme) {
+      Object.assign(theme, newThemeData);
+
       ThemeService.currentTheme = theme;
     }
   }
@@ -96,11 +166,11 @@ export class ThemeService {
    * Lightens a hex color.
    *
    * @param color - The color to lighten
-   * @param amount - (Optional) The amount by which to lighten the color. This is a value
+   * @param amount - The amount by which to lighten the color. This is a value
    * between 0-1. The default for this value is the same value used by the service to generate
    * lightened color variants for theme colors.
    *
-   * @returns - The lightened color.
+   * @returns The lightened color.
    */
   static lighten(color: string, amount = 0.1): string {
     const c = chroma(color);
@@ -112,14 +182,22 @@ export class ThemeService {
    * Darkens a hex color.
    *
    * @param color - The color to darken
-   * @param amount - (Optional) The amount by which to darken the color. This is a value
+   * @param amount - The amount by which to darken the color. This is a value
    * between 0-1. The default for this value is the same value used by the service to generate
    * darkened color variants for theme colors.
    *
-   * @returns - The darkened color.
+   * @returns The darkened color.
    */
   static darken(color: string, amount = 0.1) {
     return ThemeService.lighten(color, -amount);
+  }
+
+  private static getTheme(themeName: string): Theme | undefined {
+    return ThemeService._themes.find((t) => t.name === themeName);
+  }
+
+  private static hasTheme(themeName: string): boolean {
+    return ThemeService._themes.some((t) => t.name === themeName);
   }
 
   private static updateCssVariables() {

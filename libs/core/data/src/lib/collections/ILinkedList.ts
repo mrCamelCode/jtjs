@@ -68,7 +68,7 @@ export interface ILinkedList<T1> {
    *
    * @param predicate - The predicate to invoke on each element of the linked list.
    *
-   * @returns - A new linked list with the elements that passed the test of the provided predicate.
+   * @returns A new linked list with the elements that passed the test of the provided predicate.
    */
   filter(predicate: (nodeValue: T1) => boolean): ILinkedList<T1>;
   /**
@@ -77,7 +77,7 @@ export interface ILinkedList<T1> {
    *
    * @param iteratee - The function to invoke on each element in the linked list. Returns a value.
    *
-   * @returns - A new linked list comprised of all values collectively returned from individual invocations of the
+   * @returns A new linked list comprised of all values collectively returned from individual invocations of the
    * provided iteratee.
    */
   map<T2>(iteratee: (nodeValue: T1) => T2): ILinkedList<T2>;
@@ -92,7 +92,7 @@ export interface ILinkedList<T1> {
    *
    * @param value - The value to search for. Equality is based on strict equality.
    *
-   * @returns - Whether the specified value exists in the linked list.
+   * @returns Whether the specified value exists in the linked list.
    */
   includes(value: T1): boolean;
   /**
@@ -101,7 +101,7 @@ export interface ILinkedList<T1> {
    * @param predicate - The predicate to invoke on each element in the linked list. Returns whether the
    * nodeValue for that iteration passed its test.
    *
-   * @returns - Whether any element in the array passed the test specified by the provided predicate.
+   * @returns Whether any element in the array passed the test specified by the provided predicate.
    */
   some(predicate: (nodeValue: T1) => boolean): boolean;
   /**
@@ -109,7 +109,7 @@ export interface ILinkedList<T1> {
    *
    * @param predicate - The predicate to invoke on each element in the linked list.
    *
-   * @returns - The element that passed the provided predicate, null if no element passed.
+   * @returns The element that passed the provided predicate, null if no element passed.
    */
   find(predicate: (nodeValue: T1) => boolean): T1 | null;
   /**
@@ -117,11 +117,11 @@ export interface ILinkedList<T1> {
    */
   clear(): void;
   /**
-   * @returns - The linked list as an array.
+   * @returns The linked list as an array.
    */
   toArray(): T1[];
   /**
-   * @returns - The linked list as a human-readable string.
+   * @returns The linked list as a human-readable string.
    */
   toString(): string;
 }

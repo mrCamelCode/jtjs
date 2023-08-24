@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/view",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "dependencies": {
     "@jtjs/event": ">=0.0.1"
   }
