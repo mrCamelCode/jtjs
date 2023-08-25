@@ -30,6 +30,7 @@ export const MultilineTextInput = forwardRef<
         onChangeText?.(event.target.value, event);
         onChange?.(event);
       }}
+      rows={rows}
       {...otherProps}
       ref={ref}
     />
