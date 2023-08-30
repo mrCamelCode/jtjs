@@ -24,6 +24,7 @@
     ::-webkit-scrollbar {
       background-color: transparent;
       width: 10px;
+      height: 10px;
     }
     ::-webkit-scrollbar-thumb {
       @include rounded-corners;
@@ -34,10 +35,23 @@
         var(--jtjs-theme-accent-lightened) 20%,
         var(--jtjs-theme-accent-darkened) 50%
       );
+
+      &:horizontal {
+        background: linear-gradient(
+          to top,
+          var(--jtjs-theme-accent-darkened) 50%,
+          var(--jtjs-theme-accent-lightened) 80%
+        );
+      }
     }
   }
 
   html {
     background-color: var(--jtjs-theme-background);
+  }
+
+  :root {
+    --jtjs-rounded-corner-radius: 10px;
+    --jtjs-slightly-rounded-corner-radius: 5px;
   }
 }

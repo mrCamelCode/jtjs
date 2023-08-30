@@ -1,5 +1,5 @@
 .jtjs-table {
-  @include rounded-corners;
+  @include slightly-rounded-corners;
 
   color: var(--jtjs-theme-text);
 
@@ -23,15 +23,13 @@
     }
 
     &:first-child {
-      @include rounded-corners;
+      @include slightly-rounded-corners;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
     }
     &:last-child {
-      @include rounded-corners;
+      @include slightly-rounded-corners;
       border-top-left-radius: 0;
-      border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
   }

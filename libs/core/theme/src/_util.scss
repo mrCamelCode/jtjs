@@ -12,11 +12,11 @@
 }
 
 @mixin slightly-rounded-corners {
-  border-radius: 5px;
+  border-radius: var(--jtjs-slightly-rounded-corner-radius);
 }
 
 @mixin rounded-corners {
-  border-radius: 10px;
+  border-radius: var(--jtjs-rounded-corner-radius);
 }
 
 @mixin soft-shadow {
