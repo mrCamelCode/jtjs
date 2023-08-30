@@ -1,5 +1,5 @@
 import {
-  BinaryThemeToggle,
+  ThemeToggle,
   Button,
   Checkbox,
   Collapsible,
@@ -234,7 +234,7 @@ export function App() {
         <Toggle disabled />
 
         <Tooltipped tooltip="Toggle App Theme" disableWrapperFocus>
-          <BinaryThemeToggle
+          <ThemeToggle
             mode={theme.name === 'light' ? ThemeMode.Light : ThemeMode.Dark}
             onToggle={(mode) =>
               mode === ThemeMode.Light ? setTheme('light') : setTheme('dark')

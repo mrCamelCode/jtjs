@@ -11,7 +11,7 @@ export enum ThemeMode {
   Dark,
 }
 
-export interface BinaryThemeToggleProps
+export interface ThemeToggleProps
   extends Omit<ToggleProps, 'onToggle' | 'isOn'> {
   onToggle?: (themeMode: ThemeMode, event: UserInteractionEvent) => void;
   mode?: ThemeMode;
@@ -23,9 +23,9 @@ export interface BinaryThemeToggleProps
  * Can be controlled or uncontrolled. If you intend to control the component, you must provide
  * a `mode` that's not `undefined` and it must be a {@link ThemeMode}.
  */
-export const BinaryThemeToggle = forwardRef<
+export const ThemeToggle = forwardRef<
   HTMLSpanElement,
-  BinaryThemeToggleProps
+  ThemeToggleProps
 >(({ className, onToggle, mode, ...otherProps }, ref) => {
   const [internalValue, setInternalValue] = useState(ThemeMode.Light);
 
