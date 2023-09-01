@@ -16,15 +16,19 @@
       @include slightly-rounded-corners;
       border: none;
       background-color: transparent;
-      color: var(--jtjs-theme-button);
       cursor: pointer;
-      font-size: 1.3rem;
-      font-weight: bold;
+
       transition: transform 0.2s ease;
       user-select: none;
 
       &[aria-expanded='true'] {
         transform: rotate(90deg);
+      }
+
+      svg {
+        path {
+          fill: var(--jtjs-theme-button);
+        }
       }
     }
   }

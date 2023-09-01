@@ -12,6 +12,13 @@ export interface TableCell {
   content: ReactNode;
 }
 
+export interface ComplexTableColumnHeader {
+  header: ReactNode;
+  headerProps?: ComponentPropsWithoutRef<'th'>;
+}
+
+export type TableColumnHeader = ReactNode | ComplexTableColumnHeader;
+
 export interface TableRow {
   cells: ReactNode[];
   tableRowProps?: ComponentPropsWithoutRef<'tr'>;
@@ -20,7 +27,7 @@ export interface TableRow {
 
 export interface TableProps
   extends Omit<ComponentPropsWithRef<'table'>, 'rows' | 'headers'> {
-  columnHeaders: ReactNode[];
+  columnHeaders: TableColumnHeader[];
   /**
    * The title of the table. This should be a descriptive but short name describing
    * what the table is for.
@@ -170,17 +177,36 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
           }}
         >
           <tr>
-            {headers.map((header, index) => {
+            {headers.map((columnHeader, index) => {
+              const isComplexHeader =
+                typeof columnHeader === 'object' && columnHeader !== null
+                  ? 'header' in columnHeader
+                  : false;
+
+              const {
+                header,
+                headerProps: {
+                  style: tableHeaderStyle,
+                  ...otherHeaderProps
+                } = {},
+              } = isComplexHeader
+                ? (columnHeader as ComplexTableColumnHeader)
+                : ({
+                    header: columnHeader as ReactNode,
+                  } as ComplexTableColumnHeader);
+
               return (
                 <th
-                  key={typeof header === 'string' ? header : index}
+                  key={typeof columnHeader === 'string' ? columnHeader : index}
                   style={{
+                    ...tableHeaderStyle,
                     ...(useVerticalHeaders
                       ? {
                           writingMode: 'vertical-rl',
                         }
                       : {}),
                   }}
+                  {...otherHeaderProps}
                 >
                   {header}
                 </th>

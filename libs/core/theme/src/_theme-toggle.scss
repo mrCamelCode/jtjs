@@ -3,9 +3,9 @@
 .jtjs-toggle.jtjs-theme-toggle {
   @include toggle.jtjs-toggle(1.5rem, 3rem);
 
-
   &.jtjs-toggle-on {
     background-color: var(--jtjs-theme-background);
+    box-shadow: 0 0 0 1px var(--jtjs-theme-outline);
 
     .jtjs-toggle-knob {
       background-color: var(--jtjs-theme-button);
@@ -13,6 +13,7 @@
   }
   &.jtjs-toggle-off {
     background-color: var(--jtjs-theme-background);
+    box-shadow: 0 0 0 1px var(--jtjs-theme-outline);
 
     .jtjs-toggle-knob {
       background-color: var(--jtjs-theme-button);
@@ -22,16 +23,14 @@
   &:not([disabled]) {
     &::before,
     &::after {
-      font-size: 1.05em;
+      font-size: 1.05rem;
     }
 
     &::before {
       content: '🌞';
-      margin-left: 0.1rem;
     }
     &::after {
       content: '🌜';
-      margin-right: 0.1rem;
     }
   }
 }

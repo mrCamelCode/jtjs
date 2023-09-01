@@ -67,6 +67,68 @@ describe('Table', () => {
     expect(screen.queryByText('Custom one')).not.toBeNull();
   });
 
+  describe('header customization', () => {
+    describe('simple', () => {
+      test('plain strings can be passed to the column headers', () => {
+        renderTable({
+          columnHeaders: ['Column Test'],
+        });
+
+        expect(screen.queryByText('Column Test')).not.toBeNull();
+      });
+      test('a node can be passed', () => {
+        renderTable({
+          columnHeaders: [<span>Column Test</span>],
+        });
+
+        expect(screen.queryByText('Column Test')).not.toBeNull();
+      });
+    });
+    describe('complex', () => {
+      test('the passed "header" appears', () => {
+        renderTable({
+          columnHeaders: [
+            {
+              header: 'Column Test',
+            },
+          ],
+        });
+
+        expect(screen.queryByText('Column Test')).not.toBeNull();
+      });
+      test('extra props can be passed', () => {
+        const { container } = renderTable({
+          columnHeaders: [
+            {
+              header: 'Column Test',
+              headerProps: {
+                'aria-label': 'test!',
+                className: 'test-class',
+              },
+            },
+          ],
+        });
+
+        expect(container.querySelector("[aria-label='test!']")).not.toBeNull();
+        expect(container.querySelector('.test-class')).not.toBeNull();
+      });
+    });
+
+    test('can mix complex and simple headers', () => {
+      renderTable({
+        columnHeaders: [
+          'Column Test 1',
+          {
+            header: 'Column Test 2',
+          },
+        ],
+      });
+
+      expect(screen.queryByText('Column Test 1')).not.toBeNull();
+      expect(screen.queryByText('Column Test 2')).not.toBeNull();
+    });
+  });
+
   describe('empty tag', () => {
     test('shows when table is empty', () => {
       renderTable();

@@ -64,12 +64,10 @@
   cursor: pointer;
   box-sizing: content-box;
 
-  border: 1px solid var(--jtjs-theme-outline);
-
-  transition: background-color $animationDuration ease;
+  transition: background-color $animationDuration ease, box-shadow $animationDuration ease;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   &:not([disabled]) {
     $margin: 0.3rem;
@@ -80,12 +78,10 @@
     }
 
     &::before {
-      margin-left: $margin;
       content: '\2714';
       color: var(--jtjs-theme-affirmativeText);
     }
     &::after {
-      margin-right: $margin;
       content: '\2716';
       color: var(--jtjs-theme-negativeText);
     }
@@ -97,7 +93,6 @@
     width: $height;
     box-sizing: border-box;
     border-radius: 50%;
-    top: 0;
     background-color: var(--jtjs-theme-negativeText);
 
     transition: left $animationDuration ease, transform $animationDuration ease,
@@ -106,10 +101,11 @@
 
   &.jtjs-toggle-on {
     background-color: var(--jtjs-theme-affirmative);
+    box-shadow: 0 0 1px 0 var(--jtjs-theme-affirmative);
 
     .jtjs-toggle-knob {
       left: $width;
-      transform: translateX(-100%);
+      transform: translateX(calc(-100% + 1px));
       animation: toggle-knob-slide-on $animationDuration;
 
       background-color: var(--jtjs-theme-affirmativeText);
@@ -118,9 +114,11 @@
 
   &.jtjs-toggle-off {
     background-color: var(--jtjs-theme-negative);
+    box-shadow: 0 0 1px 0 var(--jtjs-theme-negative);
 
     .jtjs-toggle-knob {
       left: 0;
+      transform: translateX(-1px);
       background-color: var(--jtjs-theme-negativeText);
 
       animation: toggle-knob-slide-off $animationDuration;
@@ -130,6 +128,7 @@
   &.jtjs-toggle[disabled] {
     cursor: not-allowed;
     background-color: var(--jtjs-theme-disabled);
+    box-shadow: none;
 
     &:focus {
       outline: none;

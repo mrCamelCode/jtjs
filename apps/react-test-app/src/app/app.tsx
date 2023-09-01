@@ -1,5 +1,4 @@
 import {
-  ThemeToggle,
   Button,
   Checkbox,
   Collapsible,
@@ -26,6 +25,7 @@ import {
   Table,
   Text,
   ThemeMode,
+  ThemeToggle,
   Toggle,
   Tooltipped,
   useBreakpoint,
@@ -345,7 +345,10 @@ export function App() {
         <Button>Another Button</Button>
         <Button disabled>Can't Click Me!</Button>
 
-        <Collapsible heading="Collapsible Heading" collapseBehaviour={HideBehaviour.Hide}>
+        <Collapsible
+          heading="Collapsible Heading"
+          collapseBehaviour={HideBehaviour.Hide}
+        >
           <Text>I can be collapsed!</Text>
 
           <Button>Focusable Button</Button>
@@ -359,7 +362,20 @@ export function App() {
 
           <Table
             title="Example Table"
-            columnHeaders={['Name', 'Age', 'Profession', 'Input']}
+            columnHeaders={[
+              'Name',
+              'Age',
+              {
+                header: 'Profession',
+                headerProps: {
+                  onClick: () => console.log('click!'),
+                  style: {
+                    cursor: 'pointer',
+                  }
+                },
+              },
+              'Input',
+            ]}
             rows={new Array(20).fill(0).map(() => ({
               cells: [
                 'JT',
