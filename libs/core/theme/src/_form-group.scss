@@ -8,4 +8,8 @@
   legend {
     color: var(--jtjs-theme-text);
   }
+
+  &:has(.jtjs-error) {
+    @include error-outline;
+  }
 }

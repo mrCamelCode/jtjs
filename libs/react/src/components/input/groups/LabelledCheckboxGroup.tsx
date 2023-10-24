@@ -6,6 +6,10 @@ import {
 } from 'react';
 import { LabelPosition, LabelledProps, Option } from '../../../types';
 import { buildClassName } from '../../../util';
+import {
+  InputFeedbackMessage,
+  InputFeedbackMessageType,
+} from '../../structured-information/InputFeedbackMessage';
 import { InlineText } from '../../text/InlineText';
 import { LabelledCheckbox, LabelledCheckboxProps } from '../labelled';
 import { FormGroup, FormGroupProps } from './FormGroup';
@@ -84,6 +88,7 @@ export const LabelledCheckboxGroup = forwardRef<
         className: labelTextClassName,
         ...otherLabelTextProps
       } = {},
+      error,
       ...otherProps
     },
     ref
@@ -134,6 +139,12 @@ export const LabelledCheckboxGroup = forwardRef<
         {...otherProps}
         ref={ref}
       >
+        {error && (
+          <InputFeedbackMessage messageType={InputFeedbackMessageType.Error}>
+            {error}
+          </InputFeedbackMessage>
+        )}
+
         {label !== undefined &&
           labelPosition === LabelPosition.Before &&
           labelMarkup}

@@ -88,7 +88,10 @@ export const MaskedMultilineTextInput = forwardRef<
     return (
       <MultilineTextInput
         data-testid="masked-multiline-text-input"
-        className={buildClassName(className, 'jtjs-masked-multiline-text-input')}
+        className={buildClassName(
+          className,
+          'jtjs-masked-multiline-text-input'
+        )}
         value={getValue()}
         onChange={(event) => {
           handleChange(event);

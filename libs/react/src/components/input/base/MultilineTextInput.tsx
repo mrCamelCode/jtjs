@@ -1,8 +1,10 @@
 import { ChangeEvent, ComponentPropsWithRef, forwardRef } from 'react';
+import { SizableProps, getPrefWidthStyle } from '../../../types/sizable.props';
 import { buildClassName } from '../../../util';
 
 export interface MultilineTextInputProps
-  extends ComponentPropsWithRef<'textarea'> {
+  extends ComponentPropsWithRef<'textarea'>,
+    SizableProps {
   /**
    * Handler for when the user attempts to change the input.
    *
@@ -21,18 +23,35 @@ export interface MultilineTextInputProps
 export const MultilineTextInput = forwardRef<
   HTMLTextAreaElement,
   MultilineTextInputProps
->(({ className, onChange, onChangeText, rows = 5, ...otherProps }, ref) => {
-  return (
-    <textarea
-      data-testid="multiline-text-input"
-      className={buildClassName(className, 'jtjs-multiline-text-input')}
-      onChange={(event) => {
-        onChangeText?.(event.target.value, event);
-        onChange?.(event);
-      }}
-      rows={rows}
-      {...otherProps}
-      ref={ref}
-    />
-  );
-});
+>(
+  (
+    {
+      className,
+      style,
+      prefWidth,
+      onChange,
+      onChangeText,
+      rows = 5,
+      ...otherProps
+    },
+    ref
+  ) => {
+    return (
+      <textarea
+        data-testid="multiline-text-input"
+        className={buildClassName(className, 'jtjs-multiline-text-input')}
+        style={{
+          ...getPrefWidthStyle(prefWidth),
+          ...style,
+        }}
+        onChange={(event) => {
+          onChangeText?.(event.target.value, event);
+          onChange?.(event);
+        }}
+        rows={rows}
+        {...otherProps}
+        ref={ref}
+      />
+    );
+  }
+);

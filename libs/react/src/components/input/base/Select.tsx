@@ -6,6 +6,7 @@ import {
 } from 'react';
 import { Option } from '../../../types';
 import { buildClassName } from '../../../util';
+import { SizableProps, getPrefWidthStyle } from '../../../types/sizable.props';
 
 export type SelectOption<T> = Option<
   T,
@@ -17,7 +18,9 @@ export interface SelectOptionGroup<T> {
   optionGroupProps?: Omit<ComponentPropsWithoutRef<'optgroup'>, 'label'>;
 }
 
-export interface SelectProps extends ComponentPropsWithRef<'select'> {
+export interface SelectProps
+  extends ComponentPropsWithRef<'select'>,
+    SizableProps {
   /**
    * The options to show in the dropdown.
    */
@@ -48,7 +51,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onChange,
       onChangeSelection,
       className,
+      style,
       children,
+      prefWidth,
       ...otherProps
     },
     ref
@@ -57,6 +62,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <select
         data-testid="select"
         className={buildClassName(className, 'jtjs-select')}
+        style={{
+          ...getPrefWidthStyle(prefWidth),
+          ...style,
+        }}
         onChange={(event) => {
           onChangeSelection?.(event.target.value, event);
           onChange?.(event);

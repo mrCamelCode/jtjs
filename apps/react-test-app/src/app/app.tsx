@@ -32,6 +32,7 @@ import {
   useTheme,
 } from '@jtjs/react';
 import { ThemeService } from '@jtjs/view';
+import { Size } from 'libs/react/src/types/sizable.props';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -130,6 +131,7 @@ export function App() {
               value: 'M',
             },
           ]}
+          error="Bad news!"
         />
 
         <LabelledRadioGroup
@@ -371,7 +373,7 @@ export function App() {
                   onClick: () => console.log('click!'),
                   style: {
                     cursor: 'pointer',
-                  }
+                  },
                 },
               },
               'Input',
@@ -427,7 +429,20 @@ export function App() {
         <LabelledInput label="Password" type="password" />
         <LabelledInput label="Numbers" type="number" />
 
-        <LabelledTextInput label="Labelled Text Input" />
+        <LabelledTextInput label="Labelled Text Input" error="Problem!" />
+        <LabelledTextInput
+          label="Bottom Label Error"
+          labelPosition={LabelPosition.After}
+          error="This is a longer error message that's probably too long."
+        />
+
+        <Collapsible heading="Input Sizes" style={{ width: '100%' }}>
+          {Object.entries(Size).map(([sizeName, size]) => {
+            return (
+              <LabelledInput key={sizeName} label={sizeName} prefWidth={size} />
+            );
+          })}
+        </Collapsible>
 
         <div
           style={{

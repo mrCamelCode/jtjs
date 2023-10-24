@@ -1,8 +1,9 @@
 import { ChangeEvent, forwardRef } from 'react';
 import { buildClassName } from '../../../util';
 import { Input, InputProps } from './Input';
+import { SizableProps, getPrefWidthStyle } from '../../../types/sizable.props';
 
-export interface TextInputProps extends InputProps {
+export interface TextInputProps extends InputProps, SizableProps {
   /**
    * Handler for when the user attempts to change the input.
    *
@@ -18,11 +19,18 @@ export interface TextInputProps extends InputProps {
  * using `MultilineTextInput`.
  */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ className, onChange, onChangeText, ...otherProps }, ref) => {
+  (
+    { className, style, prefWidth, onChange, onChangeText, ...otherProps },
+    ref
+  ) => {
     return (
       <Input
         data-testid="text-input"
         className={buildClassName(className, 'jtjs-text-input')}
+        style={{
+          ...getPrefWidthStyle(prefWidth),
+          ...style,
+        }}
         type="text"
         onChange={(event) => {
           onChangeText?.(event.target.value, event);
