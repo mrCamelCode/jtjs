@@ -52,7 +52,6 @@
   }
   &:active:not(:disabled) {
     background-color: var(--jtjs-theme-button-darkened);
-    transform: scale(0.95);
   }
   &:disabled {
     background-color: var(--jtjs-theme-disabled);
