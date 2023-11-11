@@ -11,7 +11,7 @@ import { buildClassName } from '../../util';
 
 export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   /**
-   * (Optional, defaults to `true`) Whether the position of the mouse is tracked when it's over the button.
+   * (Optional, defaults to `false`) Whether the position of the mouse is tracked when it's over the button.
    * This can be useful in creating effects with the background of the button that are based on the mouse
    * position, but could be expensive if you have a lot of other things going on in your app.
    *
@@ -41,7 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       onMouseMove,
       onChangeMousePosition,
-      enableMouseTracking = true,
+      enableMouseTracking = false,
       ...otherProps
     },
     ref
