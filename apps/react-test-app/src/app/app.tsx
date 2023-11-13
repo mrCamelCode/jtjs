@@ -344,7 +344,7 @@ export function App() {
         />
 
         <Button>Click Me!</Button>
-        <Button>Another Button</Button>
+        <Button enableMouseTracking>Another Button</Button>
         <Button disabled>Can't Click Me!</Button>
 
         <Collapsible
