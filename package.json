@@ -9,7 +9,8 @@
     "test": "nx test",
     "test:all": "nx run-many --all --target=test --parallel --skip-nx-cache",
     "clean:modules": "npx rimraf node_modules",
-    "clean:dist": "npx rimraf dist"
+    "clean:dist": "npx rimraf dist",
+    "docs:react": "npx react-docgen -o ./react-docgen-output.json ./libs/react/src/**/*.tsx --pretty && npx ts-node ./scripts/gen-md-from-react-docgen.ts ./react-docgen-output.json ./libs/react/README && npx rimraf ./react-docgen-output.json"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +43,7 @@
     "@nx/web": "16.7.1",
     "@nx/workspace": "16.7.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@react-docgen/cli": "^2.0.1",
     "@svgr/webpack": "^6.1.2",
     "@swc-node/register": "~1.4.2",
     "@swc/cli": "~0.1.62",
@@ -73,6 +75,7 @@
     "jest-environment-jsdom": "^29.4.1",
     "nx": "16.7.1",
     "prettier": "2.6.2",
+    "react-docgen": "^7.0.1",
     "react-refresh": "^0.10.0",
     "react-router-dom": "6.11.2",
     "style-loader": "^3.3.0",

@@ -50,7 +50,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       className,
       children,
       ...otherProps
-    },
+    }: SelectProps,
     ref
   ) => {
     return (

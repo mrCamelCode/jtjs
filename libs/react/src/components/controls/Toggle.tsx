@@ -38,10 +38,21 @@ export interface ToggleProps
  *
  * Can be controlled or uncontrolled. If you intend to control the component, you must provide
  * a `isOn` that's not `undefined` and it must be a `boolean`.
+ *
+ * Note that because a Toggle has no backing element in HTML, you must style this element for it
+ * to have any appearance. JTJS' theme library contains default styling for Toggles you can
+ * use as a base.
  */
 export const Toggle = forwardRef<HTMLSpanElement, ToggleProps>(
   (
-    { className, isOn, onToggle, disabled, defaultIsOn, ...otherProps },
+    {
+      className,
+      isOn,
+      onToggle,
+      disabled,
+      defaultIsOn,
+      ...otherProps
+    }: ToggleProps,
     ref
   ) => {
     const [internalValue, setInternalValue] = useState(defaultIsOn ?? false);

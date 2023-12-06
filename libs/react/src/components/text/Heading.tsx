@@ -13,7 +13,7 @@ export interface HeadingProps extends ComponentPropsWithRef<'h1'> {
  * Wraps the base heading elements and uses the appropriate element depending on the `importance` of the Heading.
  */
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, importance = 3, ...otherProps }, ref) => {
+  ({ className, importance = 3, ...otherProps }: HeadingProps, ref) => {
     return createElement(`h${importance}`, {
       className: buildClassName(className, 'jtjs-heading'),
       ...otherProps,

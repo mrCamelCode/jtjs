@@ -15,7 +15,7 @@ export const LabelledInput = forwardRef<HTMLInputElement, LabelledInputProps>(
     {
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       ...otherProps
-    },
+    }: LabelledInputProps,
     ref
   ) => {
     return (

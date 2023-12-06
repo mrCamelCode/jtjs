@@ -18,7 +18,10 @@ export interface TextInputProps extends InputProps {
  * using `MultilineTextInput`.
  */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ className, onChange, onChangeText, ...otherProps }, ref) => {
+  (
+    { className, onChange, onChangeText, ...otherProps }: TextInputProps,
+    ref
+  ) => {
     return (
       <Input
         data-testid="text-input"

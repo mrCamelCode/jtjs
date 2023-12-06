@@ -16,7 +16,7 @@ export const LabelledToggle = forwardRef<HTMLSpanElement, LabelledToggleProps>(
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       labelTextProps: { id: labelTextId, ...otherLabelTextProps } = {},
       ...otherProps
-    },
+    }: LabelledToggleProps,
     ref
   ) => {
     const idToUse = labelTextId ?? `jtjs-toggle-${useId()}`;

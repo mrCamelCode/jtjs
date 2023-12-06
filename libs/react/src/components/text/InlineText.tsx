@@ -7,7 +7,16 @@ export interface InlineTextProps extends ComponentPropsWithRef<'span'> {
 }
 
 export const InlineText = forwardRef<HTMLSpanElement, InlineTextProps>(
-  ({ italic = false, bold = false, className, style, ...otherProps }, ref) => {
+  (
+    {
+      italic = false,
+      bold = false,
+      className,
+      style,
+      ...otherProps
+    }: InlineTextProps,
+    ref
+  ) => {
     return (
       <span
         className={buildClassName(className, 'jtjs-inline-text')}

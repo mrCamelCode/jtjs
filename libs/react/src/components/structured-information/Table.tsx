@@ -81,7 +81,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
       useVerticalColumnHeaders: useVerticalHeaders = false,
       maxHeight = '',
       ...otherProps
-    },
+    }: TableProps,
     ref
   ) => {
     const generateTableFromRowData = () => {

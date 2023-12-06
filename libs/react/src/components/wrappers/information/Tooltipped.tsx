@@ -47,7 +47,7 @@ export interface TooltippedProps extends ComponentPropsWithoutRef<'div'> {
    * (Optional, defaults to `false`) Whether the wrapper for the tooltip can be
    * focused. You should disable wrapper focus when the element you're giving a
    * tooltip to can receive focus on its own. Since the inner element can receive
-   * focus, allowing the wrapper to have focus serves no purpose but to make
+   * focus, allowing the wrapper to have focus serves no purpose, but it makes
    * keyboard navigation more difficult.
    */
   disableWrapperFocus?: boolean;

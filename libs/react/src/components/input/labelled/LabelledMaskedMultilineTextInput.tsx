@@ -23,7 +23,7 @@ export const LabelledMaskedMultilineTextInput = forwardRef<
     {
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       ...otherProps
-    },
+    }: LabelledMaskedMultilineTextInputProps,
     ref
   ) => {
     return (

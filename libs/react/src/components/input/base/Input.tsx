@@ -10,7 +10,7 @@ export interface InputProps
  * something like the Checkbox, Radio, or TextInput components.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...otherProps }, ref) => {
+  ({ className, ...otherProps }: InputProps, ref) => {
     return (
       <input
         className={buildClassName(className, 'jtjs-input')}

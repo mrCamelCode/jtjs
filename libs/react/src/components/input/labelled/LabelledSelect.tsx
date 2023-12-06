@@ -18,7 +18,7 @@ export const LabelledSelect = forwardRef<
     {
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       ...otherProps
-    },
+    }: LabelledSelectProps,
     ref
   ) => {
     return (

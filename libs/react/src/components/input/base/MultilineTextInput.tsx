@@ -21,18 +21,29 @@ export interface MultilineTextInputProps
 export const MultilineTextInput = forwardRef<
   HTMLTextAreaElement,
   MultilineTextInputProps
->(({ className, onChange, onChangeText, rows = 5, ...otherProps }, ref) => {
-  return (
-    <textarea
-      data-testid="multiline-text-input"
-      className={buildClassName(className, 'jtjs-multiline-text-input')}
-      onChange={(event) => {
-        onChangeText?.(event.target.value, event);
-        onChange?.(event);
-      }}
-      rows={rows}
-      {...otherProps}
-      ref={ref}
-    />
-  );
-});
+>(
+  (
+    {
+      className,
+      onChange,
+      onChangeText,
+      rows = 5,
+      ...otherProps
+    }: MultilineTextInputProps,
+    ref
+  ) => {
+    return (
+      <textarea
+        data-testid="multiline-text-input"
+        className={buildClassName(className, 'jtjs-multiline-text-input')}
+        onChange={(event) => {
+          onChangeText?.(event.target.value, event);
+          onChange?.(event);
+        }}
+        rows={rows}
+        {...otherProps}
+        ref={ref}
+      />
+    );
+  }
+);

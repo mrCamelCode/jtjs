@@ -19,7 +19,10 @@ export interface CheckboxProps extends InputProps {
  * Wraps the base input component with a default `type` of `"checkbox"`.
  */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, onChange, onChangeChecked, ...otherProps }, ref) => {
+  (
+    { className, onChange, onChangeChecked, ...otherProps }: CheckboxProps,
+    ref
+  ) => {
     return (
       <Input
         data-testid="checkbox"

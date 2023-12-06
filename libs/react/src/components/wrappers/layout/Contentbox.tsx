@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { Flexbox, FlexboxProps } from './Flexbox';
 import { buildClassName } from '../../../util';
+import { Flexbox, FlexboxProps } from './Flexbox';
 
 export interface ContentboxProps extends FlexboxProps {
   /**
@@ -14,7 +14,7 @@ export interface ContentboxProps extends FlexboxProps {
  * A simple wrapper meant to house related content.
  */
 export const Contentbox = forwardRef<HTMLDivElement, ContentboxProps>(
-  ({ className, filled = false, ...otherProps }, ref) => {
+  ({ className, filled = false, ...otherProps }: ContentboxProps, ref) => {
     return (
       <Flexbox
         className={buildClassName(

@@ -16,7 +16,10 @@ export interface RadioProps extends InputProps {
  * A wrapper for the base input component with a default `type` of `"radio"`.
  */
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ onChange, onChangeChecked, className, ...otherProps }, ref) => {
+  (
+    { onChange, onChangeChecked, className, ...otherProps }: RadioProps,
+    ref
+  ) => {
     return (
       <Input
         data-testid="radio"

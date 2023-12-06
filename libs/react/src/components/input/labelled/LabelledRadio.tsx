@@ -17,7 +17,7 @@ export const LabelledRadio = forwardRef<HTMLInputElement, LabelledRadioProps>(
       labelPosition = LabelPosition.After,
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       ...otherProps
-    },
+    }: LabelledRadioProps,
     ref
   ) => {
     return (

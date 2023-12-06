@@ -4,6 +4,11 @@ import { InlineText, Label, LabelProps } from '../../text';
 
 export interface BaseLabelledInputProps extends LabelProps, LabelledProps {}
 
+/**
+ * The base for a labelled input. It's unlikely you want to use this unless you're
+ * creating your own custom input component. It's more likely that you want to use one
+ * of the more specific and already-created `Labelled...` components.
+ */
 export const BaseLabelledInput = ({
   children,
   label = '',

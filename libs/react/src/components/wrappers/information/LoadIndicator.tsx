@@ -5,10 +5,11 @@ export interface LoadIndicatorProps
   extends Omit<ComponentPropsWithRef<'div'>, 'children'> {}
 
 /**
- * Default load indicator. Shows animated dots if using JTJS theme package.
+ * Default load indicator. Appearance is driven by JTJS' theme package, but you
+ * can style the elements yourself instead if you prefer.
  */
 export const LoadIndicator = forwardRef<HTMLDivElement, LoadIndicatorProps>(
-  ({ className, ...otherProps }, ref) => {
+  ({ className, ...otherProps }: LoadIndicatorProps, ref) => {
     return (
       <div
         className={buildClassName(className, 'jtjs-loading-dots-container')}

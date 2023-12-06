@@ -69,7 +69,7 @@ export const LabelledRadioGroup = forwardRef<
         ...otherLabelTextProps
       } = {},
       ...otherProps
-    },
+    }: LabelledRadioGroupProps,
     ref
   ) => {
     const [internalValue, setInternalValue] =
