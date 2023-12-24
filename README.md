@@ -4,11 +4,11 @@
 
 A collection of libraries written by a lover of JS/TS, built specifically to make loving JS/TS easier. Whip up working and beautiful prototypes in minutes instead of hours; complete full applications in weeks instead of months. Libraries included are:
 
-## @jtjs/core-browser
+## @jtjs/browser
 
 Provides utilities useful for any browser and any framework (or lack thereof).
 
-## @jtjs/core-data
+## @jtjs/data
 
 Includes several useful data structure implementations that are absent from the JS standard API such as a LinkedList, Queues, and Stacks. Trees are planned to be added.
 
