@@ -19,7 +19,12 @@ export interface LinkProps extends ComponentPropsWithRef<'a'> {
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   (
-    { className, external, disableExternalNewTab, ...otherProps }: LinkProps,
+    {
+      className,
+      external = false,
+      disableExternalNewTab = false,
+      ...otherProps
+    }: LinkProps,
     ref
   ) => {
     return (

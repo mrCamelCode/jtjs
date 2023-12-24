@@ -1,8 +1,20 @@
-**Disclaimer**: These docs are auto-generated from data produced by [react-docgen](https://github.com/reactjs/react-docgen). react-docgen occasionally struggles with some TS syntax. In the cases where the docgen couldn't correctly discover a type, you'll see `??` in place of the type. The docgen also isn't great when it comes to displaying unions and function signatures. 
+**Disclaimer**: These docs are auto-generated from data produced by
+[react-docgen](https://github.com/reactjs/react-docgen). react-docgen
+occasionally struggles with some TS syntax. In the cases where the docgen
+couldn't correctly discover a type, you'll see `??` in place of the type.
+The docgen also isn't great when it comes to displaying unions, function signatures, and arrays.
 
-That being said, JTJS is fully typed. If you ever need further details on something you see in these docs, you can use the hints from your IDE of choice to get more robust type information.
+Arrays will be shown as `Array`. JTJS always types its arrays, so look to your IDE
+for more type information on those arrays.
 
-Separately, these docs currently only include documentation on components. This library also exports a number of hooks to make your life easier. If you're curious about those, just look at code completion for function names starting with `use` in your IDE of choice.
+That being said, JTJS is fully typed. If you ever need further details
+on something you see in these docs, you can use the hints from your IDE of choice to
+get more robust type information.
+
+Separately, these docs currently only include documentation on components.
+This library also exports a number of hooks to make your life easier. If you're curious
+about those, just look at code completion for function names starting with `use` in your IDE of choice.
+    
 # Components
 - [BaseLabelledInput](#baselabelledinput)
 
@@ -123,7 +135,7 @@ as variables scoped to the button. The variables are `--jtjs-mouse-pos-x` and `-
 `onChangeMousePosition?: signature` - What to do when the position of the mouse changes while hovering over the button. Only triggered when
 `enableMouseTracking` is `true`.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> mousePosition - The current mouse position, relative to the bounding box of the button. Coordinates of (-1, -1)
+@param mousePosition - The current mouse position, relative to the bounding box of the button. Coordinates of (-1, -1)
 imply that the mouse is no longer over the button.
 
 
@@ -136,8 +148,8 @@ Wraps the base input component with a default `type` of `"checkbox"`.
 ### Props
 `onChangeChecked?: signature` - Handler for when the user attempts to change the value of the checkbox.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> checked - What the user wants the current checked value to be.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param checked - What the user wants the current checked value to be.
+@param event - The original simulated event.
 
 
 
@@ -187,7 +199,7 @@ the Flexbox.
 what the Collapsible is for when it's collapsed.
 
 
-`collapseBehaviour?: HideBehaviour = HideBehaviour.Remove` - (Optional, defaults to {<span style="color: #3d80e3; font-weight: bold">@link</span> HideBehaviour.Remove}) How the Collapsible hides its content when collapsed.
+`collapseBehaviour?: HideBehaviour = HideBehaviour.Remove` - (Optional, defaults to {@link HideBehaviour.Remove}) How the Collapsible hides its content when collapsed.
 
 
 `defaultIsCollapsed?: boolean` - Whether the collapsible starts collapsed. This will only apply if the Collapsible is uncontrolled. If you're
@@ -201,7 +213,7 @@ must keep this value updated. Use `onChangeCollapsed` to listen for state change
 
 `onChangeCollapsed?: signature` - What to do when the user indicates they want to change whether the Collapsible is collapsed.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> isCollapsed - Whether the Collapsible should be collapsed.
+@param isCollapsed - Whether the Collapsible should be collapsed.
 
 
 
@@ -211,9 +223,9 @@ must keep this value updated. Use `onChangeCollapsed` to listen for state change
 ### Props
 `onChangeColor?: signature` - Handler for when the user changes the color of the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> color - The color, as a hex string. Note that browsers do not support an alpha channel
+@param color - The color, as a hex string. Note that browsers do not support an alpha channel
 for the color input.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original event.
+@param event - The original event.
 
 
 
@@ -324,7 +336,7 @@ in your project, try verifying and changing the `iconType`.
 `icon: string` - The name of the icon. This must match the name of the icon in FontAwesome, minus the
 `fa` prefix (which is added for you).
 
-<span style="color: #3d80e3; font-weight: bold">@example</span>
+@example
 ```tsx
 <Icon iconType="solid" icon="address-card" />
 ```
@@ -363,8 +375,8 @@ something like the Checkbox, Radio, or TextInput components.
 ### Props
 `onChangeChecked?: signature` - Handler for when the user attempts to change the value of the checkbox.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> checked - What the user wants the current checked value to be.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param checked - What the user wants the current checked value to be.
+@param event - The original simulated event.
 
 
 `label?: string`
@@ -402,9 +414,9 @@ want to default a controlled group, just set your `value`'s initial value to be 
 
 `onChangeSelection?: signature` - Handler for when the user attempts to change their selected items in the checkbox group.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> selectedValues - The names of the checkboxes that should be checked.
-<span style="color: #3d80e3; font-weight: bold">@param</span> selectedValue - The name of the checkboxes that was checked.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param selectedValues - The names of the checkboxes that should be checked.
+@param selectedValue - The name of the checkboxes that was checked.
+@param event - The original simulated event.
 
 
 `labelProps?: ComponentPropsWithoutRef = {}`
@@ -426,9 +438,9 @@ want to default a controlled group, just set your `value`'s initial value to be 
 ### Props
 `onChangeColor?: signature` - Handler for when the user changes the color of the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> color - The color, as a hex string. Note that browsers do not support an alpha channel
+@param color - The color, as a hex string. Note that browsers do not support an alpha channel
 for the color input.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original event.
+@param event - The original event.
 
 
 `label?: string`
@@ -467,16 +479,16 @@ for the color input.
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> treatedText - The input text after going through all the necessary filtering.
+@param treatedText - The input text after going through all the necessary filtering.
 This includes applying the mask (if provided) and removing any newlines if the input is not multiline.
-<span style="color: #3d80e3; font-weight: bold">@param</span> rawText - The raw input text with no filtering.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param rawText - The raw input text with no filtering.
+@param event - The original simulated event.
 
 
-`mask?: RegExp` - Mask to apply to the input. The masking is applied using {<span style="color: #3d80e3; font-weight: bold">@link</span> maskText}. Because this component is intended
+`mask?: RegExp` - Mask to apply to the input. The masking is applied using {@link maskText}. Because this component is intended
 to allow multiline text, your regex does _not_ need to explicitly allow newlines.
 
-<span style="color: #3d80e3; font-weight: bold">@example</span>
+@example
 ```ts
 const onlyNumbersMask = /\d/;
 ```
@@ -501,15 +513,15 @@ const onlyNumbersMask = /\d/;
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> treatedText - The input text after going through all the necessary filtering.
+@param treatedText - The input text after going through all the necessary filtering.
 This includes applying the mask (if provided) and removing any newlines if the input is not multiline.
-<span style="color: #3d80e3; font-weight: bold">@param</span> rawText - The raw input text with no filtering.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param rawText - The raw input text with no filtering.
+@param event - The original simulated event.
 
 
-`mask?: RegExp` - Mask to apply to the input. The masking is applied using {<span style="color: #3d80e3; font-weight: bold">@link</span> maskText}.
+`mask?: RegExp` - Mask to apply to the input. The masking is applied using {@link maskText}.
 
-<span style="color: #3d80e3; font-weight: bold">@example</span>
+@example
 ```ts
 const onlyNumbersMask = /\d/;
 ```
@@ -534,8 +546,8 @@ const onlyNumbersMask = /\d/;
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> text - The text of the input.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param text - The text of the input.
+@param event - The original simulated event.
 
 
 `label?: string`
@@ -595,8 +607,8 @@ want to default a controlled group, just set your `value`'s initial value to be 
 
 `onChangeSelection?: signature` - Handler for when the user attempts to change their selection in the radio group.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> optionValue - The value of the option that was selected.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param optionValue - The value of the option that was selected.
+@param event - The original simulated event.
 
 
 `labelProps?: ComponentPropsWithoutRef = {}`
@@ -621,8 +633,8 @@ want to default a controlled group, just set your `value`'s initial value to be 
 
 `onChangeSelection?: signature` - Handler for when the user attempts to change their selection in the dropdown.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> optionValue - The value of the option that was selected from the dropdown.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param optionValue - The value of the option that was selected from the dropdown.
+@param event - The original simulated event.
 
 
 `label?: string`
@@ -644,8 +656,8 @@ want to default a controlled group, just set your `value`'s initial value to be 
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> text - The text of the input.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param text - The text of the input.
+@param event - The original simulated event.
 
 
 `label?: string`
@@ -673,8 +685,8 @@ want to default a controlled group, just set your `value`'s initial value to be 
 
 `onToggle?: signature` - Handler for when the user tries to change whether the toggle is on.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> isOn - The state the user is trying to put the toggle in.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event. If the user interaced with the
+@param isOn - The state the user is trying to put the toggle in.
+@param event - The original simulated event. If the user interaced with the
 toggle via a click, this will be a MouseEvent. If the user interacted with
 the toggle via the keyboard, this will be a KeyboardEvent.
 
@@ -699,14 +711,14 @@ the toggle via the keyboard, this will be a KeyboardEvent.
 ## `Link`
 [Components ⬆️](#components)
 ### Props
-`external?: boolean` - (Optional, defaults to `false`) Whether the link is external. An external
+`external?: boolean = false` - (Optional, defaults to `false`) Whether the link is external. An external
 link will be accompanied by a small icon if using JTJS' styling.
 
 Will also request that the browser open the link in a new tab. This can be
 disabled with `disableExternalNewTab`.
 
 
-`disableExternalNewTab?: boolean` - (Optional, defaults to `false`) Whether the feature of opening links marked
+`disableExternalNewTab?: boolean = false` - (Optional, defaults to `false`) Whether the feature of opening links marked
 `external` in a new tab should be disabled.
 
 
@@ -715,8 +727,18 @@ disabled with `disableExternalNewTab`.
 ## `LoadIndicator`
 [Components ⬆️](#components)
 ### Description
-Default load indicator. Appearance is driven by JTJS' theme package, but you
-can style the elements yourself instead if you prefer.
+Default load indicator. Resolves to `span`s inside a `div` container.
+
+Note that this component has no visual appearance without styling. You must style this element for it
+to have any appearance. `@jtjs/theme` includes styles for this element if you don't want to write
+your own, or want a base to work from.
+
+If you'd like to style the component yourself, the structure of the resolved markup is:
+```
+.jtjs-loading-dots-container
+ .jtjs-loading-dot.jtjs-loading-dot-1
+ .jtjs-loading-dot.jtjs-loading-dot-2
+```
 
 
 ## `LoadView`
@@ -729,7 +751,27 @@ shown to the user (if no `loadingComponent` is provided). When `false`, the chil
 will be displayed as-is.
 
 
-`loadingComponent?: ReactNode` - (Optional, defaults to `LoadIndicator`) What to show to the user when the view is loading.
+`loadingComponent?: ReactNode = <LoadIndicator />` - (Optional, defaults to `LoadIndicator`) What to show to the user when the view is loading.
+
+
+`useSimpleLoadIndicator?: boolean = false` - (Optional, defaults to `false`) Whether to use a simple load indicator that's just an {@link InlineText} that says
+`Loading...`. This option can be useful if you're not using `@jtjs/theme` since the default {@link LoadIndicator}
+used by the `LoadView` has no appearance without styling (be it from `@jtjs/theme` or your own custom styling).
+
+If this is `true`, it will supersede anything passed to `loadingComponent`.
+
+@example
+```tsx
+// Will display: Loading...
+<LoadView useSimpleLoadIndicator isLoading />
+
+// Will display: Loading...
+<LoadView useSimpleLoadIndicator loadingComponent={<MyVeryCoolAndIntricateLoadingIndicator />} />
+
+// Will display nothing unless you're either using `@jtjs/theme` or you have your own styling for the LoadIndicator's
+// resolved HTML.
+<LoadView isLoading />
+```
 
 
 
@@ -745,16 +787,16 @@ the user input.
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> treatedText - The input text after going through all the necessary filtering.
+@param treatedText - The input text after going through all the necessary filtering.
 This includes applying the mask (if provided) and removing any newlines if the input is not multiline.
-<span style="color: #3d80e3; font-weight: bold">@param</span> rawText - The raw input text with no filtering.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param rawText - The raw input text with no filtering.
+@param event - The original simulated event.
 
 
-`mask?: RegExp` - Mask to apply to the input. The masking is applied using {<span style="color: #3d80e3; font-weight: bold">@link</span> maskText}. Because this component is intended
+`mask?: RegExp` - Mask to apply to the input. The masking is applied using {@link maskText}. Because this component is intended
 to allow multiline text, your regex does _not_ need to explicitly allow newlines.
 
-<span style="color: #3d80e3; font-weight: bold">@example</span>
+@example
 ```ts
 const onlyNumbersMask = /\d/;
 ```
@@ -773,15 +815,15 @@ any input.
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> treatedText - The input text after going through all the necessary filtering.
+@param treatedText - The input text after going through all the necessary filtering.
 This includes applying the mask (if provided) and removing any newlines if the input is not multiline.
-<span style="color: #3d80e3; font-weight: bold">@param</span> rawText - The raw input text with no filtering.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param rawText - The raw input text with no filtering.
+@param event - The original simulated event.
 
 
-`mask?: RegExp` - Mask to apply to the input. The masking is applied using {<span style="color: #3d80e3; font-weight: bold">@link</span> maskText}.
+`mask?: RegExp` - Mask to apply to the input. The masking is applied using {@link maskText}.
 
-<span style="color: #3d80e3; font-weight: bold">@example</span>
+@example
 ```ts
 const onlyNumbersMask = /\d/;
 ```
@@ -796,8 +838,8 @@ A light wrapper around a `textarea`.
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> text - The text of the input.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param text - The text of the input.
+@param event - The original simulated event.
 
 
 `rows?: ?? = 5`
@@ -829,8 +871,8 @@ a `value` that's not `undefined`.
 
 `onChangeSelection?: signature` - Handler for when the user attempts to change their selection in the dropdown.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> optionValue - The value of the option that was selected from the dropdown.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param optionValue - The value of the option that was selected from the dropdown.
+@param event - The original simulated event.
 
 
 
@@ -867,7 +909,7 @@ no data. Has no effect if `disableEmptyTag` is `true`.
 `maxHeight?: string = ''` - The max height of the Table. When this is set, a scrollbar will automatically be added
 to the Table when necessary, and the column headers will become sticky.
 
-<span style="color: #3d80e3; font-weight: bold">@example</span>
+@example
 ```ts
 '20rem'
 '800px'
@@ -896,8 +938,8 @@ using `MultilineTextInput`.
 ### Props
 `onChangeText?: signature` - Handler for when the user attempts to change the input.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> text - The text of the input.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event.
+@param text - The text of the input.
+@param event - The original simulated event.
 
 
 
@@ -908,7 +950,7 @@ using `MultilineTextInput`.
 A specialty control for toggling between two theme selections (light and dark).
 
 Can be controlled or uncontrolled. If you intend to control the component, you must provide
-a `mode` that's not `undefined` and it must be a {<span style="color: #3d80e3; font-weight: bold">@link</span> ThemeMode}.
+a `mode` that's not `undefined` and it must be a {@link ThemeMode}.
 ### Props
 `onToggle?: signature`
 
@@ -927,8 +969,14 @@ Can be controlled or uncontrolled. If you intend to control the component, you m
 a `isOn` that's not `undefined` and it must be a `boolean`.
 
 Note that because a Toggle has no backing element in HTML, you must style this element for it
-to have any appearance. JTJS' theme library contains default styling for Toggles you can
+to have any appearance. `@jtjs/theme` library contains default styling for Toggles you can
 use as a base.
+
+If you'd like to style the component yourself, the structure of the resolved markup is:
+```
+.jtjs-toggle.jtjs-toggle-{on/off}
+  .jtjs-toggle-knob
+```
 ### Props
 `defaultIsOn?: boolean`
 
@@ -938,8 +986,8 @@ use as a base.
 
 `onToggle?: signature` - Handler for when the user tries to change whether the toggle is on.
 
-<span style="color: #3d80e3; font-weight: bold">@param</span> isOn - The state the user is trying to put the toggle in.
-<span style="color: #3d80e3; font-weight: bold">@param</span> event - The original simulated event. If the user interaced with the
+@param isOn - The state the user is trying to put the toggle in.
+@param event - The original simulated event. If the user interaced with the
 toggle via a click, this will be a MouseEvent. If the user interacted with
 the toggle via the keyboard, this will be a KeyboardEvent.
 
@@ -952,7 +1000,7 @@ the toggle via the keyboard, this will be a KeyboardEvent.
 ## `Tooltip`
 [Components ⬆️](#components)
 ### Description
-<span style="color: #3d80e3; font-weight: bold">@private</span>
+@private
 
 You shouldn't be using this yourself. If you want to add a tooltip to an
 element, wrap it in a `Tooltipped`.

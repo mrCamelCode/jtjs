@@ -16,12 +16,12 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@jtjs/core-browser": ["libs/core/browser/src/index.ts"],
-      "@jtjs/core-data": ["libs/core/data/src/index.ts"],
-      "@jtjs/core-theme": ["libs/core/theme/src/index.scss"],
+      "@jtjs/browser": ["libs/browser/src/index.ts"],
+      "@jtjs/data": ["libs/data/src/index.ts"],
       "@jtjs/event": ["libs/event/src/index.ts"],
       "@jtjs/networking": ["libs/networking/src/index.ts"],
       "@jtjs/react": ["libs/react/src/index.ts"],
+      "@jtjs/theme": ["libs/theme/src/index.scss"],
       "@jtjs/view": ["libs/view/src/index.ts"],
       "@jtjs/workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
     }

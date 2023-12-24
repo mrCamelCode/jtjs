@@ -5,8 +5,18 @@ export interface LoadIndicatorProps
   extends Omit<ComponentPropsWithRef<'div'>, 'children'> {}
 
 /**
- * Default load indicator. Appearance is driven by JTJS' theme package, but you
- * can style the elements yourself instead if you prefer.
+ * Default load indicator. Resolves to `span`s inside a `div` container.
+ *
+ * Note that this component has no visual appearance without styling. You must style this element for it
+ * to have any appearance. `@jtjs/theme` includes styles for this element if you don't want to write
+ * your own, or want a base to work from.
+ *
+ * If you'd like to style the component yourself, the structure of the resolved markup is:
+ * ```
+ * .jtjs-loading-dots-container
+ *  .jtjs-loading-dot.jtjs-loading-dot-1
+ *  .jtjs-loading-dot.jtjs-loading-dot-2
+ * ```
  */
 export const LoadIndicator = forwardRef<HTMLDivElement, LoadIndicatorProps>(
   ({ className, ...otherProps }: LoadIndicatorProps, ref) => {

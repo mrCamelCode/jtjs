@@ -1,0 +1,23 @@
+.jtjs-link,
+.jtjs-link:visited {
+  color: var(--jtjs-theme-button);
+  text-decoration: none;
+  box-shadow: 0 -0.1em inset var(--jtjs-theme-button);
+
+  transition: box-shadow 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--jtjs-theme-buttonText);
+    box-shadow: 0 -1.1em 0 0 inset var(--jtjs-theme-button);
+  }
+
+  &.jtjs-link-external {
+    &::after {
+      content: '🡽';
+      display: inline-block;
+      margin-left: 0.2rem;
+      line-height: 1em;
+    }
+  }
+}

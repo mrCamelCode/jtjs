@@ -5,7 +5,7 @@ import { Tree } from '@nx/devkit';
  * find to just config.
  */
 export default async function (tree: Tree, schema: any) {
-  const filePath = 'dist/libs/core/theme/package.json';
+  const filePath = 'dist/libs/theme/package.json';
 
   try {
     if (tree.exists(filePath)) {
@@ -29,14 +29,14 @@ export default async function (tree: Tree, schema: any) {
           tree.write(filePath, fileLines.join('\n'));
         } else {
           throw new Error(
-            "Could not find closing bracked in core-theme's package.json. Please make sure the file is formatted correctly."
+            "Could not find closing bracket in @jtjs/theme's package.json. Please make sure the file is formatted correctly."
           );
         }
       }
 
-      console.log('Successfully updated core-theme package.json');
+      console.log('Successfully updated @jtjs/theme package.json');
     } else {
-      throw new Error('Could not find package.json of the core-theme lib.');
+      throw new Error('Could not find package.json of the @jtjs/theme lib.');
     }
   } catch (error) {
     console.error(

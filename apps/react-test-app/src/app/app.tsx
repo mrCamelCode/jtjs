@@ -458,6 +458,8 @@ export function App() {
 
         <LoadView isLoading />
 
+        <LoadView isLoading useSimpleLoadIndicator />
+
         <Flexbox>
           <LabelledColorInput
             label="Background Color"

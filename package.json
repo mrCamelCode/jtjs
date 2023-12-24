@@ -10,7 +10,7 @@
     "test:all": "nx run-many --all --target=test --parallel --skip-nx-cache",
     "clean:modules": "npx rimraf node_modules",
     "clean:dist": "npx rimraf dist",
-    "docs:react": "npx react-docgen -o ./react-docgen-output.json ./libs/react/src/**/*.tsx --pretty && npx ts-node ./scripts/gen-md-from-react-docgen.ts ./react-docgen-output.json ./libs/react/README && npx rimraf ./react-docgen-output.json"
+    "docs:react": "npx react-docgen -o ./react-docgen-output.json ./libs/react/src/**/*.tsx --pretty && npx ts-node ./scripts/gen-md-from-react-docgen.script.ts ./react-docgen-output.json ./libs/react/README && npx rimraf ./react-docgen-output.json"
   },
   "private": true,
   "dependencies": {

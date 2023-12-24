@@ -40,8 +40,14 @@ export interface ToggleProps
  * a `isOn` that's not `undefined` and it must be a `boolean`.
  *
  * Note that because a Toggle has no backing element in HTML, you must style this element for it
- * to have any appearance. JTJS' theme library contains default styling for Toggles you can
+ * to have any appearance. `@jtjs/theme` library contains default styling for Toggles you can
  * use as a base.
+ *
+ * If you'd like to style the component yourself, the structure of the resolved markup is:
+ * ```
+ * .jtjs-toggle.jtjs-toggle-{on/off}
+ *   .jtjs-toggle-knob
+ * ```
  */
 export const Toggle = forwardRef<HTMLSpanElement, ToggleProps>(
   (
