@@ -1,0 +1,19 @@
+.jtjs-inline-feedback-message {
+  @include slightly-rounded-corners;
+  padding: 0.2rem 0.3rem;
+  margin-top: 0.2rem;
+  width: fit-content;
+
+  &.jtjs-error {
+    background-color: var(--jtjs-theme-negative);
+    color: var(--jtjs-theme-negativeText);
+  }
+  &.jtjs-warn {
+    background-color: var(--jtjs-theme-warn);
+    color: var(--jtjs-theme-warnText);
+  }
+  &.jtjs-info {
+    background-color: var(--jtjs-theme-info);
+    color: var(--jtjs-theme-infoText);
+  }
+}

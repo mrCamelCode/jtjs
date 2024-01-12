@@ -16,6 +16,20 @@
       @include error-outline;
     }
   }
+  &:has(.jtjs-warn) {
+    .jtjs-input,
+    .jtjs-text-input,
+    .jtjs-multiline-text-input {
+      @include warn-outline;
+    }
+  }
+  &:has(.jtjs-info) {
+    .jtjs-input,
+    .jtjs-text-input,
+    .jtjs-multiline-text-input {
+      @include info-outline;
+    }
+  }
 }
 
 .jtjs-labelled-input {

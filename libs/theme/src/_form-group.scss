@@ -12,4 +12,10 @@
   &:has(.jtjs-error) {
     @include error-outline;
   }
+  &:has(.jtjs-warn) {
+    @include warn-outline;
+  }
+  &:has(.jtjs-info) {
+    @include info-outline;
+  }
 }

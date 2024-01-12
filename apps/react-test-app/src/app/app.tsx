@@ -7,6 +7,8 @@ import {
   Heading,
   HideBehaviour,
   Icon,
+  InlineFeedbackMessage,
+  InlineFeedbackMessageType,
   LabelPosition,
   LabelledCheckboxGroup,
   LabelledColorInput,
@@ -32,7 +34,6 @@ import {
   useTheme,
 } from '@jtjs/react';
 import { ThemeService } from '@jtjs/view';
-import { Size } from 'libs/react/src/types/sizable.props';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -132,6 +133,8 @@ export function App() {
             },
           ]}
           error="Bad news!"
+          warn="Better news!"
+          info="Good news!"
         />
 
         <LabelledRadioGroup
@@ -191,6 +194,9 @@ export function App() {
               name: 'bg3',
             },
           ]}
+          error="Bad news!"
+          warn="Better news!"
+          info="Good news!"
         />
 
         <LabelledCheckboxGroup
@@ -436,13 +442,20 @@ export function App() {
           error="This is a longer error message that's probably too long."
         />
 
-        <Collapsible heading="Input Sizes" style={{ width: '100%' }}>
-          {Object.entries(Size).map(([sizeName, size]) => {
-            return (
-              <LabelledInput key={sizeName} label={sizeName} prefWidth={size} />
-            );
-          })}
-        </Collapsible>
+        <LabelledTextInput label="Labelled Text Input" warn="Warning!" />
+        <LabelledTextInput label="Labelled Text Input" info="Information!" />
+
+        <InlineFeedbackMessage messageType={InlineFeedbackMessageType.Error}>
+          Standalone error!
+        </InlineFeedbackMessage>
+
+        <InlineFeedbackMessage messageType={InlineFeedbackMessageType.Warn}>
+          Standalone warn!
+        </InlineFeedbackMessage>
+
+        <InlineFeedbackMessage messageType={InlineFeedbackMessageType.Info}>
+          Standalone info!
+        </InlineFeedbackMessage>
 
         <div
           style={{

@@ -1,10 +1,8 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
-import { SizableProps } from '../../../types/sizable.props';
 import { buildClassName } from '../../../util';
 
 export interface InputProps
-  extends Omit<ComponentPropsWithRef<'input'>, 'children'>,
-    SizableProps {}
+  extends Omit<ComponentPropsWithRef<'input'>, 'children'> {}
 
 /**
  * A light wrapper for the `input` element with very little default configuration.

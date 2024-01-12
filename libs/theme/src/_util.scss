@@ -27,3 +27,13 @@
   border: 1px solid var(--jtjs-theme-negative);
   box-shadow: 0 0 3px 0px var(--jtjs-theme-negative);
 }
+
+@mixin warn-outline {
+  border: 1px solid var(--jtjs-theme-warn);
+  box-shadow: 0 0 3px 0px var(--jtjs-theme-warn);
+}
+
+@mixin info-outline {
+  border: 1px solid var(--jtjs-theme-info);
+  box-shadow: 0 0 3px 0px var(--jtjs-theme-info);
+}

@@ -1,9 +1,8 @@
 import { ChangeEvent, forwardRef } from 'react';
-import { SizableProps } from '../../../types/sizable.props';
 import { buildClassName } from '../../../util';
 import { Input, InputProps } from './Input';
 
-export interface TextInputProps extends InputProps, SizableProps {
+export interface TextInputProps extends InputProps {
   /**
    * Handler for when the user attempts to change the input.
    *

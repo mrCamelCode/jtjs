@@ -2,22 +2,28 @@ import { forwardRef } from 'react';
 import { buildClassName } from '../../util';
 import { InlineText, InlineTextProps } from '../text';
 
-export enum InputFeedbackMessageType {
-  Error,
+export enum InlineFeedbackMessageType {
+  Error = 'error',
+  Warn = 'warn',
+  Info = 'info',
 }
 
-export interface InputFeedbackMessageProps extends InlineTextProps {
-  messageType: InputFeedbackMessageType;
+export interface InlineFeedbackMessageProps extends InlineTextProps {
+  messageType: InlineFeedbackMessageType;
 }
 
-export const InputFeedbackMessage = forwardRef<
+export const InlineFeedbackMessage = forwardRef<
   HTMLSpanElement,
-  InputFeedbackMessageProps
+  InlineFeedbackMessageProps
 >(({ className, messageType, ...otherProps }, ref) => {
   const getMessageTypeClass = () => {
     switch (messageType) {
-      case InputFeedbackMessageType.Error:
+      case InlineFeedbackMessageType.Error:
         return 'jtjs-error';
+      case InlineFeedbackMessageType.Warn:
+        return 'jtjs-warn';
+      case InlineFeedbackMessageType.Info:
+        return 'jtjs-info';
       default:
         return '';
     }
@@ -27,7 +33,7 @@ export const InputFeedbackMessage = forwardRef<
     <InlineText
       className={buildClassName(
         className,
-        'jtjs-input-feedback-message',
+        'jtjs-inline-feedback-message',
         getMessageTypeClass()
       )}
       {...otherProps}

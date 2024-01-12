@@ -64,4 +64,21 @@ export interface Theme {
    * The color for text that appears on an element with a background of the `negative` color.
    */
   negativeText: string;
+  /**
+   * The color used to indicate a warning to the user. A warning isn't as bad as something negative and should be used
+   * when indicating to the user that something had a recoverable/ignorable issue.
+   */
+  warn: string;
+  /**
+   * The color for text that appears on an element with a background of the `warn` color.
+   */
+  warnText: string;
+  /**
+   * The color used to call attention to extra information.
+   */
+  info: string;
+  /**
+   * The color for text that appears on an element with a background of the `info` color.
+   */
+  infoText: string;
 }

@@ -15,6 +15,8 @@ export interface LabelledProps {
   labelProps?: LabelProps;
   labelTextProps?: InlineTextProps;
   error?: string;
+  warn?: string;
+  info?: string;
 }
 
 /**
@@ -28,14 +30,24 @@ export interface LabelledProps {
 export function pickLabelledProps<T extends LabelledProps>(
   props: T
 ): LabelledProps {
-  const { label, labelPosition, labelProps, labelTextProps, error } = props;
+  const {
+    label,
+    labelPosition,
+    labelProps,
+    labelTextProps,
+    error,
+    warn,
+    info,
+  } = props;
 
   return {
     label,
     labelPosition,
     labelProps,
     labelTextProps,
-    error
+    error,
+    warn,
+    info,
   };
 }
 
@@ -50,6 +62,8 @@ export function withoutLabelledProps<T extends LabelledProps>(
       'labelProps',
       'labelTextProps',
       'error',
+      'warn',
+      'info',
     ] as (keyof LabelledProps)[]
   ).forEach((key) => {
     delete newProps[key];

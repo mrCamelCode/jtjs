@@ -1,10 +1,8 @@
 import { ChangeEvent, ComponentPropsWithRef, forwardRef } from 'react';
-import { SizableProps } from '../../../types/sizable.props';
 import { buildClassName } from '../../../util';
 
 export interface MultilineTextInputProps
-  extends ComponentPropsWithRef<'textarea'>,
-    SizableProps {
+  extends ComponentPropsWithRef<'textarea'> {
   /**
    * Handler for when the user attempts to change the input.
    *

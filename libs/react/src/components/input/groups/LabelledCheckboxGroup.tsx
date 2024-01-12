@@ -7,9 +7,9 @@ import {
 import { LabelPosition, LabelledProps, Option } from '../../../types';
 import { buildClassName } from '../../../util';
 import {
-  InputFeedbackMessage,
-  InputFeedbackMessageType,
-} from '../../structured-information/InputFeedbackMessage';
+  InlineFeedbackMessage,
+  InlineFeedbackMessageType,
+} from '../../structured-information/InlineFeedbackMessage';
 import { InlineText } from '../../text/InlineText';
 import { LabelledCheckbox, LabelledCheckboxProps } from '../labelled';
 import { FormGroup, FormGroupProps } from './FormGroup';
@@ -89,6 +89,8 @@ export const LabelledCheckboxGroup = forwardRef<
         ...otherLabelTextProps
       } = {},
       error,
+      warn,
+      info,
       ...otherProps
     }: LabelledCheckboxGroupProps,
     ref
@@ -139,11 +141,20 @@ export const LabelledCheckboxGroup = forwardRef<
         {...otherProps}
         ref={ref}
       >
-        {error && (
-          <InputFeedbackMessage messageType={InputFeedbackMessageType.Error}>
-            {error}
-          </InputFeedbackMessage>
-        )}
+        {[
+          [error, InlineFeedbackMessageType.Error],
+          [warn, InlineFeedbackMessageType.Warn],
+          [info, InlineFeedbackMessageType.Info],
+        ]
+          .filter(([message]) => !!message)
+          .map(([message, messageType]) => (
+            <InlineFeedbackMessage
+              key={messageType}
+              messageType={messageType as InlineFeedbackMessageType}
+            >
+              {message}
+            </InlineFeedbackMessage>
+          ))}
 
         {label !== undefined &&
           labelPosition === LabelPosition.Before &&
