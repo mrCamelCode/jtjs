@@ -52,6 +52,11 @@
   }
   &:active:not(:disabled) {
     background-color: var(--jtjs-theme-button-darkened);
+
+    &.jtjs-disable-mouse-effects {
+      // Redundant for specificity. Without this, an active button as the above styling for hovering.
+      background-color: var(--jtjs-theme-button-darkened);
+    }
   }
   &:disabled {
     background-color: var(--jtjs-theme-disabled);

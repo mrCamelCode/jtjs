@@ -7,6 +7,8 @@ import {
   Heading,
   HideBehaviour,
   Icon,
+  InlineFeedbackMessage,
+  InlineFeedbackMessageType,
   LabelPosition,
   LabelledCheckboxGroup,
   LabelledColorInput,
@@ -130,6 +132,9 @@ export function App() {
               value: 'M',
             },
           ]}
+          error="Bad news!"
+          warn="Better news!"
+          info="Good news!"
         />
 
         <LabelledRadioGroup
@@ -189,6 +194,9 @@ export function App() {
               name: 'bg3',
             },
           ]}
+          error="Bad news!"
+          warn="Better news!"
+          info="Good news!"
         />
 
         <LabelledCheckboxGroup
@@ -371,7 +379,7 @@ export function App() {
                   onClick: () => console.log('click!'),
                   style: {
                     cursor: 'pointer',
-                  }
+                  },
                 },
               },
               'Input',
@@ -427,7 +435,27 @@ export function App() {
         <LabelledInput label="Password" type="password" />
         <LabelledInput label="Numbers" type="number" />
 
-        <LabelledTextInput label="Labelled Text Input" />
+        <LabelledTextInput label="Labelled Text Input" error="Problem!" />
+        <LabelledTextInput
+          label="Bottom Label Error"
+          labelPosition={LabelPosition.After}
+          error="This is a longer error message that's probably too long."
+        />
+
+        <LabelledTextInput label="Labelled Text Input" warn="Warning!" />
+        <LabelledTextInput label="Labelled Text Input" info="Information!" />
+
+        <InlineFeedbackMessage messageType={InlineFeedbackMessageType.Error}>
+          Standalone error!
+        </InlineFeedbackMessage>
+
+        <InlineFeedbackMessage messageType={InlineFeedbackMessageType.Warn}>
+          Standalone warn!
+        </InlineFeedbackMessage>
+
+        <InlineFeedbackMessage messageType={InlineFeedbackMessageType.Info}>
+          Standalone info!
+        </InlineFeedbackMessage>
 
         <div
           style={{

@@ -32,6 +32,10 @@ export class ThemeService {
     affirmativeText: '#EEE',
     negative: '#CB3D3D',
     negativeText: '#EEE',
+    warn: '#D67327',
+    warnText: '#EEE',
+    info: '#19417D',
+    infoText: '#EEE',
   };
 
   /**
@@ -53,6 +57,10 @@ export class ThemeService {
     affirmativeText: '#EEE',
     negative: '#CB3D3D',
     negativeText: '#EEE',
+    warn: '#D67327',
+    warnText: '#EEE',
+    info: '#19417D',
+    infoText: '#EEE',
   };
 
   /**
@@ -74,6 +82,10 @@ export class ThemeService {
     affirmativeText: '#EEE',
     negative: '#CB3D3D',
     negativeText: '#EEE',
+    warn: '#D67327',
+    warnText: '#EEE',
+    info: '#19417D',
+    infoText: '#EEE',
   };
 
   /**

@@ -7,6 +7,10 @@ import {
 } from 'react';
 import { LabelPosition, LabelledProps, Option } from '../../../types';
 import { buildClassName } from '../../../util/util-functions';
+import {
+  InlineFeedbackMessage,
+  InlineFeedbackMessageType,
+} from '../../structured-information/InlineFeedbackMessage';
 import { InlineText } from '../../text/InlineText';
 import { LabelledRadio, LabelledRadioProps } from '../labelled';
 import { FormGroup, FormGroupProps } from './FormGroup';
@@ -68,6 +72,9 @@ export const LabelledRadioGroup = forwardRef<
         className: labelTextClassName,
         ...otherLabelTextProps
       } = {},
+      error,
+      warn,
+      info,
       ...otherProps
     }: LabelledRadioGroupProps,
     ref
@@ -117,6 +124,21 @@ export const LabelledRadioGroup = forwardRef<
         {...otherProps}
         ref={ref}
       >
+        {[
+          [error, InlineFeedbackMessageType.Error],
+          [warn, InlineFeedbackMessageType.Warn],
+          [info, InlineFeedbackMessageType.Info],
+        ]
+          .filter(([message]) => !!message)
+          .map(([message, messageType]) => (
+            <InlineFeedbackMessage
+              key={messageType}
+              messageType={messageType as InlineFeedbackMessageType}
+            >
+              {message}
+            </InlineFeedbackMessage>
+          ))}
+
         {label !== undefined &&
           labelPosition === LabelPosition.Before &&
           labelMarkup}

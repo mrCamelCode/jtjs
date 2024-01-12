@@ -1,5 +1,9 @@
 import { LabelPosition, LabelledProps } from '../../../types';
 import { buildClassName } from '../../../util';
+import {
+  InlineFeedbackMessage,
+  InlineFeedbackMessageType,
+} from '../../structured-information/InlineFeedbackMessage';
 import { InlineText, Label, LabelProps } from '../../text';
 
 export interface BaseLabelledInputProps extends LabelProps, LabelledProps {}
@@ -19,6 +23,9 @@ export const BaseLabelledInput = ({
     className: labelTextClassName,
     ...otherLabelTextProps
   } = {},
+  error,
+  warn,
+  info,
   ...otherProps
 }: BaseLabelledInputProps) => {
   const labelText = (
@@ -47,6 +54,21 @@ export const BaseLabelledInput = ({
       {label !== undefined &&
         labelPosition === LabelPosition.After &&
         labelText}
+
+      {[
+        [error, InlineFeedbackMessageType.Error],
+        [warn, InlineFeedbackMessageType.Warn],
+        [info, InlineFeedbackMessageType.Info],
+      ]
+        .filter(([message]) => !!message)
+        .map(([message, messageType]) => (
+          <InlineFeedbackMessage
+            key={messageType}
+            messageType={messageType as InlineFeedbackMessageType}
+          >
+            {message}
+          </InlineFeedbackMessage>
+        ))}
     </Label>
   );
 };
