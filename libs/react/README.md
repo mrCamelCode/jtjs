@@ -36,6 +36,8 @@ about those, just look at code completion for function names starting with `use`
 
 - [Icon](#icon)
 
+- [InlineFeedbackMessage](#inlinefeedbackmessage)
+
 - [InlineText](#inlinetext)
 
 - [Input](#input)
@@ -112,6 +114,15 @@ of the more specific and already-created `Labelled...` components.
 
 
 `labelTextProps?: InlineTextProps = {}`
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
@@ -347,6 +358,22 @@ in your project, try verifying and changing the `iconType`.
 
 
 
+## `InlineFeedbackMessage`
+[Components ⬆️](#components)
+### Description
+Feedback for the user. Useful in forms and in reaction to user actions.
+### Props
+`italic?: boolean`
+
+
+`bold?: boolean`
+
+
+`messageType: InlineFeedbackMessageType` - The type/severity of the message's contents.
+
+
+
+
 ## `InlineText`
 [Components ⬆️](#components)
 ### Props
@@ -389,6 +416,15 @@ something like the Checkbox, Radio, or TextInput components.
 
 
 `labelTextProps?: InlineTextProps`
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
@@ -455,6 +491,15 @@ for the color input.
 `labelTextProps?: InlineTextProps`
 
 
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
+
+
 
 
 ## `LabelledInput`
@@ -470,6 +515,15 @@ for the color input.
 
 
 `labelTextProps?: InlineTextProps`
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
@@ -506,6 +560,15 @@ const onlyNumbersMask = /\d/;
 `labelTextProps?: InlineTextProps`
 
 
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
+
+
 
 
 ## `LabelledMaskedTextInput`
@@ -539,6 +602,15 @@ const onlyNumbersMask = /\d/;
 `labelTextProps?: InlineTextProps`
 
 
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
+
+
 
 
 ## `LabelledMultilineTextInput`
@@ -562,6 +634,15 @@ const onlyNumbersMask = /\d/;
 `labelTextProps?: InlineTextProps`
 
 
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
+
+
 
 
 ## `LabelledRadio`
@@ -580,6 +661,15 @@ const onlyNumbersMask = /\d/;
 
 
 `labelTextProps?: InlineTextProps`
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
@@ -649,6 +739,15 @@ want to default a controlled group, just set your `value`'s initial value to be 
 `labelTextProps?: InlineTextProps`
 
 
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
+
+
 
 
 ## `LabelledTextInput`
@@ -670,6 +769,15 @@ want to default a controlled group, just set your `value`'s initial value to be 
 
 
 `labelTextProps?: InlineTextProps`
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
@@ -704,6 +812,15 @@ the toggle via the keyboard, this will be a KeyboardEvent.
 
 
 `labelTextProps?: InlineTextProps = {}`
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
