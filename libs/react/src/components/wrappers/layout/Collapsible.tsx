@@ -28,7 +28,7 @@ export interface CollapsibleProps extends ContentboxProps {
   /**
    * What to do when the user indicates they want to change whether the Collapsible is collapsed.
    *
-   * @param isCollapsed - Whether the the Collapsible should be collapsed.
+   * @param isCollapsed - Whether the Collapsible should be collapsed.
    */
   onChangeCollapsed?: (isCollapsed: boolean) => void;
 }

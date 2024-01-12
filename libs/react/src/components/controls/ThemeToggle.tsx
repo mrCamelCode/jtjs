@@ -26,7 +26,7 @@ export interface ThemeToggleProps
 export const ThemeToggle = forwardRef<
   HTMLSpanElement,
   ThemeToggleProps
->(({ className, onToggle, mode, ...otherProps }, ref) => {
+>(({ className, onToggle, mode, ...otherProps }: ThemeToggleProps, ref) => {
   const [internalValue, setInternalValue] = useState(ThemeMode.Light);
 
   const isControlled = mode !== undefined;

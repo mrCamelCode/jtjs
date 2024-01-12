@@ -1,26 +1,37 @@
-import {
-  ComponentPropsWithRef,
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-} from 'react';
+import { ComponentPropsWithRef, forwardRef } from 'react';
 import { buildClassName } from '../../../util/util-functions';
 
 export interface FlexboxProps extends ComponentPropsWithRef<'div'> {
+  /**
+   * (Optional, defaults to `row`) The direction that the contents of the Flexbox
+   * flow.
+   */
   direction?: 'row' | 'column';
+  /**
+   * (Optional, defaults to `false`) Whether the flow direction of the Flexbox's
+   * contents should be reversed.
+   */
   reverseDirection?: boolean;
   horizontalAlignment?: 'left' | 'center' | 'right';
   verticalAlignment?: 'top' | 'center' | 'bottom';
+  /**
+   * (Optional, defaults to `false`) Whether the contents of the Flexbox should
+   * wrap.
+   */
   wrap?: boolean;
   reverseWrap?: boolean;
+  /**
+   * (Optional, defaults to `0.5rem`) How much space to put between the contents of
+   * the Flexbox.
+   */
   spacing?: string;
 }
 
 /**
- * A wrapper that allows for rapid and simple assembly of flexboxes for common use cases.
+ * A wrapper that allows for rapid and simple assembly of layouts by leveraging flex.
  *
  * Intended to be used purely for layout. Flexboxes aren't intended to have any styling associated with them besides the inline
- * styles the component generates to express the specified flex options.
+ * styles the component generates to express the flex options determined from the provided props.
  */
 export const Flexbox = forwardRef<HTMLDivElement, FlexboxProps>(
   (
@@ -36,7 +47,7 @@ export const Flexbox = forwardRef<HTMLDivElement, FlexboxProps>(
       reverseWrap = false,
       spacing = '0.5rem',
       ...otherProps
-    },
+    }: FlexboxProps,
     ref
   ) => {
     const flexWrap = `${wrap ? 'wrap' : 'nowrap'}${

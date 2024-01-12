@@ -90,7 +90,7 @@ export const LabelledCheckboxGroup = forwardRef<
       } = {},
       error,
       ...otherProps
-    },
+    }: LabelledCheckboxGroupProps,
     ref
   ) => {
     const [internalValue, setInternalValue] =

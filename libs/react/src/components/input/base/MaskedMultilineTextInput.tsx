@@ -37,7 +37,7 @@ export interface MaskedMultilineTextInputProps
  *
  * You can choose whether you control this component, but if you don't control it, the component will
  * control the underlying input for you. This allows a provided mask to still apply to
- * any input.
+ * the user input.
  */
 export const MaskedMultilineTextInput = forwardRef<
   HTMLTextAreaElement,
@@ -52,7 +52,7 @@ export const MaskedMultilineTextInput = forwardRef<
       onChange,
       onChangeText,
       ...otherProps
-    },
+    }: MaskedMultilineTextInputProps,
     ref
   ) => {
     const [internalValue, setInternalValue] = useState<string>(

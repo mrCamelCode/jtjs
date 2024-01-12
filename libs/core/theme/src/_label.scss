@@ -1,8 +1,0 @@
-.jtjs-label {
-  color: var(--jtjs-theme-text);
-
-  &:has(:disabled),
-  &:has([aria-disabled="true"]) {
-    cursor: not-allowed;
-  }
-}

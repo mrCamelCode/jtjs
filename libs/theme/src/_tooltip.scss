@@ -1,0 +1,19 @@
+.jtjs-tooltip-container {
+  .jtjs-tooltip {
+    @include slightly-rounded-corners;
+    @include soft-shadow;
+
+    padding: 0.5rem;
+    background-color: var(--jtjs-theme-background);
+    color: var(--jtjs-theme-text);
+
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    &[aria-hidden='true'] {
+      transform: scale(0.8);
+    }
+    &[aria-hidden='false'] {
+      transform: scale(1);
+    }
+  }
+}

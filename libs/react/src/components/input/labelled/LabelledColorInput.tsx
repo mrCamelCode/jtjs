@@ -20,7 +20,7 @@ export const LabelledColorInput = forwardRef<
     {
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       ...otherProps
-    },
+    }: LabelledColorInputProps,
     ref
   ) => {
     return (

@@ -1,4 +1,4 @@
-import { ActivityState, UserActivityService } from '@jtjs/core-browser';
+import { ActivityState, UserActivityService } from '@jtjs/browser';
 import { useEffect, useState } from 'react';
 
 /**

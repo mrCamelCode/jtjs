@@ -1,7 +1,7 @@
 import { ChangeEvent, forwardRef } from 'react';
+import { SizableProps } from '../../../types/sizable.props';
 import { buildClassName } from '../../../util';
 import { Input, InputProps } from './Input';
-import { SizableProps, getPrefWidthStyle } from '../../../types/sizable.props';
 
 export interface TextInputProps extends InputProps, SizableProps {
   /**
@@ -20,17 +20,13 @@ export interface TextInputProps extends InputProps, SizableProps {
  */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
-    { className, style, prefWidth, onChange, onChangeText, ...otherProps },
+    { className, onChange, onChangeText, ...otherProps }: TextInputProps,
     ref
   ) => {
     return (
       <Input
         data-testid="text-input"
         className={buildClassName(className, 'jtjs-text-input')}
-        style={{
-          ...getPrefWidthStyle(prefWidth),
-          ...style,
-        }}
         type="text"
         onChange={(event) => {
           onChangeText?.(event.target.value, event);

@@ -74,7 +74,7 @@ export const LabelledRadioGroup = forwardRef<
       } = {},
       error,
       ...otherProps
-    },
+    }: LabelledRadioGroupProps,
     ref
   ) => {
     const [internalValue, setInternalValue] =

@@ -1,5 +1,5 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
-import { SizableProps, getPrefWidthStyle } from '../../../types/sizable.props';
+import { SizableProps } from '../../../types/sizable.props';
 import { buildClassName } from '../../../util';
 
 export interface InputProps
@@ -12,14 +12,10 @@ export interface InputProps
  * something like the Checkbox, Radio, or TextInput components.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, style, prefWidth, ...otherProps }, ref) => {
+  ({ className, ...otherProps }: InputProps, ref) => {
     return (
       <input
         className={buildClassName(className, 'jtjs-input')}
-        style={{
-          ...getPrefWidthStyle(prefWidth),
-          ...style,
-        }}
         {...otherProps}
         ref={ref}
       />

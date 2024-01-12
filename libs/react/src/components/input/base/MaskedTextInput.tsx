@@ -48,7 +48,7 @@ export const MaskedTextInput = forwardRef<
       onChange,
       onChangeText,
       ...otherProps
-    },
+    }: MaskedTextInputProps,
     ref
   ) => {
     const [internalValue, setInternalValue] = useState<string>(

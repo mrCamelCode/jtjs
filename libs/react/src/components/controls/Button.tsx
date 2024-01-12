@@ -43,7 +43,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onChangeMousePosition,
       enableMouseTracking = false,
       ...otherProps
-    },
+    }: ButtonProps,
     ref
   ) => {
     const internalRef = useRef<HTMLButtonElement>(null);

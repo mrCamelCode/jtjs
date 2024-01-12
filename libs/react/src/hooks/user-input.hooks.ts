@@ -1,4 +1,4 @@
-import { UserInputKeyEventHandler, UserInputService } from '@jtjs/core-browser';
+import { UserInputKeyEventHandler, UserInputService } from '@jtjs/browser';
 import { useEffect } from 'react';
 
 type KeyName = KeyboardEvent['key'];

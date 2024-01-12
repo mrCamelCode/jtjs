@@ -6,8 +6,11 @@ export interface IconProps
   /**
    * The name of the icon. This must match the name of the icon in FontAwesome, minus the
    * `fa` prefix (which is added for you).
+   *
    * @example
+   * ```tsx
    * <Icon iconType="solid" icon="address-card" />
+   * ```
    */
   icon: string;
   /**
@@ -25,7 +28,7 @@ export interface IconProps
  * in your project, try verifying and changing the `iconType`.
  */
 export const Icon = forwardRef<HTMLSpanElement, IconProps>(
-  ({ iconType = 'solid', icon, className, ...otherProps }, ref) => {
+  ({ iconType = 'solid', icon, className, ...otherProps }: IconProps, ref) => {
     return (
       <span
         className={buildClassName(

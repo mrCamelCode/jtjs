@@ -20,7 +20,7 @@ export const LabelledCheckbox = forwardRef<
       labelPosition = LabelPosition.After,
       labelProps: { className: labelClassName, ...otherLabelProps } = {},
       ...otherProps
-    },
+    }: LabelledCheckboxProps,
     ref
   ) => {
     return (

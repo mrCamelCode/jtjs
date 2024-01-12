@@ -5,7 +5,7 @@ import { Input, InputProps } from './Input';
 export interface ColorInputProps extends InputProps {
   /**
    * Handler for when the user changes the color of the input.
-   * 
+   *
    * @param color - The color, as a hex string. Note that browsers do not support an alpha channel
    * for the color input.
    * @param event - The original event.
@@ -14,7 +14,10 @@ export interface ColorInputProps extends InputProps {
 }
 
 export const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
-  ({ className, onChange, onChangeColor, ...otherProps }, ref) => {
+  (
+    { className, onChange, onChangeColor, ...otherProps }: ColorInputProps,
+    ref
+  ) => {
     return (
       <Input
         data-testid="color-input"

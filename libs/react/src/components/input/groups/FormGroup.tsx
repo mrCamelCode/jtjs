@@ -13,7 +13,10 @@ export interface FormGroupProps extends ComponentPropsWithRef<'fieldset'> {
  * A light wrapper around a `fieldset`. Used to group related form controls and inputs together.
  */
 export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
-  ({ className, style, inlineItems = false, ...otherProps }, ref) => {
+  (
+    { className, style, inlineItems = false, ...otherProps }: FormGroupProps,
+    ref
+  ) => {
     return (
       <fieldset
         className={buildClassName(className, 'jtjs-form-group')}

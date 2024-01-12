@@ -55,7 +55,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       children,
       prefWidth,
       ...otherProps
-    },
+    }: SelectProps,
     ref
   ) => {
     return (

@@ -7,7 +7,16 @@ export interface TextProps extends ComponentPropsWithRef<'p'> {
 }
 
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
-  ({ italic = false, bold = false, className, style, ...otherProps }, ref) => {
+  (
+    {
+      italic = false,
+      bold = false,
+      className,
+      style,
+      ...otherProps
+    }: TextProps,
+    ref
+  ) => {
     return (
       <p
         className={buildClassName(className, 'jtjs-text')}
