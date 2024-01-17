@@ -4,6 +4,7 @@ import {
   Collapsible,
   Contentbox,
   Flexbox,
+  FormGroup,
   Heading,
   HideBehaviour,
   Icon,
@@ -107,6 +108,26 @@ export function App() {
       }}
     >
       <Contentbox direction="column">
+        <FormGroup>
+          <LabelledTextInput label="Something" />
+          <LabelledTextInput label="Something Else" />
+        </FormGroup>
+
+        <FormGroup error="Bad news!" warn="Better news!" info="Good news!">
+          <LabelledTextInput label="Something" />
+          <LabelledTextInput label="Something Else" />
+        </FormGroup>
+
+        <FormGroup
+          error="Bad news!"
+          warn="Better news!"
+          info="Good news!"
+          inlineItems
+        >
+          <LabelledTextInput label="Something" />
+          <LabelledTextInput label="Something Else" />
+        </FormGroup>
+
         <Text>Current breakpoint is: {currentBreakpoint}</Text>
 
         <Radio checked={radio} onChangeChecked={setRadio} />

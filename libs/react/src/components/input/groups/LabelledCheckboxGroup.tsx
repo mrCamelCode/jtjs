@@ -88,9 +88,6 @@ export const LabelledCheckboxGroup = forwardRef<
         className: labelTextClassName,
         ...otherLabelTextProps
       } = {},
-      error,
-      warn,
-      info,
       ...otherProps
     }: LabelledCheckboxGroupProps,
     ref
@@ -141,25 +138,9 @@ export const LabelledCheckboxGroup = forwardRef<
         {...otherProps}
         ref={ref}
       >
-        {[
-          [error, InlineFeedbackMessageType.Error],
-          [warn, InlineFeedbackMessageType.Warn],
-          [info, InlineFeedbackMessageType.Info],
-        ]
-          .filter(([message]) => !!message)
-          .map(([message, messageType]) => (
-            <InlineFeedbackMessage
-              key={messageType}
-              messageType={messageType as InlineFeedbackMessageType}
-            >
-              {message}
-            </InlineFeedbackMessage>
-          ))}
-
         {label !== undefined &&
           labelPosition === LabelPosition.Before &&
           labelMarkup}
-
         {options.map(({ label: checkboxLabel, name: checkboxName, props }) => {
           const id = `jtjs-checkbox-${checkboxLabel}`;
 
@@ -175,7 +156,6 @@ export const LabelledCheckboxGroup = forwardRef<
             />
           );
         })}
-
         {label !== undefined &&
           labelPosition === LabelPosition.After &&
           labelMarkup}
