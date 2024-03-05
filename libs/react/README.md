@@ -16,6 +16,8 @@ This library also exports a number of hooks to make your life easier. If you're 
 about those, just look at code completion for function names starting with `use` in your IDE of choice.
     
 # Components
+- [AcknowledgmentDialog](#acknowledgmentdialog)
+
 - [BaseLabelledInput](#baselabelledinput)
 
 - [Button](#button)
@@ -26,9 +28,15 @@ about those, just look at code completion for function names starting with `use`
 
 - [ColorInput](#colorinput)
 
+- [ConfirmationDialog](#confirmationdialog)
+
 - [Contentbox](#contentbox)
 
+- [Dialog](#dialog)
+
 - [Flexbox](#flexbox)
+
+- [FormDialog](#formdialog)
 
 - [FormGroup](#formgroup)
 
@@ -84,6 +92,8 @@ about those, just look at code completion for function names starting with `use`
 
 - [Select](#select)
 
+- [StructuredDialog](#structureddialog)
+
 - [Table](#table)
 
 - [Text](#text)
@@ -97,6 +107,34 @@ about those, just look at code completion for function names starting with `use`
 - [Tooltip](#tooltip)
 
 - [Tooltipped](#tooltipped)
+## `AcknowledgmentDialog`
+[Components ⬆️](#components)
+### Description
+A special `StructuredDialog` that provides the user with a button to acknowledge something. In contrast
+to a `ConfirmationDialog`, an `AcknowledgmentDialog` doesn't give the user an option to reject the contents
+of the dialog. These kinds of dialogs are useful for statements of fact that you want to be sure the user sees.
+
+Some examples of such would be:
+1. Legal notices that require acceptance.
+1. Making the user aware of necessary cookies your site uses.
+1. Warning the user of something on your site, like patterns that may affect those with epilepsy.
+
+The dialog will automatically close if the handler for the action (`onAcknowledge`) evaluates to `true`.
+### Props
+`acknowledgeButton?: Omit` - The data for the button that represents acknowledging the contents of the dialog. Defaults to
+a button with text `Okay` that closes the dialog when clicked. Use `onAcknowledge` to
+control what to do when this button is clicked and control whether the dialog should
+close when the button is clicked.
+
+Prefer using `onAcknowledge` rather than setting `acknowledgeButton.buttonProps.onClick`, since
+that gives you more control over the autoclose operation.
+
+
+`onAcknowledge?: DialogButton['beforeCloseOnClick']` - What to do when the prompt is acknowledged.
+
+
+
+
 ## `BaseLabelledInput`
 [Components ⬆️](#components)
 ### Description
@@ -241,6 +279,42 @@ for the color input.
 
 
 
+## `ConfirmationDialog`
+[Components ⬆️](#components)
+### Description
+A special `StructuredDialog` that provides the user with a button to accept or reject a confirmation
+of something. This is suitable when you'd like the user to verify they want to perform the action
+that triggered the dialog. Usually, it's because the action has consequences that are difficult
+or impossible to reverse, or it's a significant operation.
+
+The dialog will automatically close if the handler for the action (`onAccept`/`onReject`) evaluates to `true`.
+### Props
+`acceptButton?: Omit` - The data for the button that represents accepting the confirmation. Defaults to
+a button with text `Okay` that closes the dialog when clicked. Use `onAccept` to
+control what to do when this button is clicked and control whether the dialog should
+close when the button is clicked.
+
+Prefer using `onAccept` rather than setting `acceptButton.buttonProps.onClick`, since
+that gives you more control over the autoclose operation.
+
+
+`rejectButton?: Omit` - The data for the button that represents rejecting the confirmation. Defaults to
+a button with text `Cancel` that closes the dialog when clicked. Use `onReject` to
+control what to do when this button is clicked and control whether the dialog should
+close when the button is clicked.
+
+Prefer using `onReject` rather than setting `rejectButton.buttonProps.onClick`, since
+that gives you more control over the autoclose operation.
+
+
+`onAccept?: DialogButton['beforeCloseOnClick']` - What to do when the confirmation prompt is accepted.
+
+
+`onReject?: DialogButton['beforeCloseOnClick']` - What to do when the confirmation prompt is rejected.
+
+
+
+
 ## `Contentbox`
 [Components ⬆️](#components)
 ### Description
@@ -273,6 +347,51 @@ the Flexbox.
 
 `filled?: boolean = false` - (Optional, defaults to `false`). Whether the box should have a marker class that indicates it should be filled
 (have a background color).
+
+
+
+
+## `Dialog`
+[Components ⬆️](#components)
+### Description
+Base component for a dialog, with an option for whether it's a modal. Use the `show` prop to control whether the
+dialog is currently visible.
+
+This dialog component gives you the most control over what's in the dialog, but that also means you're responsible
+for setting up the structure of the contents of the dialog. If you're looking for a component that handles more of
+the common dialog use cases for you, it's recommended to use the other dialog components, like
+`ConfirmationDialog` and `AcknowledgmentDialog`. If you want some structure to a custom dialog but don't want to
+implement all of that yourself, consider using `StructuredDialog`.
+
+**Note**: The use of dialogs in an application should be minimal. They're generally unfriendly to accessibility and tend
+to look bad on mobile. If you're considering using a dialog/modal, you should seriously consider your design
+and evaluate whether the use of a dialog/modal is really a requirement. With that said, if you do decide you want this,
+JTJS does what it can to make the dialog itself accessible and friendly to the browser.
+### Props
+`show: boolean` - Whether the dialog should be showing. You should be using this to control when the dialog
+is visible, as opposed to conditionally rendering.
+
+@example
+```tsx
+// DO:
+<Dialog show={someShowState} onClose={() => setSomeShowState(false)} />
+
+// DON'T:
+{someShowState && (<Dialog />)}
+```
+
+
+`isModal?: boolean = false` - Whether the dialog is a modal. A modal is a dialog that goes on top of the rest of the page in the center of the
+screen regardless of where it exists in the DOM. Visually, everything behind the modal is darkened. Elements
+behind the modal cannot be interacted with until the modal is closed.
+
+
+`hideBehaviour?: HideBehaviour = HideBehaviour.Remove` - (Optional, defaults to {@link HideBehaviour.Remove}) How the dialog handles its children when it's not shown. If
+{@link HideBehaviour.Hide}, the children of the dialog remain mounted when the dialog is hidden.
+If {@link HideBehaviour.Remove}, the children of the dialog will be unmounted when the dialog is hidden.
+
+Consider setting this to {@link HideBehaviour.Hide} if the children of the dialog need to maintain some kind of \
+state in between separate showings of the dialog.
 
 
 
@@ -312,6 +431,33 @@ the Flexbox.
 
 
 
+## `FormDialog`
+[Components ⬆️](#components)
+### Description
+A special `StructuredDialog` that provides the user with a button to cancel the form and abandon it.
+Your application shouldn't save or submit any information in this event.
+
+Because your form would exist within the dialog content you specify and forms are highly implementation-specific,
+JTJS doesn't offer a submit button by default with this dialog. This component exists largely for convenience
+and making your JSX semantic when you do decide to put a form in a dialog.
+
+It's likely you'll want to close the dialog after the user successfully submits your form.
+To do so, keep a `ref` to the `FormDialog` and pass it to the `closeDialog` function.
+### Props
+`cancelButton?: Omit` - The data for the button that represents cancelling the form. Defaults to
+a button with text `Cancel` that closes the dialog when clicked. Use `onCancel` to
+control what to do when this button is clicked and control whether the dialog should
+close when the button is clicked.
+
+Prefer using `onCancel` rather than setting `cancelButton.buttonProps.onClick`, since
+that gives you more control over the autoclose operation.
+
+
+`onCancel?: DialogButton['beforeCloseOnClick']` - What to do when the form is abandoned.
+
+
+
+
 ## `FormGroup`
 [Components ⬆️](#components)
 ### Description
@@ -319,6 +465,15 @@ A light wrapper around a `fieldset`. Used to group related form controls and inp
 ### Props
 `inlineItems?: boolean = false` - (Optional, defaults to `false`) Whether the items in the group should be inline.
 If this is `false`, each item in the group will be on its own line.
+
+
+`error?: string`
+
+
+`warn?: string`
+
+
+`info?: string`
 
 
 
@@ -990,6 +1145,50 @@ a `value` that's not `undefined`.
 
 @param optionValue - The value of the option that was selected from the dropdown.
 @param event - The original simulated event.
+
+
+
+
+## `StructuredDialog`
+[Components ⬆️](#components)
+### Description
+Base component for a dialog with a standard structure. A structured dialog has, from top to bottom:
+
+1. An optional (though strongly recommended) title. This should describe what the dialog is for.
+2. An area for your content.
+3. An area for buttons. These buttons could be anything you need. Some examples would be a "Cancel" button to cancel
+any actions done in the dialog or an "Okay" button for a confirmation dialog, etc.
+### Props
+`show: boolean` - Whether the dialog should be showing. You should be using this to control when the dialog
+is visible, as opposed to conditionally rendering.
+
+@example
+```tsx
+// DO:
+<Dialog show={someShowState} onClose={() => setSomeShowState(false)} />
+
+// DON'T:
+{someShowState && (<Dialog />)}
+```
+
+
+`isModal?: boolean` - Whether the dialog is a modal. A modal is a dialog that goes on top of the rest of the page in the center of the
+screen regardless of where it exists in the DOM. Visually, everything behind the modal is darkened. Elements
+behind the modal cannot be interacted with until the modal is closed.
+
+
+`hideBehaviour?: HideBehaviour` - (Optional, defaults to {@link HideBehaviour.Remove}) How the dialog handles its children when it's not shown. If
+{@link HideBehaviour.Hide}, the children of the dialog remain mounted when the dialog is hidden.
+If {@link HideBehaviour.Remove}, the children of the dialog will be unmounted when the dialog is hidden.
+
+Consider setting this to {@link HideBehaviour.Hide} if the children of the dialog need to maintain some kind of \
+state in between separate showings of the dialog.
+
+
+`title?: string = ''`
+
+
+`buttons?: Array = []`
 
 
 
