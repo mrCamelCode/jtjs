@@ -18,32 +18,11 @@
       @include focus;
     }
 
-    // Firefox only
+    // #1: webkit scrollbar styling doesn't seem to be supported anymore. This is
+    // the extent of scrollbar styling we can do at this point (along with the width,
+    // but accessibility guidelines suggest making it no smaller than 44px, which is the
+    // default width anyway).
     scrollbar-color: var(--jtjs-theme-accent) transparent;
-
-    ::-webkit-scrollbar {
-      background-color: transparent;
-      width: 10px;
-      height: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      @include rounded-corners;
-
-      // background-color: var(--jtjs-theme-accent);
-      background: linear-gradient(
-        to right,
-        var(--jtjs-theme-accent-lightened) 20%,
-        var(--jtjs-theme-accent-darkened) 50%
-      );
-
-      &:horizontal {
-        background: linear-gradient(
-          to top,
-          var(--jtjs-theme-accent-darkened) 50%,
-          var(--jtjs-theme-accent-lightened) 80%
-        );
-      }
-    }
   }
 
   html {
