@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/browser",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "license": "MIT",
   "dependencies": {
     "@jtjs/event": ">=1.0.0"
