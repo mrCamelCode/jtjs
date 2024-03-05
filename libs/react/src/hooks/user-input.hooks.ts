@@ -76,15 +76,16 @@ export interface ChordInputOptions {
 export function useChordDown(
   keys: KeyName[],
   handler: KeyEventHandler,
-  options?: ChordInputOptions
+  options: ChordInputOptions = {}
 ) {
-  const { exclusive = false } = options ?? {};
+  const { exclusive = false } = options;
 
   useEffect(() => {
     const keyListener: UserInputKeyEventHandler = () => {
       if (
-        (exclusive && UserInputService.isChordPressedExclusively(keys)) ||
-        UserInputService.isChordPressed(keys)
+        exclusive
+          ? UserInputService.isChordPressedExclusively(keys)
+          : UserInputService.isChordPressed(keys)
       ) {
         handler();
       }
