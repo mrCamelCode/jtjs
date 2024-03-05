@@ -72,7 +72,7 @@ export class UserInputService {
   public static isChordPressedExclusively(keys: KeyName[]): boolean {
     return (
       UserInputService.isChordPressed(keys) &&
-      Object.values(UserInputService._keylog).map((val) => !!val).length ===
+      Object.values(UserInputService._keylog).filter(Boolean).length ===
         keys.length
     );
   }
