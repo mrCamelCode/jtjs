@@ -10,6 +10,7 @@ import {
   Icon,
   InlineFeedbackMessage,
   InlineFeedbackMessageType,
+  InlineText,
   LabelPosition,
   LabelledCheckboxGroup,
   LabelledColorInput,
@@ -117,6 +118,20 @@ export function App() {
           <LabelledTextInput label="Something" />
           <LabelledTextInput label="Something Else" />
         </FormGroup>
+
+        <InlineText
+          style={{
+            maxWidth: 200,
+            maxHeight: '2rem',
+            overflow: 'auto',
+            wordBreak: 'keep-all',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          something really long that will definitely cause a scrollbar I mean
+          cmon look at this runon sentence it's just neverending okay I'll stop
+          now because this is probably enough.
+        </InlineText>
 
         <FormGroup
           error="Bad news!"
