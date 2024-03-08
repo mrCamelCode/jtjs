@@ -4,18 +4,18 @@ import {
   Collapsible,
   Contentbox,
   Flexbox,
+  FormDialog,
   FormGroup,
   Heading,
   HideBehaviour,
   Icon,
   InlineFeedbackMessage,
   InlineFeedbackMessageType,
+  InlineText,
   LabelPosition,
   LabelledCheckboxGroup,
   LabelledColorInput,
   LabelledInput,
-  LabelledMaskedMultilineTextInput,
-  LabelledMaskedTextInput,
   LabelledRadio,
   LabelledRadioGroup,
   LabelledSelect,
@@ -25,17 +25,24 @@ import {
   LoadView,
   Radio,
   Select,
+  StructuredDialog,
   Table,
   Text,
   ThemeMode,
   ThemeToggle,
   Toggle,
   Tooltipped,
+  closeDialog,
   useBreakpoint,
   useTheme,
 } from '@jtjs/react';
 import { ThemeService } from '@jtjs/view';
-import { useEffect, useState } from 'react';
+import {
+  SubmitHandler,
+  required,
+  useForm as useModularForm,
+} from '@modular-forms/react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function fakeNetworkCall(): Promise<number> {
@@ -58,6 +65,11 @@ ThemeService.registerTheme({
 //   console.log('activity state changin to:', ActivityState[state].toString());
 // });
 
+type ModularFormData = {
+  username: string;
+  password: string;
+};
+
 export function App() {
   const [theme, setTheme] = useTheme();
   const [data, setData] = useState(0);
@@ -66,8 +78,12 @@ export function App() {
   const [selectedOption, setSelectedOption] = useState('');
   const [toggle, setToggle] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState(theme.background);
+  const [showDialog, setShowDialog] = useState(false);
+  const [showFormDialog, setShowFormDialog] = useState(false);
 
   const currentBreakpoint = useBreakpoint();
+
+  const modularFormDialog = useRef<HTMLDialogElement>(null);
 
   console.log('render');
 
@@ -98,6 +114,12 @@ export function App() {
 
   const onSubmit = (data: any) => console.log(data);
 
+  const handleModularFormSubmit: SubmitHandler<ModularFormData> = (values) => {
+    console.log('subimtted with values:', values);
+
+    closeDialog(modularFormDialog.current);
+  };
+
   return (
     <div
       id="content"
@@ -108,6 +130,31 @@ export function App() {
       }}
     >
       <Contentbox direction="column">
+        <Button onClick={() => setShowDialog(true)}>Open Dialog</Button>
+        <StructuredDialog
+          // title="My Dialog"
+          show={showDialog}
+          isModal
+          onClose={() => setShowDialog(false)}
+        >
+          <InlineText>I'm text in a dialog!</InlineText>
+
+          <LabelledTextInput label="Input in Dialog" autoFocus />
+        </StructuredDialog>
+
+        <Button onClick={() => setShowFormDialog(true)}>
+          Open Form Dialog
+        </Button>
+        <FormDialog
+          ref={modularFormDialog}
+          show={showFormDialog}
+          title="Form Dialog"
+          isModal
+          onClose={() => setShowFormDialog(false)}
+        >
+          <ModularFormTest handleSubmit={handleModularFormSubmit} />
+        </FormDialog>
+
         <FormGroup>
           <LabelledTextInput label="Something" />
           <LabelledTextInput label="Something Else" />
@@ -117,6 +164,20 @@ export function App() {
           <LabelledTextInput label="Something" />
           <LabelledTextInput label="Something Else" />
         </FormGroup>
+
+        <InlineText
+          style={{
+            maxWidth: 200,
+            maxHeight: '2rem',
+            overflow: 'auto',
+            wordBreak: 'keep-all',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          something really long that will definitely cause a scrollbar I mean
+          cmon look at this runon sentence it's just neverending okay I'll stop
+          now because this is probably enough.
+        </InlineText>
 
         <FormGroup
           error="Bad news!"
@@ -430,7 +491,7 @@ export function App() {
           />
         </Collapsible>
 
-        <Contentbox filled>
+        {/* <Contentbox filled>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Flexbox direction="column">
               <LabelledMaskedTextInput
@@ -451,7 +512,7 @@ export function App() {
               <Button type="submit">Submit</Button>
             </Flexbox>
           </form>
-        </Contentbox>
+        </Contentbox> */}
 
         <LabelledInput label="Password" type="password" />
         <LabelledInput label="Numbers" type="number" />
@@ -582,5 +643,41 @@ export function App() {
     </div>
   );
 }
+
+const ModularFormTest = ({
+  handleSubmit,
+}: {
+  handleSubmit: SubmitHandler<ModularFormData>;
+}) => {
+  const [modularForm, { Field, Form }] = useModularForm<ModularFormData>();
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Field name="username" validate={[required('req')]}>
+        {(field, props) => (
+          <LabelledTextInput
+            {...props}
+            label="Username"
+            error={field.error.value}
+            required
+          />
+        )}
+      </Field>
+
+      <Field name="password" validate={[required('req')]}>
+        {(field, props) => (
+          <LabelledTextInput
+            {...props}
+            label="Password"
+            error={field.error.value}
+            required
+          />
+        )}
+      </Field>
+
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+};
 
 export default App;
