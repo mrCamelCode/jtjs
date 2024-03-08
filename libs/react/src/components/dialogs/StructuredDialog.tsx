@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { buildClassName } from '../../util';
-import { Button } from '../controls';
+import { AsyncButton } from '../controls';
 import { Heading } from '../text';
 import { Flexbox } from '../wrappers';
 import { Dialog, DialogProps } from './Dialog';
@@ -69,7 +69,7 @@ export const StructuredDialog = forwardRef<
                   const { onClick } = buttonProps;
 
                   return (
-                    <Button
+                    <AsyncButton
                       key={text}
                       onClick={async (...args) => {
                         onClick?.(...args);
@@ -86,7 +86,7 @@ export const StructuredDialog = forwardRef<
                       {...buttonProps}
                     >
                       {text}
-                    </Button>
+                    </AsyncButton>
                   );
                 }
               )}
