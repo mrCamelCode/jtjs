@@ -18,6 +18,8 @@ about those, just look at code completion for function names starting with `use`
 # Components
 - [AcknowledgmentDialog](#acknowledgmentdialog)
 
+- [AsyncButton](#asyncbutton)
+
 - [BaseLabelledInput](#baselabelledinput)
 
 - [Button](#button)
@@ -131,6 +133,37 @@ that gives you more control over the autoclose operation.
 
 
 `onAcknowledge?: DialogButton['beforeCloseOnClick']` - What to do when the prompt is acknowledged.
+
+
+
+
+## `AsyncButton`
+[Components ⬆️](#components)
+### Description
+A specialized button that assumes that its `onClick` handler is async and will wait for it to finish. While waiting,
+the button is disabled.
+
+While the async task is running, the button will have the `jtjs-async-button-working` class attached to it if you'd
+like to assign special styles for that state.
+### Props
+`enableMouseTracking?: boolean` - (Optional, defaults to `false`) Whether the position of the mouse is tracked when it's over the button.
+This can be useful in creating effects with the background of the button that are based on the mouse
+position, but could be expensive if you have a lot of other things going on in your app.
+
+If you want to use the mouse position yourself, the current position of the mouse can be tracked in the CSS
+as variables scoped to the button. The variables are `--jtjs-mouse-pos-x` and `--jtjs-mouse-pos-y`.
+
+
+`onChangeMousePosition?: signature` - What to do when the position of the mouse changes while hovering over the button. Only triggered when
+`enableMouseTracking` is `true`.
+
+@param mousePosition - The current mouse position, relative to the bounding box of the button. Coordinates of (-1, -1)
+imply that the mouse is no longer over the button.
+
+
+`isPerformingAsyncTask?: boolean = false` - Whether the async button should behave as though it's performing its async task. This will be used in conjunction
+with any async `onClick` and the button will show as performing its async task if an `onClick` handler is running
+or this is `true`.
 
 
 

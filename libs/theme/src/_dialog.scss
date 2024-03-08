@@ -14,7 +14,7 @@
   @include rounded-corners;
   @include soft-shadow;
 
-  animation: jtjs-dialog-entry 0.3s ease;
+  animation: jtjs-anim_pop 0.4s linear;
 
   outline: none;
   border: none;
