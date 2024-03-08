@@ -7,7 +7,7 @@
   // It may seem silly to have two animations that do the same thing, but it's necessary.
   // Having different animations gives them different names, which allows the animation
   // to re-run when the toggle state changes.
-  @keyframes toggle-knob-slide-on {
+  @keyframes jtjs-anim_toggle-knob-slide-on {
     0% {
       width: $height;
       border-radius: 50%;
@@ -32,7 +32,7 @@
     }
   }
 
-  @keyframes toggle-knob-slide-off {
+  @keyframes jtjs-anim_toggle-knob-slide-off {
     0% {
       width: $height;
       border-radius: 50%;
@@ -107,7 +107,7 @@
     .jtjs-toggle-knob {
       left: $width;
       transform: translateX(calc(-100% + 1px));
-      animation: toggle-knob-slide-on $animationDuration;
+      animation: jtjs-anim_toggle-knob-slide-on $animationDuration;
 
       background-color: var(--jtjs-theme-affirmativeText);
     }
@@ -122,7 +122,7 @@
       transform: translateX(-1px);
       background-color: var(--jtjs-theme-negativeText);
 
-      animation: toggle-knob-slide-off $animationDuration;
+      animation: jtjs-anim_toggle-knob-slide-off $animationDuration;
     }
   }
 

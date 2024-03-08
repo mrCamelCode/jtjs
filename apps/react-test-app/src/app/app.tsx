@@ -150,6 +150,7 @@ export function App() {
           show={showFormDialog}
           title="Form Dialog"
           isModal
+          onCancel={() => new Promise((resolve) => setTimeout(() => resolve(true), 3000))}
           onClose={() => setShowFormDialog(false)}
         >
           <ModularFormTest handleSubmit={handleModularFormSubmit} />
