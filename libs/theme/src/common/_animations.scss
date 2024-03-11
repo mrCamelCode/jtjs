@@ -13,6 +13,21 @@
   animation-timing-function: ease;
 }
 
+.jtjs-anim_fade-out {
+  @keyframes jtjs-anim_fade-out {
+    0% {
+      filter: opacity(1);
+    }
+    100% {
+      filter: opacity(0);
+    }
+  }
+
+  animation-name: jtjs-anim_fade-out !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+}
+
 .jtjs-anim_slide-in {
   @keyframes jtjs-anim_slide-in {
     0% {
