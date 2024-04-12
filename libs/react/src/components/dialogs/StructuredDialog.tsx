@@ -1,8 +1,8 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
-import { buildClassName } from '../../util';
-import { AsyncButton } from '../controls';
-import { Heading } from '../text';
-import { Flexbox } from '../wrappers';
+import { buildClassName } from '../../util/util-functions';
+import { AsyncButton } from '../controls/AsyncButton';
+import { Heading } from '../text/Heading';
+import { Flexbox } from '../wrappers/layout/Flexbox';
 import { Dialog, DialogProps } from './Dialog';
 import { DialogButton } from './dialog.model';
 import { closeDialog } from './dialog.util';

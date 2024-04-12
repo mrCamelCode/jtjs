@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { buildClassName } from '../../util';
+import { buildClassName } from '../../util/util-functions';
 
 export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   /**

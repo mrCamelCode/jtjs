@@ -1,4 +1,5 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
+import { HorizontalAlignment, VerticalAlignment } from '../../../types';
 import { buildClassName } from '../../../util/util-functions';
 
 export interface FlexboxProps extends ComponentPropsWithRef<'div'> {
@@ -12,8 +13,8 @@ export interface FlexboxProps extends ComponentPropsWithRef<'div'> {
    * contents should be reversed.
    */
   reverseDirection?: boolean;
-  horizontalAlignment?: 'left' | 'center' | 'right';
-  verticalAlignment?: 'top' | 'center' | 'bottom';
+  horizontalAlignment?: HorizontalAlignment;
+  verticalAlignment?: VerticalAlignment;
   /**
    * (Optional, defaults to `false`) Whether the contents of the Flexbox should
    * wrap.

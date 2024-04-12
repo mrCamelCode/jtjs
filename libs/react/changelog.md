@@ -1,3 +1,10 @@
+# 1.7.0
+
+- Features
+  - Added the `PhoneLink` and `EmailLink` components.
+  - Added the `Grid` and `GridArea` components.
+    - Very exciting addition to JTJS! Grid is a very useful but complex feature of CSS and I've wanted an easy way to interact with it akin to how `Flexbox` lets me interact with CSS flex. These components should simplify many of the common use cases of CSS grid.
+
 # 1.6.0
 
 - Features

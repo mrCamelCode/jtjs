@@ -6,6 +6,8 @@ import {
   Flexbox,
   FormDialog,
   FormGroup,
+  Grid,
+  GridArea,
   Heading,
   HideBehaviour,
   Icon,
@@ -150,7 +152,9 @@ export function App() {
           show={showFormDialog}
           title="Form Dialog"
           isModal
-          onCancel={() => new Promise((resolve) => setTimeout(() => resolve(true), 3000))}
+          onCancel={() =>
+            new Promise((resolve) => setTimeout(() => resolve(true), 3000))
+          }
           onClose={() => setShowFormDialog(false)}
         >
           <ModularFormTest handleSubmit={handleModularFormSubmit} />
@@ -640,6 +644,213 @@ export function App() {
             );
           })}
         </Flexbox>
+      </Contentbox>
+
+      <Contentbox direction="column">
+        <Heading importance={1}>Grid</Heading>
+
+        <Heading importance={2}>Standard</Heading>
+        <Grid
+          layout={`
+                | 100px  | 1fr    | 100px
+           auto | header | header | header
+           1fr  | .      | main   | sidebar
+                | footer | footer | footer
+        `}
+          style={{
+            width: '100%',
+          }}
+        >
+          <GridArea name="header">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'red',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Header</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea name="main">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'blue',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Main</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea name="sidebar">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'lightblue',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Sidebar</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea name="footer">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'green',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Footer</Text>
+            </Flexbox>
+          </GridArea>
+        </Grid>
+
+        <Heading importance={2}>Areas Span Rows</Heading>
+        <Grid
+          layout={`
+                | 1fr    | 1fr    | auto
+           auto | header | header | sidebar
+           1fr  | main   | main   | sidebar
+                | footer | footer | sidebar
+        `}
+          style={{
+            width: '100%',
+          }}
+        >
+          <GridArea name="header">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'red',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Header</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea name="main">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'blue',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Main</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea name="sidebar">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'lightblue',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Sidebar</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea name="footer">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'green',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Footer</Text>
+            </Flexbox>
+          </GridArea>
+        </Grid>
+
+        <Heading importance={2}>Responsive</Heading>
+        <Grid
+          layout={{
+            columnSizing: '100px 1fr 100px',
+            rowSizing: 'auto 1fr 1fr auto',
+          }}
+          style={{
+            width: '100%',
+          }}
+        >
+          <GridArea row="1" column="1 / span 3">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'red',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Header</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea>
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'blue',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Main</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea>
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'lightblue',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Sidebar</Text>
+            </Flexbox>
+          </GridArea>
+
+          <GridArea row="3" column="1 / span 3">
+            <Flexbox
+              horizontalAlignment="center"
+              verticalAlignment="center"
+              style={{
+                backgroundColor: 'green',
+                height: '100%',
+                width: '100%',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Footer</Text>
+            </Flexbox>
+          </GridArea>
+        </Grid>
       </Contentbox>
     </div>
   );

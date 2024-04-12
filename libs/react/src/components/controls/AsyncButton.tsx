@@ -1,6 +1,6 @@
 import { forwardRef, useState } from 'react';
-import { useIsMountedRef } from '../../hooks';
-import { buildClassName } from '../../util';
+import { useIsMountedRef } from '../../hooks/use-is-mounted-ref.hook';
+import { buildClassName } from '../../util/util-functions';
 import { Button, ButtonProps } from './Button';
 
 export interface AsyncButtonProps extends ButtonProps {
