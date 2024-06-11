@@ -1,3 +1,7 @@
+# 1.7.1
+
+- Correct lack of exports.
+
 # 1.7.0
 
 - Features
