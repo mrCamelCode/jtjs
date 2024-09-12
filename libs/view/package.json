@@ -1,7 +1,8 @@
 {
   "name": "@jtjs/view",
   "version": "1.1.0",
-  "dependencies": {
-    "@jtjs/event": ">=0.0.1"
+  "description": "Utilities that are useful in situations where there's a view of any kind. This library isn't dependent on a browser environment, but plays nicely with one.",
+  "peerDependencies": {
+    "@jtjs/event": "^1.0.0"
   }
 }

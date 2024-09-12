@@ -1,6 +1,6 @@
 import { Event } from '@jtjs/event';
 import chroma from 'chroma-js';
-import { Theme } from '../models/theme.model';
+import { Theme } from '../model/theme.model';
 
 export type OnChangeThemeListener = (theme: Theme) => void;
 

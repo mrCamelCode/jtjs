@@ -1,5 +1,7 @@
+import { ImageConversionType } from '@jtjs/browser';
 import {
   Button,
+  Carousel,
   Checkbox,
   Collapsible,
   Contentbox,
@@ -17,6 +19,7 @@ import {
   LabelPosition,
   LabelledCheckboxGroup,
   LabelledColorInput,
+  LabelledImageFileInput,
   LabelledInput,
   LabelledRadio,
   LabelledRadioGroup,
@@ -82,6 +85,7 @@ export function App() {
   const [backgroundColor, setBackgroundColor] = useState(theme.background);
   const [showDialog, setShowDialog] = useState(false);
   const [showFormDialog, setShowFormDialog] = useState(false);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
 
   const currentBreakpoint = useBreakpoint();
 
@@ -851,6 +855,36 @@ export function App() {
             </Flexbox>
           </GridArea>
         </Grid>
+      </Contentbox>
+
+      <Contentbox direction="column">
+        <Heading importance={2}>Carousel</Heading>
+
+        <Carousel
+          items={['test 1', 'test 2', 'test 3']}
+          getItemKey={(item) => item}
+          renderItem={(item) => <InlineText>{item}</InlineText>}
+          onChangeActiveItem={(item) => console.log('new active item:', item)}
+        />
+      </Contentbox>
+
+      <Contentbox direction="column">
+        <Heading importance={2}>Image Input</Heading>
+
+        <LabelledImageFileInput
+          label="Image Upload"
+          onChangeFiles={setImageFiles}
+          convertIncomingTo={ImageConversionType.Webp}
+          onConvertedFiles={(files) => {
+            console.log('converted:', files);
+          }}
+          multiple
+        />
+
+        <Text>Files:</Text>
+        {imageFiles.map((file) => (
+          <Text key={file.name}>{file.name}</Text>
+        ))}
       </Contentbox>
     </div>
   );

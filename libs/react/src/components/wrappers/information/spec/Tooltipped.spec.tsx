@@ -41,8 +41,8 @@ describe('Tooltipped', () => {
         '.jtjs-tooltip-container'
       ) as HTMLDivElement;
 
-      act(() => {
-        userEvent.hover(wrapper);
+      await act(async () => {
+        await userEvent.hover(wrapper);
       });
 
       await waitFor(() => screen.getByTestId('tooltip-container'));
@@ -79,12 +79,12 @@ describe('Tooltipped', () => {
         '.jtjs-tooltip-container'
       ) as HTMLDivElement;
 
-      act(() => {
-        userEvent.hover(wrapper);
+      await act(async () => {
+        await userEvent.hover(wrapper);
       });
 
-      act(() => {
-        userEvent.unhover(wrapper);
+      await act(async () => {
+        await userEvent.unhover(wrapper);
       });
 
       await waitFor(() => screen.getByTestId('tooltip-container'));

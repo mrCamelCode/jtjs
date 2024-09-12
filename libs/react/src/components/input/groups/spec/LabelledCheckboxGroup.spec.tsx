@@ -1,4 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import { describe, test, afterEach, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { ChangeEvent } from 'react';
 import {
@@ -23,7 +24,7 @@ const defaultOptions: CheckboxOption[] = [
 ];
 
 let value: string[] = [];
-const onChangeSelection = jest.fn(
+const onChangeSelection = vi.fn(
   (
     selectedValues: string[],
     selectedValue: string,
@@ -47,7 +48,7 @@ const renderLabelledCheckboxGroup = (
 describe('LabelledCheckboxGroup', () => {
   afterEach(() => {
     cleanup();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('controlled', () => {
@@ -61,12 +62,12 @@ describe('LabelledCheckboxGroup', () => {
       });
     });
 
-    test('the selections should update upon user interaction', () => {
+    test('the selections should update upon user interaction', async () => {
       renderLabelledCheckboxGroup({
         value,
       });
 
-      userEvent.click(screen.getByLabelText('Checkbox 2'));
+      await userEvent.click(screen.getByLabelText('Checkbox 2'));
 
       expect(onChangeSelection).toHaveBeenCalledWith(
         ['2'],

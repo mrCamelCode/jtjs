@@ -10,13 +10,13 @@ export interface ILinkedList<T1> {
    */
   readonly last: T1 | undefined;
   /**
-   * The first node in the linked list, null if the list is empty.
+   * The first node in the linked list, undefined if the list is empty.
    */
-  readonly head: ILinkedListNode<T1> | null;
+  readonly head: ILinkedListNode<T1> | undefined;
   /**
-   * The last node in the linked list, null if the list is empty.
+   * The last node in the linked list, undefined if the list is empty.
    */
-  readonly tip: ILinkedListNode<T1> | null;
+  readonly tip: ILinkedListNode<T1> | undefined;
   /**
    * The number of elements in the linked list.
    */
@@ -109,9 +109,9 @@ export interface ILinkedList<T1> {
    *
    * @param predicate - The predicate to invoke on each element in the linked list.
    *
-   * @returns The element that passed the provided predicate, null if no element passed.
+   * @returns The element that passed the provided predicate, undefined if no element passed.
    */
-  find(predicate: (nodeValue: T1) => boolean): T1 | null;
+  find(predicate: (nodeValue: T1) => boolean): T1 | undefined;
   /**
    * Clears the list, emptying it entirely.
    */

@@ -1,14 +1,12 @@
 {
   "name": "@jtjs/react",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "license": "MIT",
-  "dependencies": {
-    "@jtjs/browser": ">=0.0.1",
-    "@jtjs/data": ">=0.0.1",
-    "@jtjs/view": ">=0.0.1"
-  },
+  "description": "A component library for React applications.",
   "peerDependencies": {
     "react": ">=18.0",
-    "react-dom": ">=18.0"
+    "react-dom": ">=18.0",
+    "@jtjs/browser": "^1.0.0",
+    "@jtjs/view": "^1.0.0"
   }
 }

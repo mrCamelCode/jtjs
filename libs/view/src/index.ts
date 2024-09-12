@@ -1,2 +1,2 @@
-export * from './lib/services/theme.service';
-export * from './lib/models/theme.model';
+export * from './lib/model';
+export * from './lib/services';

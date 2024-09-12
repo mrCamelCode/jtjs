@@ -16,13 +16,13 @@ export interface IQueue<T> {
   /**
    * Removes the first item in the queue.
    *
-   * @returns The removed item, or null if the queue was empty.
+   * @returns The removed item, or undefined if the queue was empty.
    */
-  dequeue(): T | null;
+  dequeue(): T | undefined;
   /**
-   * @returns The first item in the queue, or null if the queue is empty.
+   * @returns The first item in the queue, or undefined if the queue is empty.
    */
-  peek(): T | null;
+  peek(): T | undefined;
   /**
    * Clears the queue entirely.
    */

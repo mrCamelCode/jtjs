@@ -24,16 +24,16 @@ export class Queue<T> implements IQueue<T> {
     this._queue.add(item);
   }
 
-  dequeue(): T | null {
-    const item = this._queue.first ?? null;
+  dequeue(): T | undefined {
+    const item = this._queue.first ?? undefined;
 
     this._queue.removeFirst();
 
     return item;
   }
 
-  peek(): T | null {
-    return this._queue.first ?? null;
+  peek(): T | undefined {
+    return this._queue.first ?? undefined;
   }
 
   clear(): void {

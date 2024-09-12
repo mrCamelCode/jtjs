@@ -22,12 +22,12 @@ export class Stack<T> implements IStack<T> {
     this._stack.push(item);
   }
 
-  pop(): T | null {
-    return this._stack.pop() ?? null;
+  pop(): T | undefined {
+    return this._stack.pop() ?? undefined;
   }
 
-  peek(): T | null {
-    return this._stack[this._stack.length - 1] ?? null;
+  peek(): T | undefined {
+    return this._stack[this._stack.length - 1] ?? undefined;
   }
 
   clear(): void {

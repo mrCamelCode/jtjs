@@ -6,13 +6,13 @@ import { LinkedListNode } from './LinkedListNode';
  * Implementation of a doubly linked list.
  */
 export class LinkedList<T> implements ILinkedList<T> {
-  private _head: ILinkedListNode<T> | null;
-  get head(): ILinkedListNode<T> | null {
+  private _head: ILinkedListNode<T> | undefined;
+  get head(): ILinkedListNode<T> | undefined {
     return this._head;
   }
 
-  private _tip: ILinkedListNode<T> | null;
-  get tip(): ILinkedListNode<T> | null {
+  private _tip: ILinkedListNode<T> | undefined;
+  get tip(): ILinkedListNode<T> | undefined {
     return this._tip;
   }
 
@@ -48,8 +48,8 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   constructor(...values: T[]) {
-    this._head = null;
-    this._tip = null;
+    this._head = undefined;
+    this._tip = undefined;
     this._length = 0;
 
     values.forEach((val) => {
@@ -92,9 +92,9 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   remove(value: T): void {
-    let foundNode: ILinkedListNode<T> | null = null;
+    let foundNode: ILinkedListNode<T> | undefined = undefined;
 
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (node.value === value) {
         foundNode = node;
         break;
@@ -105,9 +105,9 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   removeBy(predicate: (value: T) => boolean): void {
-    let foundNode: ILinkedListNode<T> | null = null;
+    let foundNode: ILinkedListNode<T> | undefined = undefined;
 
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (predicate(node.value)) {
         foundNode = node;
         break;
@@ -128,7 +128,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   filter(predicate: (nodeValue: T) => boolean): LinkedList<T> {
     const list = new LinkedList<T>();
 
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (predicate(node.value)) {
         list.add(node.value);
       }
@@ -140,7 +140,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   map<T2>(iteratee: (nodeValue: T) => T2): LinkedList<T2> {
     const list = new LinkedList<T2>();
 
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       list.add(iteratee(node.value));
     }
 
@@ -148,13 +148,13 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   forEach(iteratee: (nodeValue: T) => void): void {
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       iteratee(node.value);
     }
   }
 
   includes(value: T): boolean {
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (node.value === value) {
         return true;
       }
@@ -164,7 +164,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   some(predicate: (nodeValue: T) => boolean): boolean {
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (predicate(node.value)) {
         return true;
       }
@@ -173,26 +173,26 @@ export class LinkedList<T> implements ILinkedList<T> {
     return false;
   }
 
-  find(predicate: (nodeValue: T) => boolean): T | null {
-    for (let node = this._head; node !== null; node = node.next) {
+  find(predicate: (nodeValue: T) => boolean): T | undefined {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (predicate(node.value)) {
         return node.value;
       }
     }
 
-    return null;
+    return undefined;
   }
 
   clear(): void {
-    this._head = null;
-    this._tip = null;
+    this._head = undefined;
+    this._tip = undefined;
     this._length = 0;
   }
 
   toArray(): T[] {
     const arr = [];
 
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       arr.push(node.value);
     }
 
@@ -201,7 +201,7 @@ export class LinkedList<T> implements ILinkedList<T> {
 
   toString(): string {
     let str = '(';
-    for (let node = this._head; node !== null; node = node.next) {
+    for (let node = this._head; node !== undefined; node = node.next) {
       if (node === this._head) {
         str += `${node.value}`;
       } else {
@@ -212,7 +212,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return str + ')';
   }
 
-  private removeNode(node: ILinkedListNode<T> | null) {
+  private removeNode(node: ILinkedListNode<T> | undefined) {
     if (!node) {
       return;
     }
@@ -231,8 +231,8 @@ export class LinkedList<T> implements ILinkedList<T> {
       this._tip = node.previous;
     }
 
-    node.previous = null;
-    node.next = null;
+    node.previous = undefined;
+    node.next = undefined;
 
     this._length--;
   }

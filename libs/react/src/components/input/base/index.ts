@@ -7,3 +7,5 @@ export * from './MultilineTextInput';
 export * from './Radio';
 export * from './Select';
 export * from './TextInput';
+export * from './FileInput';
+export * from './ImageFileInput';

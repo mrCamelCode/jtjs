@@ -57,12 +57,12 @@ describe('LabelledRadioGroup', () => {
       });
     });
 
-    test('the selection should update upon user interaction', () => {
+    test('the selection should update upon user interaction', async () => {
       renderLabelledRadioGroup({
         value,
       });
 
-      userEvent.click(screen.getByLabelText('Radio 2'));
+      await userEvent.click(screen.getByLabelText('Radio 2'));
 
       expect(onChangeSelection).toHaveBeenCalledWith(
         '2',
@@ -106,10 +106,10 @@ describe('LabelledRadioGroup', () => {
       });
     });
 
-    test('the selection should update upon user interaction', () => {
+    test('the selection should update upon user interaction', async () => {
       renderLabelledRadioGroup();
 
-      userEvent.click(screen.getByLabelText('Radio 2'));
+      await userEvent.click(screen.getByLabelText('Radio 2'));
 
       expect(onChangeSelection).toHaveBeenCalledWith(
         '2',

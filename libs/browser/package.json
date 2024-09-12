@@ -1,8 +1,9 @@
 {
   "name": "@jtjs/browser",
-  "version": "0.0.13",
+  "version": "1.0.0",
   "license": "MIT",
-  "dependencies": {
-    "@jtjs/event": ">=1.0.0"
+  "description": "JTJS utilities that only work in the browser.",
+  "peerDependencies": {
+    "@jtjs/event": "^1.0.0"
   }
 }

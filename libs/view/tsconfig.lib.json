@@ -7,5 +7,5 @@
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "../browser/src/lib/util/image.util.ts", "../browser/src/lib/util/index.ts"]
 }

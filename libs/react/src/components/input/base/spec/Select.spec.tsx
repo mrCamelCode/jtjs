@@ -46,13 +46,13 @@ describe('Select', () => {
       expect(screen.getByText('Option 2')).toBeDefined();
     });
 
-    test('should allow you to change which option is selected', () => {
+    test('should allow you to change which option is selected', async () => {
       renderSelect({
         value,
         onChangeSelection,
       });
 
-      userEvent.selectOptions(screen.getByTestId('select'), 'Option 2');
+      await userEvent.selectOptions(screen.getByTestId('select'), 'Option 2');
 
       expect(onChangeSelection).toHaveBeenCalledTimes(1);
 
@@ -91,16 +91,16 @@ describe('Select', () => {
       expect(screen.getByText('Option 2')).toBeDefined();
     });
 
-    test('should allow you to change which option is selected', () => {
+    test('should allow you to change which option is selected', async () => {
       renderSelect();
 
       const select = screen.getByTestId('select') as HTMLSelectElement;
 
-      userEvent.selectOptions(screen.getByTestId('select'), 'Option 2');
+      await userEvent.selectOptions(screen.getByTestId('select'), 'Option 2');
 
       expect(select.value).toBe('2');
 
-      userEvent.selectOptions(screen.getByTestId('select'), 'Option 1');
+      await userEvent.selectOptions(screen.getByTestId('select'), 'Option 1');
 
       expect(select.value).toBe('1');
     });

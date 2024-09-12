@@ -16,15 +16,15 @@ export interface IStack<T> {
   /**
    * Pops the first item on the stack off. This mutates the stack.
    *
-   * @returns The popped item, or null if the stack is empty.
+   * @returns The popped item, or undefined if the stack is empty.
    */
-  pop(): T | null;
+  pop(): T | undefined;
   /**
    * Shows you the first item in the stack without removing it.
    *
-   * @returns The first item in the stack, or null if the stack is empty.
+   * @returns The first item in the stack, or undefined if the stack is empty.
    */
-  peek(): T | null;
+  peek(): T | undefined;
   /**
    * Clears the stack entirely.
    */

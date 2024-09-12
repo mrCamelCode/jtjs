@@ -14,7 +14,7 @@ describe('Button', () => {
     jest.clearAllMocks();
   });
 
-  it('invokes the click handler when clicked and shows up properly', () => {
+  it('invokes the click handler when clicked and shows up properly', async () => {
     const onClick = jest.fn();
 
     renderButton({
@@ -24,7 +24,7 @@ describe('Button', () => {
 
     expect(onClick).not.toHaveBeenCalled();
 
-    userEvent.click(screen.getByText('Click Me'));
+    await userEvent.click(screen.getByText('Click Me'));
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });

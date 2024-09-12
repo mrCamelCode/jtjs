@@ -45,7 +45,7 @@ xdescribe('StructuredDialog', () => {
 
     buttons.forEach((button) => expect(screen.getByText(button)).not.toBeNull);
   });
-  test('onClick for button is called when provided', () => {
+  test('onClick for button is called when provided', async () => {
     const mock = jest.fn();
 
     renderStructuredDialog({
@@ -60,11 +60,11 @@ xdescribe('StructuredDialog', () => {
     });
 
     const button = screen.getByText('test');
-    userEvent.click(button);
+    await userEvent.click(button);
 
     expect(mock).toHaveBeenCalledTimes(1);
   });
-  test('dialog is told to close when `closeDialogOnClick` is enabled for a button', () => {
+  test('dialog is told to close when `closeDialogOnClick` is enabled for a button', async () => {
     const closeDialogSpy = jest.spyOn(dialogUtils, 'closeDialog');
 
     renderStructuredDialog({
@@ -80,7 +80,7 @@ xdescribe('StructuredDialog', () => {
     closeDialogSpy.mockClear();
 
     const button = screen.getByText('test');
-    userEvent.click(button);
+    await userEvent.click(button);
 
     expect(closeDialogSpy).toHaveBeenCalledTimes(1);
   });
@@ -103,7 +103,7 @@ xdescribe('StructuredDialog', () => {
       closeDialogSpy.mockClear();
 
       const button = screen.getByText('test');
-      userEvent.click(button);
+      await userEvent.click(button);
 
       // Gives the async onClick handler time to resolve.
       await tick();
@@ -128,7 +128,7 @@ xdescribe('StructuredDialog', () => {
       closeDialogSpy.mockClear();
 
       const button = screen.getByText('test');
-      userEvent.click(button);
+      await userEvent.click(button);
 
       await tick();
 

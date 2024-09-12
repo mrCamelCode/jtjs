@@ -2,7 +2,7 @@ import {
   ChangeEvent,
   ComponentPropsWithRef,
   ComponentPropsWithoutRef,
-  forwardRef,
+  forwardRef
 } from 'react';
 import { Option } from '../../../types';
 import { buildClassName } from '../../../util';

@@ -1,5 +1,5 @@
 export interface ILinkedListNode<T> {
   value: T;
-  previous: ILinkedListNode<T> | null;
-  next: ILinkedListNode<T> | null;
+  previous: ILinkedListNode<T> | undefined;
+  next: ILinkedListNode<T> | undefined;
 }

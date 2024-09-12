@@ -20,7 +20,7 @@ describe('Toggle', () => {
   });
 
   describe('controlled', () => {
-    test('the value should update with user interaction, both by mouse and keyboard', () => {
+    test('the value should update with user interaction, both by mouse and keyboard', async () => {
       const { rerender } = renderToggle({
         isOn,
       });
@@ -30,7 +30,7 @@ describe('Toggle', () => {
 
       const toggle = screen.getByTestId('toggle');
 
-      userEvent.click(toggle);
+      await userEvent.click(toggle);
 
       expect(onToggle).toHaveBeenLastCalledWith(
         false,
@@ -41,7 +41,7 @@ describe('Toggle', () => {
       rerender(<Toggle isOn={isOn} onToggle={onToggle} />);
 
       fireEvent.focus(toggle);
-      userEvent.keyboard(' ');
+      await userEvent.keyboard(' ');
 
       expect(onToggle).toHaveBeenLastCalledWith(
         true,
@@ -50,7 +50,7 @@ describe('Toggle', () => {
       expect(isOn).toBe(true);
     });
 
-    test('blocks user interaction when disabled', () => {
+    test('blocks user interaction when disabled', async () => {
       const { rerender } = renderToggle({ isOn, disabled: true });
 
       expect(onToggle).not.toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe('Toggle', () => {
 
       const toggle = screen.getByTestId('toggle');
 
-      userEvent.click(toggle);
+      await userEvent.click(toggle);
 
       expect(onToggle).not.toHaveBeenCalled();
       expect(isOn).toBe(true);
@@ -66,7 +66,7 @@ describe('Toggle', () => {
       rerender(<Toggle isOn={isOn} onToggle={onToggle} disabled />);
 
       fireEvent.focus(toggle);
-      userEvent.keyboard(' ');
+      await userEvent.keyboard(' ');
 
       expect(onToggle).not.toHaveBeenCalled();
       expect(isOn).toBe(true);
@@ -74,14 +74,14 @@ describe('Toggle', () => {
   });
 
   describe('uncontrolled', () => {
-    test('the value should update with user interaction, both by mouse and keyboard', () => {
+    test('the value should update with user interaction, both by mouse and keyboard', async () => {
       renderToggle();
 
       expect(onToggle).not.toHaveBeenCalled();
 
       const toggle = screen.getByTestId('toggle');
 
-      userEvent.click(toggle);
+      await userEvent.click(toggle);
 
       expect(onToggle).toHaveBeenLastCalledWith(
         true,
@@ -89,7 +89,7 @@ describe('Toggle', () => {
       );
 
       fireEvent.focus(toggle);
-      userEvent.keyboard(' ');
+      await userEvent.keyboard(' ');
 
       expect(onToggle).toHaveBeenLastCalledWith(
         false,
@@ -97,21 +97,19 @@ describe('Toggle', () => {
       );
     });
 
-    test('blocks user interaction when disabled', () => {
-      const { rerender } = renderToggle({ disabled: true });
+    test('blocks user interaction when disabled', async () => {
+      renderToggle({ disabled: true });
 
       expect(onToggle).not.toHaveBeenCalled();
 
       const toggle = screen.getByTestId('toggle');
 
-      userEvent.click(toggle);
+      await userEvent.click(toggle);
 
       expect(onToggle).not.toHaveBeenCalled();
 
-      // rerender(<Toggle isOn={isOn} onToggle={onToggle} disabled />);
-
       fireEvent.focus(toggle);
-      userEvent.keyboard(' ');
+      await userEvent.keyboard(' ');
 
       expect(onToggle).not.toHaveBeenCalled();
     });

@@ -21,12 +21,12 @@ describe('Radio', () => {
     jest.clearAllMocks();
   });
 
-  it('the value changes after a user interaction', () => {
+  it('the value changes after a user interaction', async () => {
     renderRadio();
 
     expect(onChangeChecked).not.toHaveBeenCalled();
 
-    userEvent.click(screen.getByTestId('radio'));
+    await userEvent.click(screen.getByTestId('radio'));
 
     expect(onChangeChecked).toHaveBeenCalledTimes(1);
     expect(value).toBe(true);

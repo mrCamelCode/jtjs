@@ -16,22 +16,22 @@ describe('Queue', () => {
     });
   });
   describe('dequeue', () => {
-    test('Dequeueing from an empty queue does not throw and returns null.', () => {
+    test('Dequeueing from an empty queue does not throw and returns undefined.', () => {
       expect(() => queue.dequeue()).not.toThrow();
-      expect(queue.dequeue()).toBe(null);
+      expect(queue.dequeue()).toBe(undefined);
     });
     test('Can dequeue an item.', () => {
       queue.enqueue(1);
 
       expect(queue.dequeue()).toBe(1);
       expect(queue.length).toBe(0);
-      expect(queue.dequeue()).toBe(null);
+      expect(queue.dequeue()).toBe(undefined);
     });
   });
   describe('peek', () => {
-    test('Peeking on an empty queue does not throw and returns null.', () => {
+    test('Peeking on an empty queue does not throw and returns undefined.', () => {
       expect(() => queue.peek()).not.toThrow();
-      expect(queue.peek()).toBe(null);
+      expect(queue.peek()).toBe(undefined);
     });
     test('Can peek an item.', () => {
       queue.enqueue(1);
@@ -53,7 +53,7 @@ describe('Queue', () => {
 
       expect(queue.length).toBe(0);
       expect(queue.isEmpty).toBe(true);
-      expect(queue.peek()).toBe(null);
+      expect(queue.peek()).toBe(undefined);
     });
   });
   describe('toArray', () => {

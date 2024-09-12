@@ -32,8 +32,8 @@ describe('LinkedList', () => {
 
       expect(linkedList.head.value === linkedList.first).toBe(true);
       expect(linkedList.first).toBe(10);
-      expect(linkedList.head.next).toBe(null);
-      expect(linkedList.head.previous).toBe(null);
+      expect(linkedList.head.next).toBe(undefined);
+      expect(linkedList.head.previous).toBe(undefined);
       expect(linkedList.length).toBe(1);
     });
     test('The element is correctly inserted to the front of the list when adding to a non-empty list.', () => {
@@ -46,7 +46,7 @@ describe('LinkedList', () => {
       expect(linkedList.head.value === linkedList.first).toBe(true);
       expect(linkedList.first).toBe(5);
       expect(linkedList.head.next.value).toBe(1);
-      expect(linkedList.head.previous).toBe(null);
+      expect(linkedList.head.previous).toBe(undefined);
       expect(linkedList.length).toBe(4);
     });
   });
@@ -59,8 +59,8 @@ describe('LinkedList', () => {
           linkedList.last === linkedList.first
       ).toBe(true);
       expect(linkedList.last).toBe(1);
-      expect(linkedList.tip.next).toBe(null);
-      expect(linkedList.tip.previous).toBe(null);
+      expect(linkedList.tip.next).toBe(undefined);
+      expect(linkedList.tip.previous).toBe(undefined);
       expect(linkedList.length).toBe(1);
     });
     test('The element is correctly put at the end of a non-empty list.', () => {
@@ -72,7 +72,7 @@ describe('LinkedList', () => {
 
       expect(linkedList.tip.value === linkedList.last).toBe(true);
       expect(linkedList.last).toBe(10);
-      expect(linkedList.tip.next).toBe(null);
+      expect(linkedList.tip.next).toBe(undefined);
       expect(linkedList.tip.previous.value).toBe(3);
       expect(linkedList.length).toBe(4);
     });
@@ -90,8 +90,8 @@ describe('LinkedList', () => {
       linkedList.remove(1);
 
       expect(linkedList.length).toBe(0);
-      expect(linkedList.head).toBe(null);
-      expect(linkedList.tip).toBe(null);
+      expect(linkedList.head).toBe(undefined);
+      expect(linkedList.tip).toBe(undefined);
     });
     test('Will NOT remove the only element in a list if it does not match.', () => {
       linkedList = new LinkedList(1);
@@ -128,7 +128,7 @@ describe('LinkedList', () => {
 
       expect(linkedList.length).toBe(2);
       expect(linkedList.head.value).toBe(2);
-      expect(linkedList.head.previous).toBe(null);
+      expect(linkedList.head.previous).toBe(undefined);
       expect(linkedList.head.next === linkedList.tip).toBe(true);
       expect(linkedList.tip.value).toBe(3);
     });
@@ -139,7 +139,7 @@ describe('LinkedList', () => {
 
       expect(linkedList.length).toBe(2);
       expect(linkedList.tip.value).toBe(2);
-      expect(linkedList.tip.next).toBe(null);
+      expect(linkedList.tip.next).toBe(undefined);
       expect(linkedList.tip.previous === linkedList.head).toBe(true);
       expect(linkedList.head.value).toBe(1);
     });
@@ -157,8 +157,8 @@ describe('LinkedList', () => {
       linkedList.removeBy((val) => val === 1);
 
       expect(linkedList.length).toBe(0);
-      expect(linkedList.head).toBe(null);
-      expect(linkedList.tip).toBe(null);
+      expect(linkedList.head).toBe(undefined);
+      expect(linkedList.tip).toBe(undefined);
     });
     test('Will NOT remove the only element in a list if it does not match.', () => {
       linkedList = new LinkedList(1);
@@ -195,7 +195,7 @@ describe('LinkedList', () => {
 
       expect(linkedList.length).toBe(2);
       expect(linkedList.head.value).toBe(2);
-      expect(linkedList.head.previous).toBe(null);
+      expect(linkedList.head.previous).toBe(undefined);
       expect(linkedList.head.next === linkedList.tip).toBe(true);
       expect(linkedList.tip.value).toBe(3);
     });
@@ -206,7 +206,7 @@ describe('LinkedList', () => {
 
       expect(linkedList.length).toBe(2);
       expect(linkedList.tip.value).toBe(2);
-      expect(linkedList.tip.next).toBe(null);
+      expect(linkedList.tip.next).toBe(undefined);
       expect(linkedList.tip.previous === linkedList.head).toBe(true);
       expect(linkedList.head.value).toBe(1);
     });
@@ -223,8 +223,8 @@ describe('LinkedList', () => {
       linkedList.removeFirst();
 
       expect(linkedList.length).toBe(0);
-      expect(linkedList.head).toBe(null);
-      expect(linkedList.tip).toBe(null);
+      expect(linkedList.head).toBe(undefined);
+      expect(linkedList.tip).toBe(undefined);
     });
     test('Removes the first element correctly in a non-empty list.', () => {
       linkedList = new LinkedList(1, 2, 3);
@@ -249,8 +249,8 @@ describe('LinkedList', () => {
       linkedList.removeLast();
 
       expect(linkedList.length).toBe(0);
-      expect(linkedList.head).toBe(null);
-      expect(linkedList.tip).toBe(null);
+      expect(linkedList.head).toBe(undefined);
+      expect(linkedList.tip).toBe(undefined);
     });
     test('Correctly removes the last element in a non-empty list.', () => {
       linkedList = new LinkedList(1, 2, 3, 4);
@@ -259,7 +259,7 @@ describe('LinkedList', () => {
 
       expect(linkedList.length).toBe(3);
       expect(linkedList.tip.value).toBe(3);
-      expect(linkedList.tip.next).toBe(null);
+      expect(linkedList.tip.next).toBe(undefined);
     });
   });
   describe('filter', () => {
@@ -370,9 +370,9 @@ describe('LinkedList', () => {
     });
   });
   describe('find', () => {
-    test('Returns null and does not throw on an empty list.', () => {
+    test('Returns undefined and does not throw on an empty list.', () => {
       expect(() => linkedList.find(() => false)).not.toThrow();
-      expect(linkedList.find(() => false)).toBe(null);
+      expect(linkedList.find(() => false)).toBe(undefined);
     });
     test('Returns the correct element that matched the predicate.', () => {
       const objectToFind = {
@@ -396,7 +396,7 @@ describe('LinkedList', () => {
       expect(linkedList.find((val) => val.test === objectToFind.test)).toEqual(
         objectToFind
       );
-      expect(linkedList.find((val) => val.prop === 'val')).toBe(null);
+      expect(linkedList.find((val) => val.prop === 'val')).toBe(undefined);
     });
   });
   describe('clear', () => {
@@ -408,8 +408,8 @@ describe('LinkedList', () => {
       linkedList.clear();
 
       expect(linkedList.length).toBe(0);
-      expect(linkedList.head).toBe(null);
-      expect(linkedList.tip).toBe(null);
+      expect(linkedList.head).toBe(undefined);
+      expect(linkedList.tip).toBe(undefined);
     });
   });
   describe('toArray', () => {
@@ -447,8 +447,8 @@ describe('LinkedList', () => {
       linkedList = new LinkedList(1);
 
       expect(linkedList.head.value).toBe(1);
-      expect(linkedList.head.previous).toBe(null);
-      expect(linkedList.head.next).toBe(null);
+      expect(linkedList.head.previous).toBe(undefined);
+      expect(linkedList.head.next).toBe(undefined);
     });
     test('Nodes are correctly linked in a list with two elements.', () => {
       linkedList = new LinkedList(1, 2);
@@ -456,7 +456,7 @@ describe('LinkedList', () => {
       expect(linkedList.head.value).toBe(1);
       expect(linkedList.head.next.value).toBe(2);
 
-      expect(linkedList.head.previous).toBe(null);
+      expect(linkedList.head.previous).toBe(undefined);
       expect(linkedList.head.next.previous).toEqual(linkedList.head);
     });
     test('Nodes are correctly linked in a list with more than two elements.', () => {
@@ -469,7 +469,7 @@ describe('LinkedList', () => {
       const five = four.next;
 
       expect(one.value).toBe(1);
-      expect(one.previous).toBe(null);
+      expect(one.previous).toBe(undefined);
 
       expect(two.value).toBe(2);
       expect(two.previous).toEqual(one);
@@ -482,7 +482,7 @@ describe('LinkedList', () => {
 
       expect(five.value).toBe(5);
       expect(five.previous).toEqual(four);
-      expect(five.next).toBe(null);
+      expect(five.next).toBe(undefined);
     });
   });
 });

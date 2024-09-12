@@ -8,3 +8,4 @@ export * from './LabelledRadio';
 export * from './LabelledSelect';
 export * from './LabelledTextInput';
 export * from './LabelledToggle';
+export * from './LabelledImageFileInput';

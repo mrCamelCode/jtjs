@@ -20,12 +20,12 @@ describe('Checkbox', () => {
     jest.clearAllMocks();
   });
 
-  it('checked value updates correctly on interaction', () => {
+  it('checked value updates correctly on interaction', async () => {
     renderCheckbox();
 
     expect(onChangeChecked).not.toHaveBeenCalled();
 
-    userEvent.click(screen.getByTestId('checkbox'));
+    await userEvent.click(screen.getByTestId('checkbox'));
 
     expect(onChangeChecked).toHaveBeenCalledTimes(1);
     expect(value).toBe(true);

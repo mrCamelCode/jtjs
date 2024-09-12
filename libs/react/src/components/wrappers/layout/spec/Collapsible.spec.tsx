@@ -38,54 +38,56 @@ describe('Collapsible', () => {
 
       expect(isCollapsed).toBe(false);
 
-      act(() => {
-        userEvent.click(screen.getByText(headingText));
+      await act(async () => {
+        await userEvent.click(screen.getByText(headingText));
       });
 
       expect(isCollapsed).toBe(true);
     });
 
-    test('changes collapsed state when the button in the header is clicked', () => {
+    test('changes collapsed state when the button in the header is clicked', async () => {
       renderCollapsible({
         isCollapsed,
       });
 
       expect(isCollapsed).toBe(false);
 
-      act(() => {
-        userEvent.click(screen.getByTestId('collapsible-collapse-button'));
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('collapsible-collapse-button')
+        );
       });
 
       expect(isCollapsed).toBe(true);
     });
 
-    test('changes collapsed state when the button in the header is focused and the user presses Space', () => {
+    test('changes collapsed state when the button in the header is focused and the user presses Space', async () => {
       renderCollapsible({
         isCollapsed,
       });
 
       expect(isCollapsed).toBe(false);
 
-      act(() => {
+      await act(async () => {
         const button = screen.getByTestId('collapsible-collapse-button');
 
-        userEvent.type(button, '{space}');
+        await userEvent.type(button, '{space}');
       });
 
       expect(isCollapsed).toBe(true);
     });
 
-    test('changes collapsed state when the button in the header is focused and the user presses Enter', () => {
+    test('changes collapsed state when the button in the header is focused and the user presses Enter', async () => {
       renderCollapsible({
         isCollapsed,
       });
 
       expect(isCollapsed).toBe(false);
 
-      act(() => {
+      await act(async () => {
         const button = screen.getByTestId('collapsible-collapse-button');
 
-        userEvent.type(button, '{enter}');
+        await userEvent.type(button, '{enter}');
       });
 
       expect(isCollapsed).toBe(true);
@@ -134,42 +136,44 @@ describe('Collapsible', () => {
     test('changes collapsed state when the header is clicked', async () => {
       renderCollapsible();
 
-      act(() => {
-        userEvent.click(screen.getByText(headingText));
+      await act(async () => {
+        await userEvent.click(screen.getByText(headingText));
       });
 
       expect(screen.queryByText(contentText)).toBeNull();
     });
 
-    test('changes collapsed state when the button in the header is clicked', () => {
+    test('changes collapsed state when the button in the header is clicked', async () => {
       renderCollapsible();
 
-      act(() => {
-        userEvent.click(screen.getByTestId('collapsible-collapse-button'));
+      await act(async () => {
+        await userEvent.click(
+          screen.getByTestId('collapsible-collapse-button')
+        );
       });
 
       expect(screen.queryByText(contentText)).toBeNull();
     });
 
-    test('changes collapsed state when the button in the header is focused and the user presses Space', () => {
+    test('changes collapsed state when the button in the header is focused and the user presses Space', async () => {
       renderCollapsible();
 
-      act(() => {
+      await act(async () => {
         const button = screen.getByTestId('collapsible-collapse-button');
 
-        userEvent.type(button, '{space}');
+        await userEvent.type(button, '{space}');
       });
 
       expect(screen.queryByText(contentText)).toBeNull();
     });
 
-    test('changes collapsed state when the button in the header is focused and the user presses Enter', () => {
+    test('changes collapsed state when the button in the header is focused and the user presses Enter', async () => {
       renderCollapsible();
 
-      act(() => {
+      await act(async () => {
         const button = screen.getByTestId('collapsible-collapse-button');
 
-        userEvent.type(button, '{enter}');
+        await userEvent.type(button, '{enter}');
       });
 
       expect(screen.queryByText(contentText)).toBeNull();

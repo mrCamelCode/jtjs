@@ -16,22 +16,22 @@ describe('Stack', () => {
     });
   });
   describe('pop', () => {
-    test('Popping from an empty stack does not throw and returns null.', () => {
+    test('Popping from an empty stack does not throw and returns undefined.', () => {
       expect(() => stack.pop()).not.toThrow();
-      expect(stack.pop()).toBe(null);
+      expect(stack.pop()).toBe(undefined);
     });
     test('You can pop an item from the stack.', () => {
       stack.push(1);
 
       expect(stack.pop()).toBe(1);
       expect(stack.length).toBe(0);
-      expect(stack.pop()).toBe(null);
+      expect(stack.pop()).toBe(undefined);
     });
   });
   describe('peek', () => {
-    test('Peeking an empty stack does not throw and returns null.', () => {
+    test('Peeking an empty stack does not throw and returns undefined.', () => {
       expect(() => stack.peek()).not.toThrow();
-      expect(stack.peek()).toBe(null);
+      expect(stack.peek()).toBe(undefined);
     });
     test('You can peek the first item on the stack.', () => {
       stack.push(1);
