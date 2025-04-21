@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/view",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Utilities that are useful in situations where there's a view of any kind. This library isn't dependent on a browser environment, but plays nicely with one.",
   "type": "module",
   "license": "MIT",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrCamelCode/jtjs-view.git"
+    "url": "https://github.com/mrCamelCode/jtjs.git"
   },
   "module": "./dist/jtjs_view.js",
   "exports": {

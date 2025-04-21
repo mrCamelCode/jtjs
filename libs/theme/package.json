@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/theme",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "license": "MIT",
   "description": "A theme library containing CSS that lets you hit the ground running when using JTJS components.",
   "type": "module",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrCamelCode/jtjs-theme.git"
+    "url": "https://github.com/mrCamelCode/jtjs.git"
   },
   "module": "./dist/style.css",
   "exports": {

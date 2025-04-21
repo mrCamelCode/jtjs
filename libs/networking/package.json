@@ -1,6 +1,6 @@
 {
   "name": "@jtjs/networking",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Utilities for performing networking tasks.",
   "type": "module",
   "license": "MIT",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrCamelCode/jtjs-networking.git"
+    "url": "https://github.com/mrCamelCode/jtjs.git"
   },
   "module": "./dist/jtjs_networking.js",
   "exports": {
