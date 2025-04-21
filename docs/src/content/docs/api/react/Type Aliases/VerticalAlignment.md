@@ -3,6 +3,6 @@ title: VerticalAlignment
 description: Generated API documentation for VerticalAlignment.
 ---
 
-`Type alias` | [Source Code](https://github.com/mrCamelCode/jtjs-react/blob/0e141e63e22c212c71ce52ba40f0472cc9028516/lib/types/model.ts#L2)
+`Type alias` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/react/lib/types/model.ts#L2)
 
 VerticalAlignment: _"top" | "center" | "bottom"_

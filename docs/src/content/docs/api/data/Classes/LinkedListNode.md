@@ -3,7 +3,7 @@ title: LinkedListNode
 description: Generated API documentation for LinkedListNode.
 ---
 
-`Class` | [Source Code](undefined)
+`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/data/lib/collections/LinkedListNode.ts#L3)
 
 `implements` ILinkedListNode<T>
 

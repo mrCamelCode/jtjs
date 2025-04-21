@@ -3,7 +3,7 @@ title: ImageUtil
 description: Generated API documentation for ImageUtil.
 ---
 
-`Class` | [Source Code](https://github.com/mrCamelCode/jtjs-browser/blob/674cb475f6f9d8c2487c2c55d4e3c0ee58e20301/lib/util/image.util.ts#L7)
+`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/browser/lib/util/image.util.ts#L7)
 
 ### Constructors
 

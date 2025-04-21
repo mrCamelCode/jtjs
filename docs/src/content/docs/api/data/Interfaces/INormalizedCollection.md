@@ -3,7 +3,7 @@ title: INormalizedCollection
 description: Generated API documentation for INormalizedCollection.
 ---
 
-`Interface` | [Source Code](undefined)
+`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/data/lib/collections/INormalizedCollection.ts#L7)
 
 A collection structure that combines the benefits of an object
 (O(1) lookup, stable identifiers) and an array (preservation of

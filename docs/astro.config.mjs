@@ -7,9 +7,13 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'JTJS',
-      social: {
-        github: 'https://github.com/mrCamelCode?tab=repositories',
-      },
+      social: [
+        {
+          href: 'https://github.com/mrCamelCode/jtjs',
+          icon: 'github',
+          label: 'GitHub',
+        },
+      ],
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 4,

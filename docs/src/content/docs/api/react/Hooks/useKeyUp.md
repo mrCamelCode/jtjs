@@ -3,7 +3,7 @@ title: useKeyUp
 description: Generated API documentation for useKeyUp.
 ---
 
-`Hook` | [Source Code](https://github.com/mrCamelCode/jtjs-react/blob/0e141e63e22c212c71ce52ba40f0472cc9028516/lib/hooks/user-input.hooks.ts#L13)
+`Hook` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/react/lib/hooks/user-input.hooks.ts#L13)
 
 ---
 

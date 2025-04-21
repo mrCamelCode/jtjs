@@ -3,7 +3,7 @@ title: closeDialog
 description: Generated API documentation for closeDialog.
 ---
 
-`Function` | [Source Code](https://github.com/mrCamelCode/jtjs-react/blob/0e141e63e22c212c71ce52ba40f0472cc9028516/lib/components/dialogs/dialog.util.ts#L1)
+`Function` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/react/lib/components/dialogs/dialog.util.ts#L1)
 
 ---
 

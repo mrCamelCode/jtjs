@@ -3,7 +3,7 @@ title: Theme
 description: Generated API documentation for Theme.
 ---
 
-`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs-view/blob/a61e749933670420ad6d3edf813c05a00094ef7d/lib/model/theme.model.ts#L1)
+`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/view/lib/model/theme.model.ts#L1)
 
 ### Properties
 
