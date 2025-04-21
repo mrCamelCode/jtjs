@@ -1,0 +1,36 @@
+@mixin focus() {
+  outline-style: solid;
+  outline-width: 3px;
+  outline-color: var(--jtjs-theme-focus);
+}
+
+@mixin base-styles {
+  * {
+    position: relative;
+    box-sizing: border-box;
+
+    [disabled],
+    [aria-disabled='true'],
+    &:disabled {
+      cursor: not-allowed;
+    }
+    &:focus-visible {
+      @include focus;
+    }
+
+    // #1: webkit scrollbar styling doesn't seem to be supported anymore. This is
+    // the extent of scrollbar styling we can do at this point (along with the width,
+    // but accessibility guidelines suggest making it no smaller than 44px, which is the
+    // default width anyway).
+    scrollbar-color: var(--jtjs-theme-accent) transparent;
+  }
+
+  html {
+    background-color: var(--jtjs-theme-background);
+  }
+
+  :root {
+    --jtjs-rounded-corner-radius: 10px;
+    --jtjs-slightly-rounded-corner-radius: 5px;
+  }
+}

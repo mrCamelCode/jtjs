@@ -1,0 +1,37 @@
+@use './util' as *;
+
+@mixin input-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+
+  .jtjs-label-text {
+    font-size: smaller;
+  }
+
+  &:has(.jtjs-error) {
+    .jtjs-input,
+    .jtjs-text-input,
+    .jtjs-multiline-text-input {
+      @include error-outline;
+    }
+  }
+  &:has(.jtjs-warn) {
+    .jtjs-input,
+    .jtjs-text-input,
+    .jtjs-multiline-text-input {
+      @include warn-outline;
+    }
+  }
+  &:has(.jtjs-info) {
+    .jtjs-input,
+    .jtjs-text-input,
+    .jtjs-multiline-text-input {
+      @include info-outline;
+    }
+  }
+}
+
+.jtjs-labelled-input {
+  @include input-label;
+}

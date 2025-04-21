@@ -1,0 +1,45 @@
+.jtjs-full-image-file-input-container {
+  .jtjs-labelled-image-file-input {
+    @include slightly-rounded-corners;
+    padding: 2rem;
+    border: 3px dashed var(--jtjs-theme-button-darkened);
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .jtjs-label-text {
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      color: var(--jtjs-theme-buttonText);
+      background-color: var(--jtjs-theme-button);
+      @include slightly-rounded-corners;
+
+      &.jtjs-label-after {
+        // For drag-n-drop to work with a file input, the input itself has to receive the drop.
+        // In cases where the label is AFTER the input, dropping the file onto the label
+        // prevents the drop because it receives the event instead of the input. 
+        // With how this is styled, label position technically doesn't matter, but if the 
+        // user of the lib happens to set the position to be after the input, without this
+        // negation of pointer events, the label would receive the drop and block the input.
+        pointer-events: none;
+      }
+    }
+    .jtjs-image-file-input {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      cursor: pointer;
+    }
+    &:has(.jtjs-image-file-input:disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    &:focus-within {
+      @include focus;
+    }
+  }
+}

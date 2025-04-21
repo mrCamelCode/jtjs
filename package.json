@@ -1,0 +1,25 @@
+{
+  "name": "jtjs",
+  "workspaces": [
+    "libs/event",
+    "libs/data",
+    "libs/browser",
+    "libs/networking",
+    "libs/view",
+    "libs/theme",
+    "libs/react",
+    "docs"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "gen:docs": "cd ./docs && npm run gen",
+    "test": "npm run test --workspaces --if-present -- --watch=false"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "happy-dom": "^15.7.4",
+    "typescript": "^5.5.3",
+    "vite": "^6.3.2",
+    "vitest": "^3.1.2"
+  }
+}

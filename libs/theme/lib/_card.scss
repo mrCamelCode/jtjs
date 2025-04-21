@@ -1,0 +1,12 @@
+.jtjs-card {
+  display: block;
+  padding: 1.5rem;
+  @include rounded-corners;
+  width: 100%;
+
+  background-color: var(--jtjs-theme-foreground);
+
+  .jtjs-inner-shadow {
+    @include rounded-corners;
+  }
+}

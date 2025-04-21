@@ -1,0 +1,6 @@
+.jtjs-image-carousel-with-full-view {
+  .jtjs-image-carousel-with-full-view-default-thumbnail,
+  .jtjs-image-carousel-with-full-view-default-image-view {
+    @include slightly-rounded-corners;
+  }
+}

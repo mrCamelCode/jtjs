@@ -1,0 +1,19 @@
+@use './labelled-input' as *;
+@use './input' as *;
+
+.jtjs-select {
+  @include jtjs-input;
+
+  option,
+  optgroup {
+    background-color: var(--jtjs-theme-background);
+  }
+
+  &:disabled {
+    background-color: var(--jtjs-theme-disabled);
+  }
+}
+
+.jtjs-labelled-select {
+  @include input-label;
+}

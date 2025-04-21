@@ -1,0 +1,183 @@
+.jtjs-anim_fade-in {
+  animation-name: jtjs-anim_fade-in !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+
+  @keyframes jtjs-anim_fade-in {
+    0% {
+      filter: opacity(0);
+    }
+    100% {
+      filter: opacity(1);
+    }
+  }
+}
+
+.jtjs-anim_fade-out {
+  animation-name: jtjs-anim_fade-out !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+
+  @keyframes jtjs-anim_fade-out {
+    0% {
+      filter: opacity(1);
+    }
+    100% {
+      filter: opacity(0);
+    }
+  }
+}
+
+.jtjs-anim_slide-in {
+  animation-name: jtjs-anim_slide-in !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+
+  @keyframes jtjs-anim_slide-in {
+    0% {
+      filter: opacity(0);
+      transform: translateX(-15%);
+    }
+    100% {
+      filter: opacity(1);
+      transform: translateX(0%);
+    }
+  }
+}
+
+.jtjs-anim_slide-out {
+  animation-name: jtjs-anim_slide-out !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+
+  @keyframes jtjs-anim_slide-out {
+    0% {
+      filter: opacity(1);
+      transform: translate(0);
+    }
+    100% {
+      filter: opacity(0);
+      transform: translateX(-15%);
+    }
+  }
+}
+
+.jtjs-anim_backdrop-blur-in {
+  animation-name: jtjs-anim_backdrop-blur-in !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+
+  @keyframes jtjs-anim_backdrop-blur-in {
+    from {
+      backdrop-filter: blur(0px);
+    }
+
+    to {
+      backdrop-filter: blur(10px);
+    }
+  }
+}
+
+.jtjs-anim_backdrop-blur-out {
+  animation-name: jtjs-anim_backdrop-blur-out !important;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+
+  @keyframes jtjs-anim_backdrop-blur-out {
+    from {
+      backdrop-filter: blur(10px);
+    }
+
+    to {
+      backdrop-filter: blur(0px);
+    }
+  }
+}
+
+.jtjs-anim_pop {
+  animation-name: jtjs-anim_pop !important;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+
+  @keyframes jtjs-anim_pop {
+    0% {
+      transform: scale(0);
+    }
+    33% {
+      transform: scale(1.1);
+    }
+    66% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+.jtjs-anim_pop-wiggle {
+  animation-name: jtjs-anim_pop-wiggle !important;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+
+  @keyframes jtjs-anim_pop-wiggle {
+    0% {
+      transform: rotate(0) scale(0);
+    }
+    33% {
+      transform: rotate(-10deg) scale(1.1);
+    }
+    66% {
+      transform: rotate(10deg) scale(0.9);
+    }
+    100% {
+      transform: rotate(0) scale(1);
+    }
+  }
+}
+
+.jtjs-anim_shimmer {
+  background: linear-gradient(
+    to right,
+    var(--jtjs-theme-disabled) 8%,
+    var(--jtjs-theme-disabled-lightened) 18%,
+    var(--jtjs-theme-disabled) 33%
+  );
+  background-size: 1200px 100%;
+
+  animation-name: jtjs-anim_shimmer !important;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  @keyframes jtjs-anim_shimmer {
+    0% {
+      background-position: -1200px 0;
+    }
+    100% {
+      background-position: 1200px 0;
+    }
+  }
+}
+
+.jtjs-anim_pulse {
+  animation-name: jtjs-anim_pulse !important;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  @keyframes jtjs-anim_pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}

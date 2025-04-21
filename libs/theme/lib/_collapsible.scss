@@ -1,0 +1,41 @@
+.jtjs-collapsible {
+  $padding: 1rem;
+
+  padding: 0;
+
+  .jtjs-collapsible-header {
+    padding: $padding;
+    cursor: pointer;
+    color: var(--jtjs-theme-text);
+
+    .jtjs-collapsible-collapse-button {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+
+      @include slightly-rounded-corners;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+
+      transition: transform 0.2s ease;
+      user-select: none;
+
+      &[aria-expanded='true'] {
+        transform: rotate(90deg);
+      }
+
+      svg {
+        path {
+          fill: var(--jtjs-theme-button);
+        }
+      }
+    }
+  }
+
+  .jtjs-collapsible-content {
+    padding: $padding;
+    padding-top: 0;
+    width: 100%;
+  }
+}

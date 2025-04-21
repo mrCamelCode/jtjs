@@ -1,0 +1,37 @@
+---
+title: JTJS
+description: Level up your JavaScript development experience with JTJS, a suite of JS development libraries.
+template: splash
+hero:
+  tagline: Welcome to a better JavaScript development experience.
+  actions:
+    - text: What is JTJS?
+      link: /introduction/01-what-is-jtjs/
+      icon: right-arrow
+    - text: API
+      link: /api/
+      icon: right-arrow
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Features
+
+<CardGrid stagger>
+  <Card title="Handy" icon="rocket">
+    Hit the ground running in your JS project with a suite of libraries that handle the nitty gritties so you can focus
+    on the business requirements.
+  </Card>
+  <Card title="Fully Typed" icon="seti:typescript">
+    All JTJS modules are implemented entirely in TypeScript, giving you complete type-safety all the way down. Types
+    come bundled with our JS bundles.
+  </Card>
+  <Card title="Modular" icon="seti:bicep">
+    JTJS is a suite of libraries, not a framework. You only need to pull down what you actually want to use.
+  </Card>
+  <Card title="Open Source" icon="open-book">
+    All of JTJS is open source. Curious about how something works? Simply follow the source code link available on all
+    of our API pages to go straight to the code.
+  </Card>
+</CardGrid>

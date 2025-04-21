@@ -1,0 +1,5 @@
+@use './labelled-input';
+
+.jtjs-labelled-image-file-input {
+  @include input-label;
+}

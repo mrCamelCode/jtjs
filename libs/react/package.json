@@ -1,0 +1,56 @@
+{
+  "name": "@jtjs/react",
+  "version": "3.0.1",
+  "license": "MIT",
+  "description": "A component library for React applications.",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrCamelCode/jtjs-react.git"
+  },
+  "module": "./dist/jtjs_react.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/jtjs_react.js"
+      }
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && npm run build:types",
+    "build:types": "tsc --project tsconfig.build.json",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "@jtjs/browser": "^2.0.0",
+    "@jtjs/view": "^2.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@jtjs/theme": "^2.2.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react-swc": "^3.7.2",
+    "eslint": "^9.18.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^15.14.0",
+    "react-hook-form": "^7.54.2",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.20.0"
+  }
+}

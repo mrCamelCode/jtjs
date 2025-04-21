@@ -1,0 +1,89 @@
+// TODO: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/UI_pseudo-classes#checked
+// Can rework the custom radio to be a little fancier with this as a guide.
+
+@mixin custom-radio {
+  content: '';
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--jtjs-theme-outline);
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+@mixin custom-radio-dot {
+  background: radial-gradient(
+    circle,
+    var(--jtjs-theme-button) 0%,
+    var(--jtjs-theme-button) 40%,
+    transparent 50%,
+    transparent 100%
+  );
+}
+
+.jtjs-radio,
+.jtjs-labelled-radio {
+  cursor: pointer;
+}
+
+.jtjs-labelled-radio {
+  // Because of how difficult HTML makes it to customize a radio button,
+  // I have to make the customized button off of an element other than the
+  // input itself if I'm to simultaneously hide the browser's radio button.
+  // Therefore, radio buttons must be labelled to receive custom styling in
+  // JTJS. This shouldn't be a big deal, considering you shouldn't have an
+  // unlabelled checkbox or radio button in a real use case.
+
+  .jtjs-radio {
+    @include visually-hidden;
+    height: 0;
+    width: 0;
+  }
+
+  .jtjs-label-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+
+    &.jtjs-label-before {
+      &::after {
+        @include custom-radio;
+      }
+    }
+    &.jtjs-label-after {
+      &::before {
+        @include custom-radio;
+      }
+    }
+  }
+
+  &:has(.jtjs-radio:checked) {
+    .jtjs-label-text {
+      &.jtjs-label-before {
+        &::after {
+          @include custom-radio-dot;
+        }
+      }
+      &.jtjs-label-after {
+        &::before {
+          @include custom-radio-dot;
+        }
+      }
+    }
+  }
+
+  &:focus-within {
+    &:has(.jtjs-radio:focus-visible) {
+      .jtjs-label-text {
+        &::before,
+        &::after {
+          @include focus;
+        }
+      }
+    }
+  }
+}

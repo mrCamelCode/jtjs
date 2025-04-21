@@ -1,0 +1,8 @@
+@use './labelled-input';
+
+.jtjs-labelled-text-input,
+.jtjs-labelled-multiline-text-input,
+.jtjs-labelled-masked-text-input,
+.jtjs-labelled-masked-multiline-text-input {
+  @include input-label;
+}

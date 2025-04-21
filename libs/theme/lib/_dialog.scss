@@ -1,0 +1,63 @@
+@keyframes jtjs-dialog-entry {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.jtjs-dialog {
+  @include rounded-corners;
+  @include soft-shadow;
+
+  animation: jtjs-anim_fade-in 0.2s linear forwards;
+
+  outline: none;
+  border: none;
+  overflow: hidden;
+
+  background-color: var(--jtjs-theme-background);
+
+  &::backdrop {
+    animation: jtjs-anim_backdrop-blur-in 0.2s linear forwards;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 991px) {
+    min-width: 500px;
+    max-width: 100%;
+  }
+
+  @media only screen and (min-width: 992px) {
+    width: 700px;
+  }
+}
+
+.jtjs-structured-dialog {
+  padding: 0;
+
+  .jtjs-dialog-title {
+    padding: 1rem;
+    width: 100%;
+    background-color: var(--jtjs-theme-foreground);
+
+    margin: 0;
+    flex: 1;
+  }
+
+  .jtjs-dialog-content-container {
+    padding: 1.5rem;
+  }
+
+  .jtjs-dialog-buttons-container {
+    padding: 1rem;
+    width: 100%;
+  }
+}

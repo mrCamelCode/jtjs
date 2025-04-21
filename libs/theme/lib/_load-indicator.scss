@@ -1,0 +1,96 @@
+$jtjsLoadingDotSize: 1.8rem;
+$jtjsLoadingDotSpacing: 0.2rem;
+$jtjsLoadingDotTotalSize: $jtjsLoadingDotSize + $jtjsLoadingDotSpacing;
+
+@keyframes jtjs-anim_lift-and-slide-loading-dot {
+  from {
+    bottom: 0;
+    right: 0;
+    height: $jtjsLoadingDotSize;
+    width: $jtjsLoadingDotSize;
+  }
+
+  5% {
+    height: $jtjsLoadingDotSize * 0.8;
+  }
+
+  25% {
+    bottom: $jtjsLoadingDotTotalSize;
+    right: 0;
+    height: $jtjsLoadingDotSize;
+    width: $jtjsLoadingDotSize;
+  }
+
+  50% {
+    width: $jtjsLoadingDotSize * 1.2;
+  }
+
+  75% {
+    bottom: $jtjsLoadingDotTotalSize;
+    right: $jtjsLoadingDotTotalSize;
+    width: $jtjsLoadingDotSize;
+    height: $jtjsLoadingDotSize;
+  }
+
+  80% {
+    height: $jtjsLoadingDotSize * 0.8;
+  }
+
+  to {
+    bottom: 0;
+    right: $jtjsLoadingDotTotalSize;
+    height: $jtjsLoadingDotSize;
+    width: $jtjsLoadingDotSize;
+  }
+}
+
+@keyframes jtjs-anim_slide-loading-dot {
+  from {
+    right: 0;
+    width: $jtjsLoadingDotSize;
+  }
+
+  25% {
+    right: 0;
+    width: $jtjsLoadingDotSize;
+  }
+
+  50% {
+    width: $jtjsLoadingDotSize * 1.2;
+  }
+
+  75% {
+    right: -$jtjsLoadingDotTotalSize;
+  }
+
+  to {
+    right: -$jtjsLoadingDotTotalSize;
+  }
+}
+
+.jtjs-loading-dots-container {
+  display: flex;
+  gap: $jtjsLoadingDotSpacing;
+  width: 100%;
+  justify-content: center;
+
+  .jtjs-loading-dot {
+    height: $jtjsLoadingDotSize;
+    width: $jtjsLoadingDotSize;
+    border-radius: 0.2rem;
+    background-color: var(--jtjs-theme-text);
+    display: inline-block;
+
+    &.jtjs-loading-dot-1 {
+      animation-name: jtjs-anim_slide-loading-dot;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+    }
+
+    &.jtjs-loading-dot-2 {
+      animation-name: jtjs-anim_lift-and-slide-loading-dot;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+    }
+  }
+}

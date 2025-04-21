@@ -1,0 +1,149 @@
+@use 'sass:math';
+
+@mixin jtjs-toggle($height: 1.2rem, $width: 2.5rem) {
+  $borderRadius: math.div($height, 2);
+  $animationDuration: 0.3s;
+
+  height: $height;
+  width: $width;
+  border-radius: $borderRadius;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: content-box;
+
+  transition: background-color $animationDuration ease, box-shadow $animationDuration ease;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  // It may seem silly to have two animations that do the same thing, but it's necessary.
+  // Having different animations gives them different names, which allows the animation
+  // to re-run when the toggle state changes.
+  @keyframes jtjs-anim_toggle-knob-slide-on {
+    0% {
+      width: $height;
+      border-radius: 50%;
+    }
+
+    10% {
+      border-radius: $borderRadius;
+    }
+
+    50% {
+      width: $width;
+      border-radius: $borderRadius;
+    }
+
+    90% {
+      border-radius: $borderRadius;
+    }
+
+    100% {
+      width: $height;
+      border-radius: 50%;
+    }
+  }
+
+  @keyframes jtjs-anim_toggle-knob-slide-off {
+    0% {
+      width: $height;
+      border-radius: 50%;
+    }
+
+    10% {
+      border-radius: $borderRadius;
+    }
+
+    50% {
+      width: $width;
+      border-radius: $borderRadius;
+    }
+
+    90% {
+      border-radius: $borderRadius;
+    }
+
+    100% {
+      width: $height;
+      border-radius: 50%;
+    }
+  }
+
+  &:not([disabled]) {
+    $margin: 0.3rem;
+
+    &::before,
+    &::after {
+      font-size: 0.8rem;
+    }
+
+    &::before {
+      content: '\2714';
+      color: var(--jtjs-theme-affirmativeText);
+    }
+    &::after {
+      content: '\2716';
+      color: var(--jtjs-theme-negativeText);
+    }
+  }
+
+  .jtjs-toggle-knob {
+    position: absolute;
+    height: $height;
+    width: $height;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: var(--jtjs-theme-negativeText);
+
+    transition: left $animationDuration ease, transform $animationDuration ease,
+      background-color $animationDuration ease;
+  }
+
+  &.jtjs-toggle-on {
+    background-color: var(--jtjs-theme-affirmative);
+    box-shadow: 0 0 1px 0 var(--jtjs-theme-affirmative);
+
+    .jtjs-toggle-knob {
+      left: $width;
+      transform: translateX(calc(-100% + 1px));
+      animation: jtjs-anim_toggle-knob-slide-on $animationDuration;
+
+      background-color: var(--jtjs-theme-affirmativeText);
+    }
+  }
+
+  &.jtjs-toggle-off {
+    background-color: var(--jtjs-theme-negative);
+    box-shadow: 0 0 1px 0 var(--jtjs-theme-negative);
+
+    .jtjs-toggle-knob {
+      left: 0;
+      transform: translateX(-1px);
+      background-color: var(--jtjs-theme-negativeText);
+
+      animation: jtjs-anim_toggle-knob-slide-off $animationDuration;
+    }
+  }
+
+  &.jtjs-toggle[disabled] {
+    cursor: not-allowed;
+    background-color: var(--jtjs-theme-disabled);
+    box-shadow: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.jtjs-labelled-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.jtjs-toggle {
+  @include jtjs-toggle;
+}

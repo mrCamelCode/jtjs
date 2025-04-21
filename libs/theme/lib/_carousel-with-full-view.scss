@@ -1,0 +1,9 @@
+.jtjs-carousel-with-full-view {
+  .jtjs-carousel-item-container {
+    opacity: 0.5;
+
+    &.jtjs-carousel-active-item {
+      opacity: 1;
+    }
+  }
+}

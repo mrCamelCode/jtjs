@@ -1,0 +1,26 @@
+@use 'sass:math';
+
+.jtjs-button {
+  padding: 0.7rem 1rem;
+  @include slightly-rounded-corners;
+
+  cursor: pointer;
+
+  background-color: var(--jtjs-theme-button);
+  border: none;
+  color: var(--jtjs-theme-buttonText);
+
+  overflow: hidden;
+
+  &:hover:not(:disabled) {
+    background-color: var(--jtjs-theme-button-lightened);
+    border-color: var(--jtjs-theme-button-darkened);
+  }
+  &:active:not(:disabled) {
+    background-color: var(--jtjs-theme-button-darkened);
+  }
+  &:disabled {
+    background-color: var(--jtjs-theme-disabled);
+    border-color: var(--jtjs-theme-disabled);
+  }
+}

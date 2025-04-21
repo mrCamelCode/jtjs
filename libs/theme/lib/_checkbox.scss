@@ -1,0 +1,78 @@
+@mixin custom-checkbox {
+  content: '';
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  color: var(--jtjs-theme-buttonText);
+  border: 1px solid var(--jtjs-theme-outline);
+  @include slightly-rounded-corners;
+  background-color: transparent;
+}
+
+@mixin custom-checkbox-check {
+  content: '\2714'; // checkmark
+  line-height: 1.2em;
+  font-size: 0.8em;
+  text-align: center;
+  background-color: var(--jtjs-theme-button);
+}
+
+.jtjs-checkbox,
+.jtjs-labelled-checkbox {
+  cursor: pointer;
+}
+
+.jtjs-labelled-checkbox {
+  .jtjs-checkbox {
+    @include visually-hidden;
+    height: 0;
+    width: 0;
+  }
+
+  .jtjs-label-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+
+    &.jtjs-label-before {
+      &::after {
+        @include custom-checkbox;
+      }
+    }
+    &.jtjs-label-after {
+      &::before {
+        @include custom-checkbox;
+      }
+    }
+  }
+
+  &:has(.jtjs-checkbox:checked) {
+    .jtjs-label-text {
+      &.jtjs-label-before {
+        &::after {
+          @include custom-checkbox-check;
+        }
+      }
+      &.jtjs-label-after {
+        &::before {
+          @include custom-checkbox-check;
+        }
+      }
+    }
+  }
+
+  &:focus-within {
+    &:has(.jtjs-checkbox:focus-visible) {
+      .jtjs-label-text {
+        &::before,
+        &::after {
+          @include focus;
+        }
+      }
+    }
+  }
+}

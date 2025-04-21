@@ -1,0 +1,21 @@
+.jtjs-form-group {
+  display: block;
+  @include slightly-rounded-corners;
+
+  background-color: transparent;
+  border: 1px solid var(--jtjs-theme-outline);
+
+  legend {
+    color: var(--jtjs-theme-text);
+  }
+
+  &:has(.jtjs-error) {
+    @include error-outline;
+  }
+  &:has(.jtjs-warn) {
+    @include warn-outline;
+  }
+  &:has(.jtjs-info) {
+    @include info-outline;
+  }
+}

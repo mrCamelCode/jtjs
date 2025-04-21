@@ -1,0 +1,6 @@
+@use './input';
+
+.jtjs-text-input,
+.jtjs-multiline-text-input {
+  @include jtjs-input;
+}

@@ -1,0 +1,39 @@
+@mixin visually-hidden {
+  position: absolute;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin focus {
+  outline-style: solid;
+  outline-width: 3px;
+  outline-color: var(--jtjs-theme-focus);
+}
+
+@mixin slightly-rounded-corners {
+  border-radius: var(--jtjs-slightly-rounded-corner-radius);
+}
+
+@mixin rounded-corners {
+  border-radius: var(--jtjs-rounded-corner-radius);
+}
+
+@mixin soft-shadow {
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.65);
+}
+
+@mixin error-outline {
+  border: 1px solid var(--jtjs-theme-negative);
+  box-shadow: 0 0 3px 0px var(--jtjs-theme-negative);
+}
+
+@mixin warn-outline {
+  border: 1px solid var(--jtjs-theme-warn);
+  box-shadow: 0 0 3px 0px var(--jtjs-theme-warn);
+}
+
+@mixin info-outline {
+  border: 1px solid var(--jtjs-theme-info);
+  box-shadow: 0 0 3px 0px var(--jtjs-theme-info);
+}

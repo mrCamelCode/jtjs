@@ -1,0 +1,23 @@
+{
+  "name": "@jtjs/docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "gen": "npx tsx ./scripts/docgen/main.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/starlight": "^0.34.0",
+    "astro": "^5.7.4",
+    "sharp": "^0.32.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.1",
+    "typedoc": "^0.26.8"
+  }
+}

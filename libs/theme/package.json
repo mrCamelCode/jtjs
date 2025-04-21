@@ -1,0 +1,27 @@
+{
+  "name": "@jtjs/theme",
+  "version": "2.3.2",
+  "license": "MIT",
+  "description": "A theme library containing CSS that lets you hit the ground running when using JTJS components.",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrCamelCode/jtjs-theme.git"
+  },
+  "module": "./dist/style.css",
+  "exports": {
+    ".": "./dist/style.css"
+  },
+  "style": "./dist/style.css",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.79.2"
+  }
+}
