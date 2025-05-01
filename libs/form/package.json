@@ -1,0 +1,32 @@
+{
+  "name": "@jtjs/form",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrCamelCode/jtjs.git"
+  },
+  "module": "./dist/jtjs_form.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/jtjs_form.js"
+      }
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build": "tsc && vite build && npm run build:types",
+    "build:types": "tsc --project tsconfig.build.json",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "@jtjs/event": "^2.0.3"
+  }
+}

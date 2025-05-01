@@ -1,11 +1,7 @@
 {
-  "target": "ES2020",
+  "extends": "../../tsconfig.build.base.json",
   "compilerOptions": {
     "outDir": "dist/types",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true
   },
-  "include": ["lib"],
-  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
+  "include": ["lib"]
 }

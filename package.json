@@ -3,6 +3,7 @@
   "workspaces": [
     "libs/event",
     "libs/data",
+    "libs/form",
     "libs/browser",
     "libs/networking",
     "libs/view",

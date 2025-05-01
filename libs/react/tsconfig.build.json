@@ -1,14 +1,8 @@
-// Used for building the types for the lib.
 {
+  "extends": "../../tsconfig.build.base.json",
   "compilerOptions": {
-    "target": "ES2020",
     "outDir": "dist/types",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
     "jsx": "react-jsx"
   },
-  "include": ["lib"],
-  "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx"]
+  "include": ["lib"]
 }
