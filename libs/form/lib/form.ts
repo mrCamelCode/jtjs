@@ -21,8 +21,36 @@ export class Form<TFormValues extends object> {
   };
 
   get values(): DeepPartial<TFormValues> {
-    // JT TODO
-    return {} as any;
+    const vals: Record<string, any> = {};
+
+    const setAtPath = <T>(obj: Record<string, any>, pathSegments: string[], value: T) => {
+      const indexPattern = /^\d+$/;
+
+      const [currentPathSegment, ...nextPathSegments] = pathSegments;
+      const isLeaf = nextPathSegments.length === 0;
+
+      if (isLeaf) {
+        obj[currentPathSegment] = value;
+      } else {
+        const isCurrentPropertyArray = indexPattern.test(nextPathSegments[0]);
+
+        if (!(currentPathSegment in obj)) {
+          obj[currentPathSegment] = isCurrentPropertyArray ? [] : {};
+        }
+
+        setAtPath(obj[currentPathSegment], nextPathSegments, value);
+      }
+    };
+
+    [...this.#fieldMap.entries()].forEach(([path, field]) => {
+      setAtPath(vals, (path as string).split('.'), field.value);
+    });
+
+    return vals as DeepPartial<TFormValues>;
+  }
+
+  get #fields(): Field[] {
+    return [...this.#fieldMap.values()];
   }
 
   constructor(options: FormOptions<TFormValues>) {
@@ -34,6 +62,12 @@ export class Form<TFormValues extends object> {
     field: Field<PropertyAtPath<TFormValues, T> extends FieldValue ? PropertyAtPath<TFormValues, T> : never>
   ): void => {
     this.#fieldMap.set(path, field);
+  };
+
+  initialize = () => {
+    this.#fields.forEach((field) => {
+      field.initialize();
+    });
   };
 
   requestSubmit = async (): Promise<void> => {
@@ -48,7 +82,7 @@ export class Form<TFormValues extends object> {
 
       if (!hasErrors) {
         // Make the good-faith assumption that they have registered all fields and their validators
-        // are enforcing any rules to ensure the values are in the correct shape.
+        // are enforcing any rules to ensure the values are in the correct shape and satisfy any optionality.
         await this.#options.onSubmit(this.values as TFormValues);
       }
     } catch (error) {

@@ -9,6 +9,8 @@ export class ValidationChain<TValidator extends (...args: any[]) => MaybeAsync<s
   }
 
   async validate(...args: Parameters<TValidator>): Promise<ValidationResult> {
-    return (await Promise.all(this.#validators.map((validator) => validator(...args)))).flat(Infinity) as string[];
+    return (await Promise.all(this.#validators.map((validator) => validator(...args)))).flat(
+      Infinity
+    ) as ValidationResult;
   }
 }

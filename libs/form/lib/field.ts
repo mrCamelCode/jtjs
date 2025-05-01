@@ -35,6 +35,10 @@ export class Field<TFieldValue extends FieldValue = any> {
     this.#value = options.initialValue;
   }
 
+  initialize = () => {
+    this.value = this.#initialValue;
+  };
+
   validate = async (): Promise<ValidationResult> => {
     return (await Promise.all(this.#options.validators?.map((validator) => validator(this)) ?? [])).flat(
       Infinity
