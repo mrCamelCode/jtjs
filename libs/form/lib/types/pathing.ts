@@ -11,8 +11,8 @@ type ExtractArrayType<T> = T extends any[] ? T[number] : never;
 export type PropertyPath<T> = (
   T extends any[] // is array
     ? ExtractArrayType<T> extends object
-      ? `${number}.${PropertyPath<T[number]>}` // for arrays of objects, drill into them (can't specify a path that leads to an object array)
-      : '' // for arrays of primitives, allow targeting the path to that array.
+      ? (`${number}.${PropertyPath<T[number]>}` | `${number}` | '') // for arrays of objects, allow the path to the array, an index of it, and drill into the element type 
+      : ('' | `${number}`) // for arrays of primitives, allow the path to the array, or an index of it
     : T extends object
     ? { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<PropertyPath<T[K]>>}` }[Exclude<keyof T, symbol>]
     : ''
