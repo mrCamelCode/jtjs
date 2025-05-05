@@ -6,6 +6,20 @@
 
 type DotPrefix<T extends string> = T extends '' ? '' : `.${T}`;
 
+type ExtractArrayType<T> = T extends any[] ? T[number] : never;
+
+export type PropertyPath<T> = (
+  T extends any[] // is array
+    ? ExtractArrayType<T> extends object
+      ? `${number}.${PropertyPath<T[number]>}` // for arrays of objects, drill into them (can't specify a path that leads to an object array)
+      : '' // for arrays of primitives, allow targeting the path to that array.
+    : T extends object
+    ? { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<PropertyPath<T[K]>>}` }[Exclude<keyof T, symbol>]
+    : ''
+) extends infer D
+  ? Extract<D, string>
+  : never;
+
 export type PropertyAtPath<TObject, TPath extends string> = TObject extends object
   ? TPath extends `${infer TPrefix}.${infer TSuffix}`
     ? TPrefix extends keyof TObject
@@ -15,12 +29,4 @@ export type PropertyAtPath<TObject, TPath extends string> = TObject extends obje
     TPath extends keyof TObject
     ? TObject[TPath]
     : false
-  : never;
-
-export type PropertyPath<T> = (
-  T extends object
-    ? { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<PropertyPath<T[K]>>}` }[Exclude<keyof T, symbol>]
-    : ''
-) extends infer D
-  ? Extract<D, string>
   : never;
