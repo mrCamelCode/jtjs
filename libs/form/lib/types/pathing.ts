@@ -1,32 +1,39 @@
-// JT TODO: Types currently have the issue of playing strangely with arrays. `PropertyPath` is aware
-// of valid array paths, but shows `.length` as a key and doesn't offer property suggestions when at an
-// index (i.e., `something.0.else`).
-// `PropertyAtPath` works fine, expect for when arrays are involved, in which case it gets very confused
-// and everything becomes never.
-
 type DotPrefix<T extends string> = T extends '' ? '' : `.${T}`;
 
 type ExtractArrayType<T> = T extends any[] ? T[number] : never;
 
-export type PropertyPath<T> = (
+export type FormValuePath<T> = (
   T extends any[] // is array
     ? ExtractArrayType<T> extends object
-      ? (`${number}.${PropertyPath<T[number]>}` | `${number}` | '') // for arrays of objects, allow the path to the array, an index of it, and drill into the element type 
-      : ('' | `${number}`) // for arrays of primitives, allow the path to the array, or an index of it
+      ? `${number}.${FormValuePath<T[number]>}` | `${number}` | '' // for arrays of objects, allow the path to the array, an index of it, and drill into the element type
+      : '' | `${number}` // for arrays of primitives, allow the path to the array, or an index of it
+    : T extends Blob // don't drill into Blobs
+    ? ''
     : T extends object
-    ? { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<PropertyPath<T[K]>>}` }[Exclude<keyof T, symbol>]
+    ? { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<FormValuePath<T[K]>>}` }[Exclude<keyof T, symbol>]
     : ''
 ) extends infer D
   ? Extract<D, string>
   : never;
 
-export type PropertyAtPath<TObject, TPath extends string> = TObject extends object
-  ? TPath extends `${infer TPrefix}.${infer TSuffix}`
-    ? TPrefix extends keyof TObject
-      ? PropertyAtPath<TObject[TPrefix], TSuffix>
+type BaseFormValueTypeAtPath<T, TPath extends string> = TPath extends `${infer TPrefix}.${infer TSuffix}`
+  ? T extends any[]
+    ? TPrefix extends `${number}`
+      ? BaseFormValueTypeAtPath<ExtractArrayType<T>, TSuffix>
       : never
-    : // We know that the path doesn't contain any dot
-    TPath extends keyof TObject
-    ? TObject[TPath]
-    : false
+    : T extends object
+    ? TPrefix extends keyof T
+      ? BaseFormValueTypeAtPath<T[TPrefix], TSuffix>
+      : never
+    : never
+  : T extends any[]
+  ? TPath extends `${number}`
+    ? ExtractArrayType<T>
+    : never
+  : T extends object
+  ? TPath extends keyof T
+    ? T[TPath]
+    : never
   : never;
+
+export type FormValueTypeAtPath<T, TPath extends FormValuePath<T>> = BaseFormValueTypeAtPath<T, TPath>;
