@@ -1,32 +1,25 @@
 import { Field } from './field';
-import { PropertyPath } from './types/pathing';
+import { FormValuePath } from './types/pathing';
 import { DeepPartial, MaybeAsync, Optional } from './types/types';
 
 export type AnyObject = { [key: string]: unknown };
 
-export type ValidationResult = string[];
+export type ValidationResult = string | undefined;
 export type FormValidator<TFormValues> = (formValues: DeepPartial<TFormValues>) => MaybeAsync<ValidationResult>;
 export interface FormValidationResult<TFormValues> {
-  form: ValidationResult;
-  fields: Map<PropertyPath<TFormValues>, ValidationResult>;
+  form: ValidationResult[];
+  fields: Map<FormValuePath<TFormValues>, ValidationResult[]>;
 }
 
-export interface FormMetadata {
+export interface FormMetadata<TFormValues extends object> {
   isSubmitting: boolean;
+  /**
+   * The result of the last-run validation.
+   */
+  validationResult?: FormValidationResult<TFormValues>;
 }
 
-export type FieldValidator = (field: Field) => MaybeAsync<string[]>;
-
-// JT TODO: `File` would also probably be a useful type.
-// export type FieldValueTypeName =
-//   | 'string'
-//   | 'string[]'
-//   | 'number'
-//   | 'number[]'
-//   | 'boolean'
-//   | 'boolean[]'
-//   | 'File'
-//   | 'File[]';
+export type FieldValidator = (field: Field) => MaybeAsync<ValidationResult>;
 
 export type FieldValue = string | string[] | number | number[] | boolean | boolean[] | File | File[];
 

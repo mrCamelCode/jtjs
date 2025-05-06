@@ -1,24 +1,25 @@
 import { Field } from './field';
-import { FieldValue, FormMetadata, FormValidationResult, FormValidator, ValidationResult } from './model';
-import { PropertyAtPath, PropertyPath } from './types/pathing';
+import { FieldValue, FormMetadata, FormValidationResult, FormValidator } from './model';
+import { FormValuePath, FormValueTypeAtPath } from './types/pathing';
 import { DeepPartial, MaybeAsync } from './types/types';
 import { ValidationChain } from './validation/validation-chain';
 
 export interface FormOptions<TFormValues extends object> {
   onSubmit: (values: TFormValues) => MaybeAsync<void>;
-  formValidation?: ValidationChain<FormValidator<TFormValues>>;
+  validators?: FormValidator<TFormValues>[];
 }
 
-/*
- * JT TODO WANTS:
- *   - If you get the field at a particular path, TS knows the vaule type of that field.
- */
+type FieldAtPath<TFormValues, TFieldPath extends FormValuePath<TFormValues>> = Field<
+  FormValueTypeAtPath<TFormValues, TFieldPath> extends FieldValue ? FormValueTypeAtPath<TFormValues, TFieldPath> : never
+>;
+
 export class Form<TFormValues extends object> {
   #options: FormOptions<TFormValues>;
-  #fieldMap: Map<PropertyPath<TFormValues>, Field> = new Map();
-  #metadata: FormMetadata = {
+  #fieldMap: Map<FormValuePath<TFormValues>, Field> = new Map();
+  #metadata: FormMetadata<TFormValues> = {
     isSubmitting: false,
   };
+  #validationChain: ValidationChain<FormValidator<TFormValues>>;
 
   get values(): DeepPartial<TFormValues> {
     const vals: Record<string, any> = {};
@@ -49,18 +50,21 @@ export class Form<TFormValues extends object> {
     return vals as DeepPartial<TFormValues>;
   }
 
+  get metadata(): FormMetadata<TFormValues> {
+    return this.#metadata;
+  }
+
   get #fields(): Field[] {
     return [...this.#fieldMap.values()];
   }
 
   constructor(options: FormOptions<TFormValues>) {
     this.#options = options;
+
+    this.#validationChain = new ValidationChain(this.#options.validators);
   }
 
-  registerField = <T extends PropertyPath<TFormValues>>(
-    path: T,
-    field: Field<PropertyAtPath<TFormValues, T> extends FieldValue ? PropertyAtPath<TFormValues, T> : never>
-  ): void => {
+  registerField = <T extends FormValuePath<TFormValues>>(path: T, field: FieldAtPath<TFormValues, T>): void => {
     this.#fieldMap.set(path, field);
   };
 
@@ -97,16 +101,39 @@ export class Form<TFormValues extends object> {
   };
 
   validate = async (): Promise<FormValidationResult<TFormValues>> => {
-    const form = (await this.#options.formValidation?.validate(this.values)) ?? [];
-    const fields = new Map<PropertyPath<TFormValues>, ValidationResult>();
+    const form = await this.#validationChain.validate(this.values);
+    const fields: FormValidationResult<TFormValues>['fields'] = new Map();
 
     for (const [path, field] of this.#fieldMap.entries()) {
       fields.set(path, await field.validate());
     }
 
-    return {
+    const result = {
       form,
       fields,
     };
+
+    this.#metadata.validationResult = result;
+
+    return result;
+  };
+
+  getField = <T extends FormValuePath<TFormValues>>(fieldPath: T): FieldAtPath<TFormValues, T> | undefined => {
+    return this.#fieldMap.get(fieldPath);
+  };
+
+  getValue = <T extends FormValuePath<TFormValues>>(fieldPath: T): FormValueTypeAtPath<TFormValues, T> | undefined => {
+    return this.getField(fieldPath)?.value;
+  };
+
+  setValue = <T extends FormValuePath<TFormValues>>(
+    fieldPath: T,
+    value: FormValueTypeAtPath<TFormValues, T> extends FieldValue ? FormValueTypeAtPath<TFormValues, T> : never
+  ) => {
+    const field = this.getField(fieldPath);
+
+    if (field) {
+      field.value = value;
+    }
   };
 }

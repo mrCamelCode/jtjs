@@ -1,6 +1,7 @@
 import { Event } from '@jtjs/event';
 import { FieldValidator, FieldValue, FieldValueTypeName, ValidationResult } from './model';
 import { Optional } from './types/types';
+import { ValidationChain } from './validation/validation-chain';
 
 export interface FieldOptions<TFieldValue extends FieldValue> {
   initialValue: TFieldValue;
@@ -13,12 +14,14 @@ export class Field<TFieldValue extends FieldValue = any> {
 
   #initialValue: TFieldValue;
   #value: Optional<TFieldValue>;
+  #validationChain: ValidationChain<FieldValidator>;
   #options: FieldOptions<TFieldValue>;
 
   get value(): Optional<TFieldValue> {
     return this.#value;
   }
-  private set value(val: Optional<TFieldValue>) {
+
+  set value(val: Optional<TFieldValue>) {
     if (val !== this.#value) {
       const old = this.#value;
 
@@ -33,15 +36,14 @@ export class Field<TFieldValue extends FieldValue = any> {
 
     this.#initialValue = options.initialValue;
     this.#value = options.initialValue;
+    this.#validationChain = new ValidationChain(this.#options.validators);
   }
 
   initialize = () => {
     this.value = this.#initialValue;
   };
 
-  validate = async (): Promise<ValidationResult> => {
-    return (await Promise.all(this.#options.validators?.map((validator) => validator(this)) ?? [])).flat(
-      Infinity
-    ) as ValidationResult;
+  validate = async (): Promise<ValidationResult[]> => {
+    return this.#validationChain.validate(this);
   };
 }
