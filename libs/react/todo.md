@@ -15,3 +15,6 @@
 - Implement `Toggle` as a checkbox: https://github.com/mdn/learning-area/blob/main/html/forms/toggle-switch-example/index.html
   - Doesn't require styling to appear
   - Uses HTML that's more semantically correct for its purpose.
+
+- Add a `useIntersectionObserver` hook or something similar.
+- Add structures to hook into `@jtjs/form`.

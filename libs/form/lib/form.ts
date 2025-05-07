@@ -1,11 +1,10 @@
 import { Field } from './field';
-import { FieldValue, FormMetadata, FormValidationResult, FormValidator } from './model';
+import { FieldValue, FormMetadata, FormValidationResult, FormValidator, SubmitHandler } from './model';
 import { FormValuePath, FormValueTypeAtPath } from './types/pathing';
-import { DeepPartial, MaybeAsync } from './types/types';
+import { DeepPartial, Optional } from './types/types';
 import { ValidationChain } from './validation/validation-chain';
 
 export interface FormOptions<TFormValues extends object> {
-  onSubmit: (values: TFormValues) => MaybeAsync<void>;
   validators?: FormValidator<TFormValues>[];
 }
 
@@ -15,7 +14,7 @@ type FieldAtPath<TFormValues, TFieldPath extends FormValuePath<TFormValues>> = F
 
 export class Form<TFormValues extends object> {
   #options: FormOptions<TFormValues>;
-  #fieldMap: Map<FormValuePath<TFormValues>, Field> = new Map();
+  #fieldMap: Map<FormValuePath<TFormValues>, Field<FieldValue>> = new Map();
   #metadata: FormMetadata<TFormValues> = {
     isSubmitting: false,
   };
@@ -58,8 +57,8 @@ export class Form<TFormValues extends object> {
     return [...this.#fieldMap.values()];
   }
 
-  constructor(options: FormOptions<TFormValues>) {
-    this.#options = options;
+  constructor(options?: FormOptions<TFormValues>) {
+    this.#options = options ?? {};
 
     this.#validationChain = new ValidationChain(this.#options.validators);
   }
@@ -74,7 +73,9 @@ export class Form<TFormValues extends object> {
     });
   };
 
-  requestSubmit = async (): Promise<void> => {
+  requestSubmit = async (
+    handler: SubmitHandler<TFormValues>
+  ): Promise<ReturnType<typeof this.validate> | undefined> => {
     this.#metadata.isSubmitting = true;
 
     try {
@@ -84,10 +85,12 @@ export class Form<TFormValues extends object> {
       const hasFieldErrors = [...validationResult.fields.entries()].some(([, result]) => result.length > 0);
       const hasErrors = hasFormErrors || hasFieldErrors;
 
-      if (!hasErrors) {
+      if (hasErrors) {
+        return validationResult;
+      } else {
         // Make the good-faith assumption that they have registered all fields and their validators
         // are enforcing any rules to ensure the values are in the correct shape and satisfy any optionality.
-        await this.#options.onSubmit(this.values as TFormValues);
+        await handler(this.values as TFormValues);
       }
     } catch (error) {
       throw new Error(
@@ -118,12 +121,12 @@ export class Form<TFormValues extends object> {
     return result;
   };
 
-  getField = <T extends FormValuePath<TFormValues>>(fieldPath: T): FieldAtPath<TFormValues, T> | undefined => {
+  getField = <T extends FormValuePath<TFormValues>>(fieldPath: T): Optional<FieldAtPath<TFormValues, T>> => {
     return this.#fieldMap.get(fieldPath);
   };
 
-  getValue = <T extends FormValuePath<TFormValues>>(fieldPath: T): FormValueTypeAtPath<TFormValues, T> | undefined => {
-    return this.getField(fieldPath)?.value;
+  getValue = <T extends FormValuePath<TFormValues>>(fieldPath: T): Optional<FormValueTypeAtPath<TFormValues, T>> => {
+    return this.getField(fieldPath)?.value as FormValueTypeAtPath<TFormValues, T>;
   };
 
   setValue = <T extends FormValuePath<TFormValues>>(
@@ -133,6 +136,7 @@ export class Form<TFormValues extends object> {
     const field = this.getField(fieldPath);
 
     if (field) {
+      // @ts-ignore: Figure out types here ideally. Things work fine from the public side.
       field.value = value;
     }
   };

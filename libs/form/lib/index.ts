@@ -1,2 +1,5 @@
-export * from './field.ts';
-export * from './form.ts';
+export * from './field';
+export * from './form';
+export * from './model';
+export * from './types/pathing';
+export * from './types/types';

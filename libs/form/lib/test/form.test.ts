@@ -15,7 +15,7 @@ describe('Form', () => {
         num: number;
         str: string;
         bool: boolean;
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -37,7 +37,7 @@ describe('Form', () => {
           str1: string;
           bool: boolean;
         };
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -71,7 +71,7 @@ describe('Form', () => {
             str: string;
           };
         };
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -110,7 +110,7 @@ describe('Form', () => {
         bools: boolean[];
         strs: string[];
         nums: number[];
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -151,7 +151,7 @@ describe('Form', () => {
           strs: string[];
           nums: number[];
         };
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -195,7 +195,7 @@ describe('Form', () => {
             };
           }[];
         };
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -243,65 +243,58 @@ describe('Form', () => {
   });
   describe('getting individual values', () => {
     test(`can get values at the root`, () => {
-      const form = new Form<{ bool: boolean }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ bool: boolean }>({});
 
       form.registerField('bool', new Field({ initialValue: false, valueTypeName: 'boolean' }));
 
       expect(form.getValue('bool')).toBe(false);
     });
     test(`can get primitives arrays at the root`, () => {
-      const form = new Form<{ strs: string[] }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ strs: string[] }>({});
 
       form.registerField('strs', new Field({ initialValue: ['test', 'test2'], valueTypeName: 'string[]' }));
 
       expect(form.getValue('strs')).toEqual(['test', 'test2']);
     });
     test(`can get object array value`, () => {
-      const form = new Form<{ objs: { beep: boolean }[] }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { beep: boolean }[] }>({});
 
       form.registerField('objs.0.beep', new Field({ initialValue: true, valueTypeName: 'boolean' }));
 
       expect(form.getValue('objs.0.beep')).toEqual(true);
     });
     test(`can get nested values`, () => {
-      const form = new Form<{ objs: { beep: boolean } }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { beep: boolean } }>({});
 
       form.registerField('objs.beep', new Field({ initialValue: true, valueTypeName: 'boolean' }));
 
       expect(form.getValue('objs.beep')).toEqual(true);
     });
     test(`can get nested primitive arrays`, () => {
-      const form = new Form<{ objs: { beeps: boolean[] } }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { beeps: boolean[] } }>({});
 
       form.registerField('objs.beeps', new Field({ initialValue: [true, false], valueTypeName: 'boolean[]' }));
 
       expect(form.getValue('objs.beeps')).toEqual([true, false]);
     });
     test(`can get nested object array value`, () => {
-      const form = new Form<{ objs: { objs: { beep: number }[] } }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { objs: { beep: number }[] } }>();
 
       form.registerField('objs.objs.0.beep', new Field({ initialValue: 100, valueTypeName: 'number' }));
 
       expect(form.getValue('objs.objs.0.beep')).toEqual(100);
     });
+    test(`values may be undefined`, () => {
+      const form = new Form<{ num: number}>();
+
+      form.registerField('num', new Field({ valueTypeName: 'number' }));
+
+      expect(form.getValue('num')).toBeUndefined();
+    });
   });
   describe('setting values', () => {
     test(`can get values at the root`, () => {
-      const form = new Form<{ bool: boolean }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ bool: boolean }>({});
 
       form.registerField('bool', new Field({ initialValue: false, valueTypeName: 'boolean' }));
 
@@ -310,9 +303,7 @@ describe('Form', () => {
       expect(form.getValue('bool')).toBe(true);
     });
     test(`can get primitives arrays at the root`, () => {
-      const form = new Form<{ strs: string[] }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ strs: string[] }>({});
 
       form.registerField('strs', new Field({ initialValue: ['test', 'test2'], valueTypeName: 'string[]' }));
 
@@ -321,9 +312,7 @@ describe('Form', () => {
       expect(form.getValue('strs')).toEqual(['1']);
     });
     test(`can get object array value`, () => {
-      const form = new Form<{ objs: { beep: boolean }[] }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { beep: boolean }[] }>({});
 
       form.registerField('objs.0.beep', new Field({ initialValue: true, valueTypeName: 'boolean' }));
 
@@ -332,9 +321,7 @@ describe('Form', () => {
       expect(form.getValue('objs.0.beep')).toEqual(false);
     });
     test(`can get nested values`, () => {
-      const form = new Form<{ objs: { beep: boolean } }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { beep: boolean } }>({});
 
       form.registerField('objs.beep', new Field({ initialValue: true, valueTypeName: 'boolean' }));
 
@@ -343,9 +330,7 @@ describe('Form', () => {
       expect(form.getValue('objs.beep')).toEqual(false);
     });
     test(`can get nested primitive arrays`, () => {
-      const form = new Form<{ objs: { beeps: boolean[] } }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { beeps: boolean[] } }>({});
 
       form.registerField('objs.beeps', new Field({ initialValue: [true, false], valueTypeName: 'boolean[]' }));
 
@@ -354,9 +339,7 @@ describe('Form', () => {
       expect(form.getValue('objs.beeps')).toEqual([false]);
     });
     test(`can get nested object array value`, () => {
-      const form = new Form<{ objs: { objs: { beep: number }[] } }>({
-        onSubmit: handleSubmit,
-      });
+      const form = new Form<{ objs: { objs: { beep: number }[] } }>({});
 
       form.registerField('objs.objs.0.beep', new Field({ initialValue: 100, valueTypeName: 'number' }));
 
@@ -376,7 +359,7 @@ describe('Form', () => {
           str1: string;
           bool: boolean;
         };
-      }>({ onSubmit: handleSubmit });
+      }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
       form.registerField('str', new Field({ initialValue: 'something', valueTypeName: 'string' }));
@@ -405,7 +388,7 @@ describe('Form', () => {
   });
   describe('validation', () => {
     test(`form validation is performed`, async () => {
-      const form = new Form<{ num: number }>({ onSubmit: handleSubmit, validators: [() => 'test'] });
+      const form = new Form<{ num: number }>({ validators: [() => 'test'] });
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
 
@@ -417,7 +400,7 @@ describe('Form', () => {
       });
     });
     test(`field validation is performed`, async () => {
-      const form = new Form<{ num: number }>({ onSubmit: handleSubmit, validators: [() => 'test'] });
+      const form = new Form<{ num: number }>({ validators: [() => 'test'] });
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number', validators: [() => 'field'] }));
 
@@ -429,7 +412,7 @@ describe('Form', () => {
       });
     });
     test(`validation results are available in metadata`, async () => {
-      const form = new Form<{ num: number }>({ onSubmit: handleSubmit, validators: [() => 'test'] });
+      const form = new Form<{ num: number }>({ validators: [() => 'test'] });
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number', validators: [() => 'field'] }));
 
@@ -439,7 +422,6 @@ describe('Form', () => {
     });
     test(`metadata is updated on subsequent runs`, async () => {
       const form = new Form<{ num: number }>({
-        onSubmit: handleSubmit,
         validators: [(values) => (values.num === 10 ? 'test' : '')],
       });
 
@@ -468,32 +450,32 @@ describe('Form', () => {
   });
   describe('submission', () => {
     test(`submission handler is not called if form has validation errors`, async () => {
-      const form = new Form<{ num: number }>({ onSubmit: handleSubmit, validators: [() => 'test'] });
+      const form = new Form<{ num: number }>({ validators: [() => 'test'] });
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
 
-      await form.requestSubmit();
+      await form.requestSubmit(handleSubmit);
 
       expect(handleSubmit).not.toHaveBeenCalled();
     });
     test(`submission handler is not called if fields have validation errors`, async () => {
-      const form = new Form<{ num: number }>({ onSubmit: handleSubmit });
+      const form = new Form<{ num: number }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number', validators: [() => 'test'] }));
 
-      await form.requestSubmit();
+      await form.requestSubmit(handleSubmit);
 
       expect(handleSubmit).not.toHaveBeenCalled();
     });
     test(`submission handler is called if there are no errors`, async () => {
-      const form = new Form<{ num: number }>({ onSubmit: handleSubmit, validators: [() => ''] });
+      const form = new Form<{ num: number }>({ validators: [() => ''] });
 
       form.registerField(
         'num',
         new Field({ initialValue: 10, valueTypeName: 'number', validators: [() => undefined] })
       );
 
-      await form.requestSubmit();
+      await form.requestSubmit(handleSubmit);
 
       expect(handleSubmit).toHaveBeenCalledOnce();
       expect(handleSubmit).toHaveBeenLastCalledWith({ num: 10 });
@@ -503,11 +485,11 @@ describe('Form', () => {
         throw 123;
       };
 
-      const form = new Form<{ num: number }>({ onSubmit: failHandleSubmit });
+      const form = new Form<{ num: number }>();
 
       form.registerField('num', new Field({ initialValue: 10, valueTypeName: 'number' }));
 
-      expect(async () => await form.requestSubmit()).rejects.toThrow(Error);
+      await expect(async () => await form.requestSubmit(failHandleSubmit)).rejects.toThrow(Error);
     });
   });
 });

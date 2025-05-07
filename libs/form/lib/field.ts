@@ -3,25 +3,31 @@ import { FieldValidator, FieldValue, FieldValueTypeName, ValidationResult } from
 import { Optional } from './types/types';
 import { ValidationChain } from './validation/validation-chain';
 
+type Widen<T> = T extends infer Value ? Value : never;
+
 export interface FieldOptions<TFieldValue extends FieldValue> {
-  initialValue: TFieldValue;
   valueTypeName: FieldValueTypeName<TFieldValue>;
-  validators?: FieldValidator[];
+  // For some reason, using the initial value as a way for TS to infer TFieldValue
+  // results in TS' inference being too narrow. Setting it as `10` makes TS believe
+  // the field is `Field<10>` as opposed to `Field<number>`. This utility type widens something
+  // like `10` to `number`.
+  initialValue?: Widen<TFieldValue>;
+  validators?: FieldValidator<TFieldValue>[];
 }
 
-export class Field<TFieldValue extends FieldValue = any> {
-  onValueChange = new Event<(newValue: Optional<TFieldValue>, oldValue: Optional<TFieldValue>) => void>();
+export class Field<TFieldValue extends FieldValue = undefined> {
+  onValueChange = new Event<(newValue: Optional<Widen<TFieldValue>>, oldValue: Optional<Widen<TFieldValue>>) => void>();
 
-  #initialValue: TFieldValue;
-  #value: Optional<TFieldValue>;
-  #validationChain: ValidationChain<FieldValidator>;
+  #initialValue: Optional<Widen<TFieldValue>>;
+  #value: Optional<Widen<TFieldValue>>;
+  #validationChain: ValidationChain<FieldValidator<TFieldValue>>;
   #options: FieldOptions<TFieldValue>;
 
-  get value(): Optional<TFieldValue> {
+  get value() {
     return this.#value;
   }
 
-  set value(val: Optional<TFieldValue>) {
+  set value(val: Optional<Widen<TFieldValue>>) {
     if (val !== this.#value) {
       const old = this.#value;
 

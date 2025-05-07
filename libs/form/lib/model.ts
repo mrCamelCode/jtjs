@@ -10,6 +10,7 @@ export interface FormValidationResult<TFormValues> {
   form: ValidationResult[];
   fields: Map<FormValuePath<TFormValues>, ValidationResult[]>;
 }
+export type SubmitHandler<TFormValues> = (values: TFormValues) => MaybeAsync<void>;
 
 export interface FormMetadata<TFormValues extends object> {
   isSubmitting: boolean;
@@ -19,9 +20,9 @@ export interface FormMetadata<TFormValues extends object> {
   validationResult?: FormValidationResult<TFormValues>;
 }
 
-export type FieldValidator = (field: Field) => MaybeAsync<ValidationResult>;
+export type FieldValidator<TFieldValue extends FieldValue> = (field: Field<TFieldValue>) => MaybeAsync<ValidationResult>;
 
-export type FieldValue = string | string[] | number | number[] | boolean | boolean[] | File | File[];
+export type FieldValue = Optional<string | string[] | number | number[] | boolean | boolean[] | File | File[]>;
 
 export type FieldValueTypeName<T> = T extends Optional<string>
   ? 'string'
