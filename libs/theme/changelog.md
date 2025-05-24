@@ -1,3 +1,7 @@
+# 2.3.4
+
+- Fixed export name.
+
 # 2.3.1 
 
 - Add repo information.
