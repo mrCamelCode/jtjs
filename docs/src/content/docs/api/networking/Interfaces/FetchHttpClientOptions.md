@@ -3,7 +3,7 @@ title: FetchHttpClientOptions
 description: Generated API documentation for FetchHttpClientOptions.
 ---
 
-`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/networking/lib/http/fetch-http-client.impl.ts#L13)
+`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/networking/lib/http/fetch-http-client.impl.ts#L14)
 
 ### Properties
 
@@ -56,10 +56,10 @@ in accordance with an API's restrictions.
 
 If a request is made before this time has elapsed, the client
 will wait to make the request. The client may wait longer than
-this value, but will not wait any less than this value. 
+this value, but will not wait any less than this value.
 
 Values less than `10` will not be accurate. When limited, the client
-won't make requests any faster than at least 10ms apart. If you need 
+won't make requests any faster than at least 10ms apart. If you need
 less than 10ms between calls, it's unlikely you need a rate limit.
 
 If multiple requests are initiated during the waiting period, they

@@ -3,7 +3,7 @@ title: Flexbox
 description: Generated API documentation for Flexbox.
 ---
 
-`Component` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/react/lib/components/wrappers/layout/Flexbox.tsx#L37)
+`Component` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/react/lib/components/wrappers/layout/Flexbox.tsx#L37)
 
 `extends` ComponentPropsWithRef<"div">
 

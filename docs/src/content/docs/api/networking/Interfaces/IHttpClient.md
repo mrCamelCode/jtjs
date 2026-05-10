@@ -3,19 +3,25 @@ title: IHttpClient
 description: Generated API documentation for IHttpClient.
 ---
 
-`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/networking/lib/http/http-client.interface.ts#L45)
+`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/networking/lib/http/http-client.interface.ts#L46)
 
 ### Properties
 
-#### onError: _Event<NetworkErrorHandler>_
+#### onError: _Event<NetworkErrorHandler<RequestType>>_
 
 Triggered on a general network error. Does not occur on non-200 series responses.
 
 ---
 
+#### onProcessResponse: _Event<ProcessedResponseHandler>_
+
+Triggered after a response is processed. Processing a response involves parsing its body.
+
+---
+
 #### onReceiveResponse: _Event<ReceiveResponseHandler<ResponseType>>_
 
-Triggered when a response is received.
+Triggered when a response is received. The response given to this event is a clone.
 
 ---
 

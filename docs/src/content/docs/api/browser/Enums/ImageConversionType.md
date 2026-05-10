@@ -3,7 +3,7 @@ title: ImageConversionType
 description: Generated API documentation for ImageConversionType.
 ---
 
-`Enumeration` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/browser/lib/util/image.util.ts#L1)
+`Enumeration` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/browser/lib/util/image.util.ts#L1)
 
 ### Enumeration Members
 

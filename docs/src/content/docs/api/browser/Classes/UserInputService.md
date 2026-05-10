@@ -3,7 +3,7 @@ title: UserInputService
 description: Generated API documentation for UserInputService.
 ---
 
-`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/browser/lib/services/user-input.service.ts#L7)
+`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/browser/lib/services/user-input.service.ts#L7)
 
 ### Constructors
 

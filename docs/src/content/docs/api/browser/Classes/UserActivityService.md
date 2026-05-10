@@ -3,7 +3,7 @@ title: UserActivityService
 description: Generated API documentation for UserActivityService.
 ---
 
-`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/browser/lib/services/user-activity.service.ts#L15)
+`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/browser/lib/services/user-activity.service.ts#L15)
 
 Provides tracking and listening for user activity. Useful for detecting when the
 user isn't actively doing something on the page.

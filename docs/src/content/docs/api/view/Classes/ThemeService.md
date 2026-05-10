@@ -3,7 +3,7 @@ title: ThemeService
 description: Generated API documentation for ThemeService.
 ---
 
-`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/ddfaeb1a2c9bf793372bb41076f65f452b124091/libs/view/lib/services/theme.service.ts#L11)
+`Class` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/view/lib/services/theme.service.ts#L11)
 
 Provides means by which to register themes, change the active theme, and listen to
 when the theme changes. Also includes helper methods for dealing with themes and colors.
