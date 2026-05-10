@@ -28,6 +28,10 @@ class MockResponseObject {
   json() {
     return this.text().then(JSON.parse);
   }
+
+  clone() {
+    return this;
+  }
 }
 
 describe('FetchHttpClient', () => {
@@ -79,11 +83,11 @@ describe('FetchHttpClient', () => {
       expect(httpClient._getTreatedUri('/somewhere')).toBe(`http://${host}/somewhere`);
       expect(
         // @ts-ignore
-        httpClient._getTreatedUri(`unluckycricketgames.com/somewhere`)
+        httpClient._getTreatedUri(`unluckycricketgames.com/somewhere`),
       ).toBe(`http://unluckycricketgames.com/somewhere`);
       expect(
         // @ts-ignore
-        httpClient._getTreatedUri(`https://unluckycricketgames.com/somewhere`)
+        httpClient._getTreatedUri(`https://unluckycricketgames.com/somewhere`),
       ).toBe(`https://unluckycricketgames.com/somewhere`);
     });
     test(`includes the path correctly when it's provided`, () => {
@@ -95,11 +99,11 @@ describe('FetchHttpClient', () => {
       expect(httpClient._getTreatedUri('/somewhere')).toBe(`/api/somewhere`);
       expect(
         // @ts-ignore
-        httpClient._getTreatedUri(`unluckycricketgames.com/somewhere`)
+        httpClient._getTreatedUri(`unluckycricketgames.com/somewhere`),
       ).toBe(`http://unluckycricketgames.com/api/somewhere`);
       expect(
         // @ts-ignore
-        httpClient._getTreatedUri(`https://unluckycricketgames.com/somewhere`)
+        httpClient._getTreatedUri(`https://unluckycricketgames.com/somewhere`),
       ).toBe(`https://unluckycricketgames.com/api/somewhere`);
     });
     test(`includes the protocol and host correctly when they're both provided`, () => {
@@ -238,7 +242,8 @@ describe('FetchHttpClient', () => {
               headers: new Headers({
                 'content-type': 'application/json',
               }),
-            })
+              clone: vi.fn(),
+            }),
           );
 
           const result = await FetchService.makeRequest('POST', uri, {
@@ -259,7 +264,8 @@ describe('FetchHttpClient', () => {
               headers: new Headers({
                 'content-type': 'application/json; charset=utf-8',
               }),
-            })
+              clone: vi.fn(),
+            }),
           );
 
           const result = await FetchService.makeRequest('POST', uri, {
@@ -282,7 +288,8 @@ describe('FetchHttpClient', () => {
               headers: new Headers({
                 'content-type': 'application/xml',
               }),
-            })
+              clone: vi.fn(),
+            }),
           );
 
           const result = await FetchService.makeRequest('POST', uri, {
@@ -306,7 +313,8 @@ describe('FetchHttpClient', () => {
               headers: new Headers({
                 'content-type': 'text/html',
               }),
-            })
+              clone: vi.fn(),
+            }),
           );
 
           const result = await FetchService.makeRequest<string>('POST', uri, {
@@ -334,7 +342,8 @@ describe('FetchHttpClient', () => {
               headers: new Headers({
                 'content-type': 'application/json',
               }),
-            })
+              clone: vi.fn(),
+            }),
           );
 
           const result = await FetchService.makeRequest('POST', uri, {
@@ -358,9 +367,9 @@ describe('FetchHttpClient', () => {
                 body,
                 new Headers({
                   'content-type': 'application/json',
-                })
-              )
-            )
+                }),
+              ),
+            ),
           );
 
           const result = await FetchService.makeRequest('POST', uri, {
@@ -497,6 +506,20 @@ describe('FetchHttpClient', () => {
 
         expect(handleReceiveResponse).toHaveBeenCalledTimes(1);
       });
+      test(`invokes onProcessResponse when a response is processed`, async () => {
+        const handleProcessResponse = vi.fn();
+
+        const client = new FetchHttpClient();
+        client.onProcessResponse.subscribe(handleProcessResponse);
+
+        await client.get(uri);
+
+        expect(handleProcessResponse).toHaveBeenCalledTimes(1);
+        expect(handleProcessResponse).toHaveBeenCalledWith({
+          response: expect.any(Response),
+          body: expect.anything(),
+        });
+      });
       test(`invokes onError when the operation encounters a network error`, async () => {
         mockFetch.mockRejectedValueOnce(new Error('Boom!'));
 
@@ -508,9 +531,9 @@ describe('FetchHttpClient', () => {
         await client.get(uri);
 
         expect(handleError).toHaveBeenCalledTimes(1);
-        expect(handleError).toHaveBeenCalledWith(new Error('Boom!'));
+        expect(handleError).toHaveBeenCalledWith(new Error('Boom!'), expect.any(Request));
       });
-      test(`invokes onError even when allowThrow was enabled on the request data`, async () => {
+      test(`invokes onError when allowThrow was enabled on the request data`, async () => {
         mockFetch.mockRejectedValueOnce(new Error('Boom!'));
 
         const handleError = vi.fn();
@@ -525,7 +548,7 @@ describe('FetchHttpClient', () => {
         } catch (error) {}
 
         expect(handleError).toHaveBeenCalledTimes(1);
-        expect(handleError).toHaveBeenCalledWith(new Error('Boom!'));
+        expect(handleError).toHaveBeenCalledWith(new Error('Boom!'), expect.any(Request));
       });
     });
   });
@@ -578,7 +601,7 @@ describe('FetchHttpClient', () => {
         expect(mockFetch).toHaveBeenCalledTimes(1);
 
         http.get('/somewhere');
-       
+
         expect(mockFetch).toHaveBeenCalledTimes(2);
       });
     });

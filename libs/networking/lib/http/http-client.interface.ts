@@ -5,16 +5,10 @@ export enum HttpProtocol {
   Https = 'https',
 }
 
-export interface BasicHttpRequestData<
-  RawResponseBodyType,
-  ParsedResponseBodyType,
-  HttpRequestOptions
-> {
+export interface BasicHttpRequestData<RawResponseBodyType, ParsedResponseBodyType, HttpRequestOptions> {
   body?: any;
   options?: Omit<HttpRequestOptions, 'method' | 'body'>;
-  responseBodyParser?: (
-    body: RawResponseBodyType
-  ) => Promise<ParsedResponseBodyType> | ParsedResponseBodyType;
+  responseBodyParser?: (body: RawResponseBodyType) => Promise<ParsedResponseBodyType> | ParsedResponseBodyType;
   /**
    * Whether the network operation is allowed to throw. By default, all network errors are caught and passed to
    * listeners of the `onError` event of the HTTP client implementation. If this is `true`, the implementation should
@@ -26,13 +20,13 @@ export interface BasicHttpRequestData<
 export interface BasicHttpResponseData<ParsedResponseBodyType> {
   /**
    * The raw received response.
-   * 
+   *
    * Can be undefined if a network error prevented the request from being fulfilled.
    */
   response?: Response;
   /**
-   * The parsed body. How the body is parsed depends on the HTTP client implementation. 
-   * 
+   * The parsed body. How the body is parsed depends on the HTTP client implementation.
+   *
    * Can be undefined if a network error prevented the request from being fulfilled.
    */
   body?: ParsedResponseBodyType;
@@ -40,26 +34,32 @@ export interface BasicHttpResponseData<ParsedResponseBodyType> {
 
 export type SendRequestHandler<T> = (request: T) => void;
 export type ReceiveResponseHandler<T> = (response: T) => void;
-export type NetworkErrorHandler = (error: Error) => void;
+export type ProcessedResponseHandler = (processedResponseDetails: BasicHttpResponseData<unknown>) => void;
+/**
+ * @param error
+ * @param triggeringRequest - The request that caused the error if available. Could be `undefined` if the
+ * error occurred before or during request construction. Such errors would typicaly
+ * mean there was an issue with the request details (options, body, etc.) that you provided.
+ */
+export type NetworkErrorHandler<T> = (error: Error, triggeringRequest?: T) => void;
 
-export interface IHttpClient<
-  HttpRequestOptionsType,
-  RequestType,
-  ResponseType,
-  RawResponseBodyType
-> {
+export interface IHttpClient<HttpRequestOptionsType, RequestType, ResponseType, RawResponseBodyType> {
   /**
    * Triggered just before a request is sent.
    */
   onSendRequest: Event<SendRequestHandler<RequestType>>;
   /**
-   * Triggered when a response is received.
+   * Triggered when a response is received. The response given to this event is a clone.
    */
   onReceiveResponse: Event<ReceiveResponseHandler<ResponseType>>;
   /**
+   * Triggered after a response is processed. Processing a response involves parsing its body.
+   */
+  onProcessResponse: Event<ProcessedResponseHandler>;
+  /**
    * Triggered on a general network error. Does not occur on non-200 series responses.
    */
-  onError: Event<NetworkErrorHandler>;
+  onError: Event<NetworkErrorHandler<RequestType>>;
 
   /**
    * A default protocol and domain to use for the instance. It will be prepended to all request URIs if
@@ -92,11 +92,7 @@ export interface IHttpClient<
   makeRequest<ParsedBodyType = undefined>(
     method: string,
     uri: string,
-    requestData?: BasicHttpRequestData<
-      RawResponseBodyType,
-      ParsedBodyType,
-      HttpRequestOptionsType
-    >
+    requestData?: BasicHttpRequestData<RawResponseBodyType, ParsedBodyType, HttpRequestOptionsType>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>>;
 
   /**
@@ -111,14 +107,7 @@ export interface IHttpClient<
    */
   get<ParsedBodyType = any>(
     uri: string,
-    requestData?: Omit<
-      BasicHttpRequestData<
-        RawResponseBodyType,
-        ParsedBodyType,
-        HttpRequestOptionsType
-      >,
-      'body'
-    >
+    requestData?: Omit<BasicHttpRequestData<RawResponseBodyType, ParsedBodyType, HttpRequestOptionsType>, 'body'>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>>;
 
   /**
@@ -133,11 +122,7 @@ export interface IHttpClient<
    */
   post<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<
-      RawResponseBodyType,
-      ParsedBodyType,
-      HttpRequestOptionsType
-    >
+    requestData?: BasicHttpRequestData<RawResponseBodyType, ParsedBodyType, HttpRequestOptionsType>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>>;
 
   /**
@@ -152,11 +137,7 @@ export interface IHttpClient<
    */
   put<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<
-      RawResponseBodyType,
-      ParsedBodyType,
-      HttpRequestOptionsType
-    >
+    requestData?: BasicHttpRequestData<RawResponseBodyType, ParsedBodyType, HttpRequestOptionsType>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>>;
 
   /**
@@ -171,11 +152,7 @@ export interface IHttpClient<
    */
   patch<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<
-      RawResponseBodyType,
-      ParsedBodyType,
-      HttpRequestOptionsType
-    >
+    requestData?: BasicHttpRequestData<RawResponseBodyType, ParsedBodyType, HttpRequestOptionsType>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>>;
 
   /**
@@ -190,10 +167,6 @@ export interface IHttpClient<
    */
   delete<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<
-      RawResponseBodyType,
-      ParsedBodyType,
-      HttpRequestOptionsType
-    >
+    requestData?: BasicHttpRequestData<RawResponseBodyType, ParsedBodyType, HttpRequestOptionsType>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>>;
 }

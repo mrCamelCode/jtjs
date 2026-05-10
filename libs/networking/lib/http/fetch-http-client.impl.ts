@@ -6,6 +6,7 @@ import {
   HttpProtocol,
   IHttpClient,
   NetworkErrorHandler,
+  ProcessedResponseHandler,
   ReceiveResponseHandler,
   SendRequestHandler,
 } from './http-client.interface';
@@ -50,12 +51,12 @@ export interface FetchHttpClientOptions {
    *
    * If a request is made before this time has elapsed, the client
    * will wait to make the request. The client may wait longer than
-   * this value, but will not wait any less than this value. 
-   * 
+   * this value, but will not wait any less than this value.
+   *
    * Values less than `10` will not be accurate. When limited, the client
-   * won't make requests any faster than at least 10ms apart. If you need 
+   * won't make requests any faster than at least 10ms apart. If you need
    * less than 10ms between calls, it's unlikely you need a rate limit.
-   * 
+   *
    * If multiple requests are initiated during the waiting period, they
    * will be queued and executed in the order they were received.
    *
@@ -95,8 +96,9 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
   protected static URI_REGEX = /^(?<uri>(?:(?<protocol>[a-z]+):\/\/)?(?<host>[a-z\d.]+)?(?<path>\/.*)?)$/i;
 
   onSendRequest = new Event<SendRequestHandler<Request>>();
+  onProcessResponse = new Event<ProcessedResponseHandler>();
   onReceiveResponse = new Event<ReceiveResponseHandler<Response>>();
-  onError = new Event<NetworkErrorHandler>();
+  onError = new Event<NetworkErrorHandler<Request>>();
 
   #timeOfLastRequest = 0;
   #requestQueue = new RequestQueue();
@@ -179,7 +181,7 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
   async makeRequest<ParsedBodyType = undefined>(
     method: string,
     uri: string,
-    requestData: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit> = {}
+    requestData: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit> = {},
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>> {
     if (this.#shouldQueueRequest) {
       const requestId = this.#requestQueue.enqueue();
@@ -207,6 +209,8 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
       contentTypeToUse = 'application/json';
     }
 
+    let request: Request | undefined = undefined;
+
     try {
       const requestUri = this._getTreatedUri(uri);
       const requestOptions: RequestInit = {
@@ -226,14 +230,13 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
         body: isJsonRequest ? JSON.stringify(body as Record<string, any>) : (body as BodyInit),
       };
 
-      this.onSendRequest.trigger({
-        url: requestUri,
-        ...requestOptions,
-      } as Request);
+      request = new Request(requestUri, requestOptions);
+
+      this.onSendRequest.trigger(request);
 
       const response = await fetch(`${this._getTreatedUri(uri)}`, requestOptions);
 
-      this.onReceiveResponse.trigger(response);
+      this.onReceiveResponse.trigger(response.clone());
 
       let defaultBodyParser;
       if (response?.headers?.get('content-type')?.includes('application/json')) {
@@ -244,14 +247,18 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
 
       defaultBodyParser = defaultBodyParser?.bind(response);
 
-      return {
+      const processedResponse: BasicHttpResponseData<ParsedBodyType> = {
         response,
         body: (await (!!responseBodyParser
           ? responseBodyParser(response?.body)
           : defaultBodyParser?.())) as ParsedBodyType,
       };
+
+      this.onProcessResponse.trigger(processedResponse);
+
+      return processedResponse;
     } catch (error) {
-      this.onError.trigger(error as Error);
+      this.onError.trigger(error as Error, request);
 
       if (allowThrow) {
         throw error;
@@ -266,35 +273,35 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
 
   get<ParsedBodyType = any>(
     uri: string,
-    requestData?: Omit<BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>, 'body'>
+    requestData?: Omit<BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>, 'body'>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>> {
     return this.makeRequest('GET', uri, requestData);
   }
 
   post<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>
+    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>> {
     return this.makeRequest('POST', uri, requestData);
   }
 
   put<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>
+    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>> {
     return this.makeRequest('PUT', uri, requestData);
   }
 
   patch<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>
+    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>> {
     return this.makeRequest('PATCH', uri, requestData);
   }
 
   delete<ParsedBodyType = undefined>(
     uri: string,
-    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>
+    requestData?: BasicHttpRequestData<FetchRawResponseBody, ParsedBodyType, RequestInit>,
   ): Promise<Partial<BasicHttpResponseData<ParsedBodyType>>> {
     return this.makeRequest('DELETE', uri, requestData);
   }
@@ -309,14 +316,14 @@ export class FetchHttpClient implements IHttpClient<RequestInit, Request, Respon
         normalizedHeaders = Object.fromEntries(
           headers.map(([headerName, headerValue]) => {
             return [headerName.toLowerCase(), headerValue];
-          })
+          }),
         );
       } else {
         // Plain object
         normalizedHeaders = Object.fromEntries(
           Object.entries(headers).map(([headerName, headerValue]) => {
             return [headerName.toLowerCase(), headerValue];
-          })
+          }),
         );
       }
     }
