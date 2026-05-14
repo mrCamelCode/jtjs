@@ -3,7 +3,7 @@ title: Collapsible
 description: Generated API documentation for Collapsible.
 ---
 
-`Component` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/react/lib/components/wrappers/layout/Collapsible.tsx#L46)
+`Component` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/3ffb67ba2a41a72275436002f53c8e2f5e0a22b2/libs/react/lib/components/wrappers/layout/Collapsible.tsx#L51)
 
 `extends` ContentboxProps
 
@@ -87,6 +87,13 @@ contents should be reversed.
 
 (Optional, defaults to `0.5rem`) How much space to put between the contents of
 the Flexbox.
+
+---
+
+#### toggleButtonContent?: _ReactNode_
+
+What to use as the content for the button that toggles the collapsible's expanded status. Whatever's
+provided must be a valid descendent of a `button`.
 
 ---
 

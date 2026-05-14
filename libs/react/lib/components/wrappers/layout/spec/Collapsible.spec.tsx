@@ -29,6 +29,15 @@ describe('Collapsible', () => {
     vi.clearAllMocks();
   });
 
+  test('custom content is visible and replaces default chevron', () => {
+    const { container } = renderCollapsible({
+      toggleButtonContent: <p>test content</p>,
+    });
+
+    expect(screen.getByText('test content')).toBeDefined();
+    expect(container.querySelector('svg')).toBeNull();
+  });
+
   describe('controlled', () => {
     test('changes collapsed state when the header is clicked', async () => {
       renderCollapsible({

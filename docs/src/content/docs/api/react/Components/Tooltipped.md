@@ -3,7 +3,7 @@ title: Tooltipped
 description: Generated API documentation for Tooltipped.
 ---
 
-`Component` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/react/lib/components/wrappers/information/Tooltipped.tsx#L74)
+`Component` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/3ffb67ba2a41a72275436002f53c8e2f5e0a22b2/libs/react/lib/components/wrappers/information/Tooltipped.tsx#L74)
 
 `extends` ComponentPropsWithoutRef<"div">
 

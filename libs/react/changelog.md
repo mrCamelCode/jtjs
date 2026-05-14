@@ -1,3 +1,8 @@
+# 3.1.0
+
+- `Collapsible`
+  - Added `toggleButtonContent`. Existing uses will continue to use the default chevron icon.
+
 # 3.0.1
 
 - Add repo information.

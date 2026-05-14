@@ -3,7 +3,7 @@ title: buildClassName
 description: Generated API documentation for buildClassName.
 ---
 
-`Function` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/react/lib/util/util-functions.ts#L4)
+`Function` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/3ffb67ba2a41a72275436002f53c8e2f5e0a22b2/libs/react/lib/util/util-functions.ts#L4)
 
 ---
 

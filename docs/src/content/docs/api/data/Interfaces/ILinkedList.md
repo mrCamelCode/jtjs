@@ -3,7 +3,7 @@ title: ILinkedList
 description: Generated API documentation for ILinkedList.
 ---
 
-`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/a4753a6198a13acff4aff934659d53df8116570c/libs/data/lib/collections/ILinkedList.ts#L3)
+`Interface` | [Source Code](https://github.com/mrCamelCode/jtjs/blob/3ffb67ba2a41a72275436002f53c8e2f5e0a22b2/libs/data/lib/collections/ILinkedList.ts#L3)
 
 ### Properties
 

@@ -26,6 +26,11 @@ export interface CollapsibleProps extends ContentboxProps {
    */
   isCollapsed?: boolean;
   /**
+   * What to use as the content for the button that toggles the collapsible's expanded status. Whatever's
+   * provided must be a valid descendent of a `button`.
+   */
+  toggleButtonContent?: ReactNode;
+  /**
    * What to do when the user indicates they want to change whether the Collapsible is collapsed.
    *
    * @param isCollapsed - Whether the Collapsible should be collapsed.
@@ -51,11 +56,10 @@ export const Collapsible = ({
   isCollapsed,
   onChangeCollapsed,
   children,
+  toggleButtonContent,
   ...otherProps
 }: CollapsibleProps) => {
-  const [internalIsCollapsed, setInternalIsCollapsed] = useState(
-    defaultIsCollapsed ?? false
-  );
+  const [internalIsCollapsed, setInternalIsCollapsed] = useState(defaultIsCollapsed ?? false);
 
   const contentId = `jtjs-collapsible-content-${useId()}`;
 
@@ -75,15 +79,10 @@ export const Collapsible = ({
     }
   };
 
-  const removeContent =
-    getIsCollapsed() && collapseBehaviour === HideBehaviour.Remove;
+  const removeContent = getIsCollapsed() && collapseBehaviour === HideBehaviour.Remove;
 
   return (
-    <Contentbox
-      className={buildClassName(className, 'jtjs-collapsible')}
-      direction="column"
-      {...otherProps}
-    >
+    <Contentbox className={buildClassName(className, 'jtjs-collapsible')} direction="column" {...otherProps}>
       <Flexbox
         className="jtjs-collapsible-header"
         style={{
@@ -107,14 +106,7 @@ export const Collapsible = ({
           aria-controls={contentId}
           aria-label="Toggle collapsible visibility"
         >
-          {/* ! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="1rem"
-            viewBox="0 0 320 512"
-          >
-            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
-          </svg>
+          {toggleButtonContent ?? <DefaultToggleButtonContent />}
         </button>
       </Flexbox>
 
@@ -138,5 +130,14 @@ export const Collapsible = ({
         </div>
       )}
     </Contentbox>
+  );
+};
+
+const DefaultToggleButtonContent = () => {
+  /* ! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. */
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" height="1rem" viewBox="0 0 320 512">
+      <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+    </svg>
   );
 };
